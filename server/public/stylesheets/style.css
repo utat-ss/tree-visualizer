@@ -1,0 +1,14 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#graph {
+  width: 2000px;
+  height: 2000px;
+  border: 1px solid lightgray;
+}
