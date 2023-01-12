@@ -12,10 +12,15 @@ const notion = new Client({
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-  let data = await notionService.getData();
+  let data = await notionService.getRequirementsData();
   let nodes_json = JSON.stringify(data.nodes);
   let edges_json = JSON.stringify(data.edges);
   res.render('index', { title: 'TreeVisualizer' , nodes: nodes_json, edges: edges_json});
+});
+
+router.get('/api/requirements', async function(req, res, next) {
+  let data = await notionService.getRequirementsData();
+  res.json(data);
 });
 
 module.exports = router;

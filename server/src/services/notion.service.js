@@ -5,7 +5,7 @@ const notionClient = new notion.Client({
     auth: getEnv("NOTION_TOKEN"),
 })
 
-const getData = async function() {
+const getRequirementsData = async function() {
     let all = []
     let has_more = true;
     let cursor = undefined;
@@ -51,4 +51,4 @@ const getData = async function() {
     }
 }
 
-module.exports = { getData };
+module.exports = { getRequirementsData };
