@@ -43,14 +43,6 @@ const getData = async function() {
           to: key
         });
       }
-      if (entry.children.length > 0) {
-        for (let child in entry.children) {
-          edges.push({
-            from: key,
-            to: child
-          })
-        }
-      }
     }
   
     return {
