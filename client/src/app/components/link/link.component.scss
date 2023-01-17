@@ -1,0 +1,19 @@
+.link {
+    font-family: monospace;
+    text-decoration: none;
+    border-bottom: 1px dotted;
+  
+    @media screen and (min-width: 600px) {
+      font-size: 1.15em;
+    }
+  }
+  
+  .primary-link {
+    color: #055b90;
+    border-color: #1ea7fd;
+  }
+  
+  .secondary-link {
+    color: #ff4785;
+    border-color: #ff4785;
+  }

@@ -1,0 +1,22 @@
+<header>  
+    <div class="wrapper">
+      <div>
+        <img width="32" height="32" viewBox="0 0 32 32" src='utat_logo.png'>
+        <h1>Tree Visualizer Tool</h1>
+      </div>
+      <div>
+          <span class="stats">
+            Statistics: [Notion database] | [Number of nodes] | [Number of warnings]
+            <script>document.write("Hello World")</script>
+          </span>
+          <script type='text/javascript'>
+            document.write("Hello World");
+            const getRequirementsData = require('./notion.service.ts');
+            var num_nodes = getRequirementsData.number_of_nodes;
+            var database_title = getRequirementsData.database_title;
+            var num_warnings = getRequirementsData.warnings;
+          </script>
+          
+        </div>
+        </div>
+</header>
