@@ -109,7 +109,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<header>  \n    <div class=\"wrapper\">\n      <div>\n        <img width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" src='utat_logo.png'>\n        <h1>Tree Visualizer Tool</h1>\n      </div>\n      <div>\n          <span class=\"stats\">\n            Statistics: [Notion database] | [Number of nodes] | [Number of warnings]\n          </span>\n          <script type='text/javascript'>\n            const getRequirementsData = require('./notion.service.ts');\n            var num_nodes = getRequirementsData.number_of_nodes;\n            document.write(num_nodes);\n          </script>\n          \n        </div>\n        </div>\n</header>"
+            "templateData": "<header>  \n    <div class=\"wrapper\">\n      <div>\n        <img width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" src='utat_logo.png'>\n        <h1>Tree Visualizer Tool</h1>\n      </div>\n      <div>\n          <span class=\"stats\">\n            Statistics: [Notion database] | [Number of nodes] | [Number of warnings]\n            <script>document.write(\"Hello World\")</script>\n          </span>\n          <script type='text/javascript'>\n            document.write(\"Hello World\");\n            var express = require('express');\n\n            var router = express.Router();\n\n            const { Client } = require(\"@notionhq/client\");\n            const { getEnv } = require(\"../utils/env.util\");\n            const notionService = require('./notion.service.ts');\n\n            // Initializing a client\n            const notion = new Client({\n              auth: \"secret_svElnxdJEHBhHQMTRxWylB258mMMlKhJJJGK3Z4Kftt\",\n            });\n            \n            var data = notionService.getRequirementsData();\n            var num_nodes = data.number_of_nodes;\n            var database_title = data.database_title;\n            var num_warnings = data.warnings;\n          </script>\n          \n        </div>\n        </div>\n</header>"
         },
         {
             "name": "ButtonComponent",
@@ -655,6 +655,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Button>",
+                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -675,11 +685,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Button.stories.ts",
+                "file": "src/app/components/appheader/stories/appheader.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                "type": "Story<AppheaderComponent>",
+                "defaultValue": "(args: AppheaderComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -690,16 +700,6 @@
                 "deprecationMessage": "",
                 "type": "Story<LinkComponent>",
                 "defaultValue": "() => ({\n  component: LinkComponent,\n  props: {\n    color: 'primary',\n    content: 'Requirements Writing Guidelines',\n    href: 'https://www.notion.so/utat-ss/Requirements-Writing-a034365a83d94f02923c98b9173e5916',\n    target: '_blank',\n  },\n  template: `\n    <app-link\n      [color]=\"color\"\n      [href]=\"href\"\n      [target]=\"target\"\n    >\n      {{ content }}\n    </app-link>`,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/appheader/stories/appheader.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<AppheaderComponent>",
-                "defaultValue": "(args: AppheaderComponent) => ({\n  props: args,\n})"
             },
             {
                 "name": "Version1",

@@ -1,8 +1,12 @@
 .wrapper {
     font-family: monospace;
-    background-color: #F0F8FF    ;
+    background-color: #b4d2ff;
     border-bottom: 1px solid rgba(24, 4, 105, 0.1);
     padding: 15px 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -20,11 +24,19 @@
     margin: 6px 0 6px 10px;
     display: inline-block;
     vertical-align: top;
+
+    text-decoration: none;
   }
   
   .stats {
-    color: #555;
+    color: rgb(0, 0, 0);
     font-weight: 10px;
     font-size: 14px;
     margin-right: 10px;
+
+    background-color: #d7ecfe;
+    border-bottom: 5px solid rgba(4, 12, 105, 0.407);
+    border-radius: 100px;
+    padding: 15px 20px;
+    box-shadow: rgba(8, 8, 125, 0.662) 0px 0px 0px 1px inset;
   }  

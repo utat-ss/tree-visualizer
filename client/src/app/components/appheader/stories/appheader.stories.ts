@@ -5,7 +5,7 @@ import type { Story, Meta } from '@storybook/angular';
 import AppheaderComponent from "../appheader.component"
 
 export default {
-  title: 'Components/Appheader',
+  title: 'Components/AppHeader',
   component: AppheaderComponent,
   decorators: [
     moduleMetadata({

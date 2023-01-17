@@ -31,4 +31,4 @@ const Template: Story<LinkComponent> = () => ({
       {{ content }}
     </app-link>`,
 });
-export const Base = Template.bind({});
+export const RequirementsWriting = Template.bind({});

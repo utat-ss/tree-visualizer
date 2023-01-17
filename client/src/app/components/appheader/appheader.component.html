@@ -1,7 +1,7 @@
 <header>  
     <div class="wrapper">
       <div>
-        <img width="32" height="32" viewBox="0 0 32 32" src='utat_logo.png'>
+        <img width="32" height="32" viewBox="0 0 32 32" src='./utat_logo.jpg'>
         <h1>Tree Visualizer Tool</h1>
       </div>
       <div>
@@ -11,10 +11,23 @@
           </span>
           <script type='text/javascript'>
             document.write("Hello World");
-            const getRequirementsData = require('./notion.service.ts');
-            var num_nodes = getRequirementsData.number_of_nodes;
-            var database_title = getRequirementsData.database_title;
-            var num_warnings = getRequirementsData.warnings;
+            var express = require('express');
+
+            var router = express.Router();
+
+            const { Client } = require("@notionhq/client");
+            const { getEnv } = require("../utils/env.util");
+            const notionService = require('./notion.service.ts');
+
+            // Initializing a client
+            const notion = new Client({
+              auth: "secret_svElnxdJEHBhHQMTRxWylB258mMMlKhJJJGK3Z4Kftt",
+            });
+            
+            var data = notionService.getRequirementsData();
+            var num_nodes = data.number_of_nodes;
+            var database_title = data.database_title;
+            var num_warnings = data.warnings;
           </script>
           
         </div>

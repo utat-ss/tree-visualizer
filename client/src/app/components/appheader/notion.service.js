@@ -1,7 +1,7 @@
 const notion = require("@notionhq/client");
 
 const notionClient = new notion.Client({
-    auth: "secret_svElnxdJEHBhHQMTRxWylB258mMMlKhJJJGK3Z4Kftt"
+    auth: "secret_svElnxdJEHBhHQMTRxWylB258mMMlKhJJJGK3Z4Kftt",
 })
 
 const getRequirementsData = async function() {
