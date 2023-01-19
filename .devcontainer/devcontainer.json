@@ -1,0 +1,13 @@
+// For format details, see https://aka.ms/devcontainer.json
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Angular.ng-template",
+				"Orta.vscode-jest",
+				"nrwl.angular-console"
+			]
+		}
+	}
+}
