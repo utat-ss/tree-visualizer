@@ -1,35 +1,13 @@
 <header>  
-    <div class="wrapper">
-      <div>
-        <img width="32" height="32" viewBox="0 0 32 32" src='./utat_logo.jpg'>
-        <h1>Tree Visualizer Tool</h1>
+  <div class="wrapper">
+    <div>
+      <img width="36" height="36" viewBox="0 0 36 36" src='../../../assets/utatLogo.png' alt = 'img'>
+      <h1>Tree Visualizer Tool</h1>
+    </div>
+    <div>
+        <span class="stats">
+          <b>STATISTICS |</b> Title: {{ database_title }} | Nodes: {{ number_of_nodes }} | Warnings: {{ number_of_warnings}}
+        </span>
       </div>
-      <div>
-          <span class="stats">
-            Statistics: [Notion database] | [Number of nodes] | [Number of warnings]
-            <script>document.write("Hello World")</script>
-          </span>
-          <script type='text/javascript'>
-            document.write("Hello World");
-            var express = require('express');
-
-            var router = express.Router();
-
-            const { Client } = require("@notionhq/client");
-            const { getEnv } = require("../utils/env.util");
-            const notionService = require('./notion.service.ts');
-
-            // Initializing a client
-            const notion = new Client({
-              auth: "secret_svElnxdJEHBhHQMTRxWylB258mMMlKhJJJGK3Z4Kftt",
-            });
-            
-            var data = notionService.getRequirementsData();
-            var num_nodes = data.number_of_nodes;
-            var database_title = data.database_title;
-            var num_warnings = data.warnings;
-          </script>
-          
-        </div>
-        </div>
+      </div>
 </header>
