@@ -1,0 +1,13 @@
+name: Pipeline
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Run Client Tests
+        run: cd client
+        run: npm install
+        run: ng test
