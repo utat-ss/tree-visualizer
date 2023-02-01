@@ -10,11 +10,12 @@ jobs:
       - name: Install client dependencies
         run: cd client && npm ci
 
+      - name: Run client tests
+        run: npx ng test
+
       - name: Upload npm debug log
+        if: failure()
         uses: actions/upload-artifact@master
         with:
           name: npm-debug-log
           path: /home/runner/.npm/_logs/
-
-      - name: Run client tests
-        run: npx ng test
