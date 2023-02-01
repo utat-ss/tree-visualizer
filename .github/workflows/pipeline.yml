@@ -14,7 +14,7 @@ jobs:
       #   run: npm install -g @angular/cli
 
       - name: Run client tests
-        run: cd client && ng test
+        run: cd client && npx ng test
 
       - name: Upload npm debug log
         if: failure()
