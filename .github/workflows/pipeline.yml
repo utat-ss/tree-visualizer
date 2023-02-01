@@ -19,7 +19,7 @@ jobs:
 
   test-client:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-client
     defaults:
       run:
         working-directory: ./client
