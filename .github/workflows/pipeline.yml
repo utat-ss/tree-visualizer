@@ -1,24 +1,34 @@
 name: Pipeline
 on: [push, pull_request]
 jobs:
-  test:
+  build-client:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npx ng build
+
+  test-client:
+    runs-on: ubuntu-latest
+    needs: build
+    defaults:
+      run:
+        working-directory: ./client
     steps:
       - name: Checkout
         uses: actions/checkout@master
 
       - name: Install client dependencies
-        run: cd client && npm ci
+        run: npm ci
 
-      # - name: Install Angular CLI globally
-      #   run: npm install -g @angular/cli
-
-      - name: Run client tests
-        run: cd client && npx ng test
-
-      - name: Upload npm debug log
-        if: failure()
-        uses: actions/upload-artifact@master
-        with:
-          name: npm-debug-log
-          path: /home/runner/.npm/_logs/
+      - name: Test
+        run: npx ng test
