@@ -10,11 +10,11 @@ jobs:
       - name: Install client dependencies
         run: cd client && npm ci
 
-      - name: Install Angular CLI globally
-        run: npm install -g @angular/cli
+      # - name: Install Angular CLI globally
+      #   run: npm install -g @angular/cli
 
       - name: Run client tests
-        run: ng test
+        run: cd client && ng test
 
       - name: Upload npm debug log
         if: failure()
