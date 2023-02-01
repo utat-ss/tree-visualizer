@@ -11,4 +11,10 @@ jobs:
         run: cd client && npm ci
 
       - name: Run client tests
-        run: npx ng test --verbose
+        run: npx ng test
+
+      - name: Upload npm debug log
+        uses: actions/upload-artifact@master
+        with:
+          name: npm-debug-log
+          path: /home/runner/.npm/_logs/
