@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DataSet, Network } from 'vis-network/standalone';
 
-import { BackendService } from '../services/backend.service'
+import { BackendService, Requirements } from '../services/backend.service'
 
 // import { VisNetworkService, Data, DataSet, Node, Edge, Options } from 'ngx-vis';
 
@@ -12,13 +13,67 @@ import { BackendService } from '../services/backend.service'
 
 export class GraphComponent implements OnInit {
   data: string = "asdfasdfadsf";
+  raw: string | undefined;
+  requirements: Requirements | undefined;
 
   constructor(private backend: BackendService) {};
 
+  showGraph(r: Requirements) {
+    console.log(r.nodes.length + " nodes and " + r.edges.length + " edges loaded!");
+
+    // create datasets
+    const nodes = new DataSet(r.nodes);
+    const edges = new DataSet(r.edges);
+
+    const container: any = document.getElementById('graph');
+
+    const data = {
+      nodes: nodes,
+      edges: edges,
+    };
+
+    const options = {
+      edges: {
+        arrows: {
+          to: {
+            enabled: true
+          }
+        },
+        width: 3,
+        hoverWidth: 3,
+        selectionWidth: 6
+      },
+      nodes: {
+        shape: 'circle',
+        mass: 5,
+        widthConstraint: {
+          maximum: 180
+        },
+        font: {
+          size: 30
+        },
+        shadow: {
+          enabled: true
+        }
+      },
+      layout: {
+        hierarchical: {
+          enabled: false,
+          nodeSpacing: 500,
+          levelSeparation: 500,
+          sortMethod: 'directed'
+        }
+      },
+      interaction: {
+        hover: true
+      }
+    };
+
+    const network = new Network(container, data, options);
+  }
+
   ngOnInit(): void {
-    this.data = "test";
-    let res = this.backend.getRequirements();
-    console.log(res)
+    this.backend.getRequirements().subscribe(this.showGraph);
   }
 
   /*
