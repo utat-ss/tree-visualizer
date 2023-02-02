@@ -150,7 +150,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<header>  \n  <div class=\"wrapper\">\n    <div>\n      <img width=\"36\" height=\"36\" viewBox=\"0 0 36 36\" src='../../../assets/utatLogo.png' alt = 'img'>\n      <h1>Tree Visualizer Tool</h1>\n    </div>\n    <div>\n        <span class=\"stats\">\n          <b>STATISTICS |</b> Title: {{ database_title }} | Nodes: {{ number_of_nodes }} | Warnings: {{ number_of_warnings}}\n        </span>\n      </div>\n      </div>\n</header>\n\n<div style=\"margin-top: 50px; padding: 50px;\">\n  <app-progress-bar></app-progress-bar>\n</div>"
+            "templateData": "<header>  \n  <div class=\"wrapper\">\n    <div>\n      <img width=\"36\" height=\"36\" viewBox=\"0 0 36 36\" src='../../../assets/utatLogo.png' alt = 'img'>\n      <h1>Tree Visualizer Tool</h1>\n    </div>\n    <div>\n        <span class=\"stats\">\n          <b>STATISTICS |</b> Title: {{ database_title }} | Nodes: {{ number_of_nodes }} | Warnings: {{ number_of_warnings}}\n        </span>\n      </div>\n      </div>\n</header>"
         },
         {
             "name": "ButtonComponent",
@@ -275,6 +275,57 @@
                     }
                 }
             }
+        },
+        {
+            "name": "ExpansionpanelComponent",
+            "id": "component-ExpansionpanelComponent-fc55d6aabb6be4305a49a10b614d8ffe98f33196e00f9887369f975ce0d73f9d1a568d60d47eab03d85a4780a48a740365e7f4e9370d2822f94e2027e7fbc9e8",
+            "file": "src/app/components/expansionpanel/expansionpanel.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-expansionpanel",
+            "styleUrls": [
+                "./expansionpanel.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./expansionpanel.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "panelOpenState",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-expansionpanel',\n  templateUrl: './expansionpanel.component.html',\n  styleUrls: ['./expansionpanel.component.scss']\n})\nexport class ExpansionpanelComponent {\n  panelOpenState = false;\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".mat-mdc-form-field + .mat-mdc-form-field {\n    margin-left: 8px;\n  }",
+                    "styleUrl": "./expansionpanel.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<mat-accordion>\n  <mat-expansion-panel>\n    <mat-expansion-panel-header>\n      <mat-panel-title>\n        This is the expansion title\n      </mat-panel-title>\n      <mat-panel-description>\n        This is a summary of the content\n      </mat-panel-description>\n    </mat-expansion-panel-header>\n    <p>This is the primary content of the panel.</p>\n  </mat-expansion-panel>\n</mat-accordion>"
         },
         {
             "name": "HeaderComponent",
@@ -511,13 +562,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-c49e650907a05136dcbc948681f6880cfe6e1243e2b9b4341f611dfccf3517509e9e0c3fa25e4eb2a6f013295c4038c210335ee7620e987fddda9353d2e7e722",
+            "id": "module-AppModule-aeffd1bd47e11655688c22ded31dc1f492e77a5900a62539e25ee4c81f8e43ad08db7512dc54d877f856a5fa7e3b2a5f6f4cfd88832b83f17af6e9dff1b8ef33",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport AppheaderComponent from \"./components/appheader/appheader.component\"\nimport { LinkComponent } from './components/link/link.component';\n\nimport { MatExpansionModule } from '@angular/material/expansion';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    AppheaderComponent,\n    LinkComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    MatExpansionModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport AppheaderComponent from \"./components/appheader/appheader.component\"\nimport { LinkComponent } from './components/link/link.component';\n\nimport { MatExpansionModule } from '@angular/material/expansion';\nimport { ExpansionpanelComponent } from './components/expansionpanel/expansionpanel.component';\n\nimport {MaterialExampleModule} from '../material.module';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    AppheaderComponent,\n    LinkComponent,\n    ExpansionpanelComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    MatExpansionModule,\n    MaterialExampleModule,\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -533,6 +584,9 @@
                             "name": "AppheaderComponent"
                         },
                         {
+                            "name": "ExpansionpanelComponent"
+                        },
+                        {
                             "name": "LinkComponent"
                         }
                     ]
@@ -542,6 +596,9 @@
                     "elements": [
                         {
                             "name": "AppRoutingModule"
+                        },
+                        {
+                            "name": "MaterialExampleModule"
                         }
                     ]
                 },
@@ -572,6 +629,42 @@
             "file": "src/app/app-routing.module.ts",
             "methods": [],
             "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nconst routes: Routes = [];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "MaterialExampleModule",
+            "id": "module-MaterialExampleModule-1439bd0629c52c728c5098738f559cffbfe6558f7b1ebbbfd056c81219631a62aa5253b2f4cf0daf08b8edf3708c7df05ece08201964061683391d34a1dc62eb",
+            "description": "",
+            "deprecationMessage": "",
+            "deprecated": false,
+            "file": "src/material.module.ts",
+            "methods": [],
+            "sourceCode": "import {NgModule} from '@angular/core';\nimport {A11yModule} from '@angular/cdk/a11y';\nimport {CdkAccordionModule} from '@angular/cdk/accordion';\nimport {ClipboardModule} from '@angular/cdk/clipboard';\nimport {DragDropModule} from '@angular/cdk/drag-drop';\nimport {PortalModule} from '@angular/cdk/portal';\nimport {ScrollingModule} from '@angular/cdk/scrolling';\nimport {CdkStepperModule} from '@angular/cdk/stepper';\nimport {CdkTableModule} from '@angular/cdk/table';\nimport {CdkTreeModule} from '@angular/cdk/tree';\nimport {MatAutocompleteModule} from '@angular/material/autocomplete';\nimport {MatBadgeModule} from '@angular/material/badge';\nimport {MatBottomSheetModule} from '@angular/material/bottom-sheet';\nimport {MatButtonModule} from '@angular/material/button';\nimport {MatButtonToggleModule} from '@angular/material/button-toggle';\nimport {MatCardModule} from '@angular/material/card';\nimport {MatCheckboxModule} from '@angular/material/checkbox';\nimport {MatChipsModule} from '@angular/material/chips';\nimport {MatStepperModule} from '@angular/material/stepper';\nimport {MatDatepickerModule} from '@angular/material/datepicker';\nimport {MatDialogModule} from '@angular/material/dialog';\nimport {MatDividerModule} from '@angular/material/divider';\nimport {MatExpansionModule} from '@angular/material/expansion';\nimport {MatGridListModule} from '@angular/material/grid-list';\nimport {MatIconModule} from '@angular/material/icon';\nimport {MatInputModule} from '@angular/material/input';\nimport {MatListModule} from '@angular/material/list';\nimport {MatMenuModule} from '@angular/material/menu';\nimport {MatNativeDateModule, MatRippleModule} from '@angular/material/core';\nimport {MatPaginatorModule} from '@angular/material/paginator';\nimport {MatProgressBarModule} from '@angular/material/progress-bar';\nimport {MatProgressSpinnerModule} from '@angular/material/progress-spinner';\nimport {MatRadioModule} from '@angular/material/radio';\nimport {MatSelectModule} from '@angular/material/select';\nimport {MatSidenavModule} from '@angular/material/sidenav';\nimport {MatSliderModule} from '@angular/material/slider';\nimport {MatSlideToggleModule} from '@angular/material/slide-toggle';\nimport {MatSnackBarModule} from '@angular/material/snack-bar';\nimport {MatSortModule} from '@angular/material/sort';\nimport {MatTableModule} from '@angular/material/table';\nimport {MatTabsModule} from '@angular/material/tabs';\nimport {MatToolbarModule} from '@angular/material/toolbar';\nimport {MatTooltipModule} from '@angular/material/tooltip';\nimport {MatTreeModule} from '@angular/material/tree';\nimport {OverlayModule} from '@angular/cdk/overlay';\nimport {CdkMenuModule} from '@angular/cdk/menu';\nimport {DialogModule} from '@angular/cdk/dialog';\n\n@NgModule({\n  exports: [\n    A11yModule,\n    CdkAccordionModule,\n    ClipboardModule,\n    CdkMenuModule,\n    CdkStepperModule,\n    CdkTableModule,\n    CdkTreeModule,\n    DragDropModule,\n    MatAutocompleteModule,\n    MatBadgeModule,\n    MatBottomSheetModule,\n    MatButtonModule,\n    MatButtonToggleModule,\n    MatCardModule,\n    MatCheckboxModule,\n    MatChipsModule,\n    MatStepperModule,\n    MatDatepickerModule,\n    MatDialogModule,\n    MatDividerModule,\n    MatExpansionModule,\n    MatGridListModule,\n    MatIconModule,\n    MatInputModule,\n    MatListModule,\n    MatMenuModule,\n    MatNativeDateModule,\n    MatPaginatorModule,\n    MatProgressBarModule,\n    MatProgressSpinnerModule,\n    MatRadioModule,\n    MatRippleModule,\n    MatSelectModule,\n    MatSidenavModule,\n    MatSliderModule,\n    MatSlideToggleModule,\n    MatSnackBarModule,\n    MatSortModule,\n    MatTableModule,\n    MatTabsModule,\n    MatToolbarModule,\n    MatTooltipModule,\n    MatTreeModule,\n    OverlayModule,\n    PortalModule,\n    ScrollingModule,\n    DialogModule,\n  ]\n})\nexport class MaterialExampleModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -736,6 +829,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/expansionpanel/stories/expansionpanel.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ExpansionpanelComponent>",
+                "defaultValue": "(args: ExpansionpanelComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/link/stories/link.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -747,6 +850,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/appheader/stories/appheader.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Version1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/expansionpanel/stories/expansionpanel.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -916,6 +1029,28 @@
                     "type": "",
                     "defaultValue": "Template.bind({})"
                 }
+            ],
+            "src/app/components/expansionpanel/stories/expansionpanel.stories.ts": [
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/expansionpanel/stories/expansionpanel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<ExpansionpanelComponent>",
+                    "defaultValue": "(args: ExpansionpanelComponent) => ({\n  props: args,\n})"
+                },
+                {
+                    "name": "Version1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/expansionpanel/stories/expansionpanel.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -970,6 +1105,35 @@
             },
             {
                 "filePath": "src/app/components/appheader/stories/appheader.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Version1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/expansionpanel/expansionpanel.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ExpansionpanelComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/expansionpanel/stories/expansionpanel.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/expansionpanel/stories/expansionpanel.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",

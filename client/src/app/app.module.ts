@@ -8,18 +8,27 @@ import AppheaderComponent from "./components/appheader/appheader.component"
 import { LinkComponent } from './components/link/link.component';
 
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ExpansionpanelComponent } from './components/expansionpanel/expansionpanel.component';
+
+import {MaterialExampleModule} from '../material.module';
+import { CardsComponent } from './components/cards/cards.component';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppheaderComponent,
-    LinkComponent
+    LinkComponent,
+    ExpansionpanelComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MaterialExampleModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

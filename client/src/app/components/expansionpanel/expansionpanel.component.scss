@@ -1,0 +1,31 @@
+.wrapper {
+    font-family: monospace;
+    background-color: #b4d2ff;
+    border-bottom: 1px solid rgba(24, 4, 105, 0.1);
+    padding: 15px 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+mat-panel-title{
+    font-family: monospace;
+    font-size: larger;
+    font-weight: bold;
+}
+
+mat-panel-description{
+    font-family: monospace;
+}
+
+p{
+    background-color:  rgba(24, 4, 105, 0.1);
+    border-bottom: 1px solid rgba(24, 4, 105, 0.1);
+    padding: 15px 20px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    align-items: center;
+    justify-content: space-between;
+    font-family: monospace;
+}
