@@ -1,0 +1,21 @@
+section {
+  display: table;
+}
+
+button {
+  font-family: monospace;
+}
+
+a {
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.button-row {
+  display: table-cell;
+  max-width: 400px;
+}
+
+.button-row .mat-mdc-button-base {
+  margin: 10px 10px 10px 10px;
+}

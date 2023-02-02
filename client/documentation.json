@@ -269,6 +269,46 @@
             "stylesData": ""
         },
         {
+            "name": "MenubuttonsComponent",
+            "id": "component-MenubuttonsComponent-d5c781509f74d21a6d0a0c3cd79e1f770f8472fee14419ef83e73c2f6db4b0aa4a8879aea60544869da51acd503ee5ac51806e442e35b71c2d67e725010af99d",
+            "file": "src/app/components/menubuttons/menubuttons.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-menubuttons",
+            "styleUrls": [
+                "./menubuttons.component.sass"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./menubuttons.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-menubuttons',\n  templateUrl: './menubuttons.component.html',\n  styleUrls: ['./menubuttons.component.sass']\n})\nexport class MenubuttonsComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./menubuttons.component.sass"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<p>menubuttons works!</p>\n"
+        },
+        {
             "name": "PageComponent",
             "id": "component-PageComponent-7126d8c2607c946741c651482413b43feb72b2d63cac9d3ac173fde206a5e635eb4cdbf7ca7ac9327c7d4d05cf7ef619144c34c11609ad677081d0ee4e855064",
             "file": "src/stories/page.component.ts",
@@ -347,18 +387,58 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "SinglebuttonsComponent",
+            "id": "component-SinglebuttonsComponent-af08ebef0ea3da830939899aa62fa66f9828b9eb83fb38c5d1b13948628a85e0c6ba664b3709db8e3d4b4eb465fb65deef995ee92df3e7aba870ac868591f3c7",
+            "file": "src/app/components/singlebuttons/singlebuttons.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-singlebuttons",
+            "styleUrls": [
+                "./singlebuttons.component.sass"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./singlebuttons.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-singlebuttons',\n  templateUrl: './singlebuttons.component.html',\n  styleUrls: ['./singlebuttons.component.sass']\n})\nexport class SinglebuttonsComponent {\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./singlebuttons.component.sass"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<p>singlebuttons works!</p>\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-0380eb99dc933726a298e8346c6bccd22e1b5cc04b104327b1338c34576989e47a18332184e6619667ea44cdcc8415094943c57e1610f717c21a145170f5c250",
+            "id": "module-AppModule-dee806d4cfb4619d40cf40e72cad173526f460d49744da73e733cd3cedc08ab56b6648880ccbcad05f41b8b5288b1428c01c663e6a6d9f61db8a58e7519284ef",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { SinglebuttonsComponent } from './components/singlebuttons/singlebuttons.component';\nimport { MenubuttonsComponent } from './components/menubuttons/menubuttons.component';\n\nimport {MatButtonModule} from '@angular/material/button';\nimport {MatMenuModule} from '@angular/material/menu';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    SinglebuttonsComponent,\n    MenubuttonsComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    MatButtonModule,\n    MatMenuModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -369,6 +449,12 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "MenubuttonsComponent"
+                        },
+                        {
+                            "name": "SinglebuttonsComponent"
                         }
                     ]
                 },
@@ -546,6 +632,46 @@
                 "deprecationMessage": "",
                 "type": "Story<Page>",
                 "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/menubuttons/stories/menubuttons.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<MenubuttonsComponent>",
+                "defaultValue": "(args: MenubuttonsComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/singlebuttons/stories/singlebuttons.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SinglebuttonsComponent>",
+                "defaultValue": "(args: SinglebuttonsComponent) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Version1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/menubuttons/stories/menubuttons.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Version1",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/singlebuttons/stories/singlebuttons.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             }
         ],
         "functions": [],
@@ -667,6 +793,50 @@
                     "type": "Story<Page>",
                     "defaultValue": "(args: Page) => ({\n  props: args,\n})"
                 }
+            ],
+            "src/app/components/menubuttons/stories/menubuttons.stories.ts": [
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/menubuttons/stories/menubuttons.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<MenubuttonsComponent>",
+                    "defaultValue": "(args: MenubuttonsComponent) => ({\n  props: args,\n})"
+                },
+                {
+                    "name": "Version1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/menubuttons/stories/menubuttons.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/app/components/singlebuttons/stories/singlebuttons.stories.ts": [
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/singlebuttons/stories/singlebuttons.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SinglebuttonsComponent>",
+                    "defaultValue": "(args: SinglebuttonsComponent) => ({\n  props: args,\n})"
+                },
+                {
+                    "name": "Version1",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/singlebuttons/stories/singlebuttons.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
             ]
         },
         "groupedFunctions": {},
@@ -688,7 +858,7 @@
         ]
     },
     "coverage": {
-        "count": 5,
+        "count": 3,
         "status": "low",
         "files": [
             {
@@ -698,6 +868,64 @@
                 "name": "AppComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/menubuttons/menubuttons.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MenubuttonsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/menubuttons/stories/menubuttons.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/menubuttons/stories/menubuttons.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Version1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/singlebuttons/singlebuttons.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SinglebuttonsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/singlebuttons/stories/singlebuttons.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/singlebuttons/stories/singlebuttons.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Version1",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

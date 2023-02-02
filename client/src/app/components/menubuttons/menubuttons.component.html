@@ -1,0 +1,28 @@
+<section>
+<button mat-raised-button color="primary" [matMenuTriggerFor]="editgraph">Edit Graph</button>
+<mat-menu #editgraph="matMenu" class="class">
+    <button mat-menu-item>Add Node</button>
+    <button mat-menu-item>Remove Node</button>
+    <button mat-menu-item [matMenuTriggerFor]="editnode">Edit Node</button>
+    <button mat-menu-item [matMenuTriggerFor]="export">Export</button>
+</mat-menu>
+
+<mat-menu #editnode="matMenu">
+    <button mat-menu-item>Edit ID</button>
+    <button mat-menu-item>Edit Mission</button>
+    <button mat-menu-item>Edit Type</button>
+    <button mat-menu-item>Edit System</button>
+    <button mat-menu-item>Edit Qualifier</button>
+    <button mat-menu-item>Edit Description</button>
+    <button mat-menu-item>Edit Rationale</button>
+    <button mat-menu-item>Edit Stakeholder</button>
+    <button mat-menu-item>Edit Verification Method</button>
+</mat-menu>
+
+<mat-menu #export="matMenu">
+  <button mat-menu-item>PDF</button>
+  <button mat-menu-item>HTML</button>
+  <button mat-menu-item>JPG</button>
+  <button mat-menu-item>PNG</button>
+</mat-menu>
+</section>
