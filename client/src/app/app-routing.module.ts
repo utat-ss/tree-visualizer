@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { GraphComponent } from './graph/graph.component';
+
+const routes: Routes = [
+  { path: "requirements", component: GraphComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
