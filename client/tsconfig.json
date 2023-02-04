@@ -23,7 +23,7 @@
       "ES2022",
       "dom"
     ],
-    "skipLibCheck": true
+    "skipLibCheck": true  // ! temp workaround for https://github.com/visjs/vis-data/issues/985
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
