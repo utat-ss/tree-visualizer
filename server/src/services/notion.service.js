@@ -9,16 +9,19 @@ const getRequirementsData = async function() {
   let all = []
   let has_more = true;
   let cursor = undefined;
+
+  // Go through pagination to grab all data
   while (has_more) {
     const results = await notionClient.databases.query({
-      database_id: "b9c7195bd9fa414a97ee704f503a0e9f",
+      database_id: "b9c7195bd9fa414a97ee704f503a0e9f",    // systems -> requirements DB
       start_cursor: cursor
     });
     has_more = results.has_more;
     cursor = results.next_cursor;
     all.push(...results.results);
   }
-  
+
+  // Simplify into title, parent, child(ren)
   let all_obj = {}
   for (let elem of all) {
     all_obj[elem.id] = {
@@ -28,6 +31,7 @@ const getRequirementsData = async function() {
     }
   }
 
+  // Parse into node/edge format that vis-network understands
   let nodes = []
   let edges = []
   for (let key of Object.keys(all_obj)) {
@@ -45,6 +49,7 @@ const getRequirementsData = async function() {
     }
   }
 
+  // Return nodes and edges
   return {
     nodes: nodes,
     edges: edges

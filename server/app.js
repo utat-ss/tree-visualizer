@@ -6,16 +6,10 @@ var logger = require('morgan');
 var cors = require('cors');
 
 var indexRouter = require('./src/routes/index');
-var usersRouter = require('./src/routes/users');
 
 var app = express();
 
-// cors
-// app.use(cors({
-//   origin: 'https://4200--main--tree-visualizer--jdtech3.code.j0e.ca'
-// }));
-app.use(cors());
-// app.options('*', cors());
+app.use(cors());    // TODO: restrict CORS once we have deployment up
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src/views'));
@@ -28,7 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src/public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
