@@ -6,7 +6,8 @@
 			"extensions": [
 				"Angular.ng-template",
 				"Orta.vscode-jest",
-				"nrwl.angular-console"
+				"nrwl.angular-console",
+				"AlexShen.classdiagram-ts"
 			]
 		}
 	}
