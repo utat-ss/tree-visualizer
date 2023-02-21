@@ -1,3 +1,5 @@
+// For demo
+
 extends layout
 
 block content
@@ -46,7 +48,12 @@ block content
         }
       },
       layout: {
-        improvedLayout: false
+        hierarchical: {
+          enabled: false,
+          nodeSpacing: 500,
+          levelSeparation: 500,
+          sortMethod: 'directed'
+        }
       },
       interaction: {
         hover: true
