@@ -9,18 +9,15 @@ const $ = go.GraphObject.make;
   styleUrls: ['./org-chart.component.sass']
 })
 export class OrgChartComponent implements OnInit {
-  public diagram: go.Diagram;
-
-
+  public diagram: go.Diagram = new go.Diagram();
 
   @Input()
-  public model: go.Model;
+  public model: go.Model = new go.GraphLinksModel();
 
   @Output()
   public nodeClicked = new EventEmitter();
 
-  constructor() { 
-    this.diagram = $(go.Diagram, 'app-org-chart')
+  constructor() {
   }
 
   public ngOnInit() {

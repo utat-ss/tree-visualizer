@@ -105,7 +105,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-75559a533611aca2d8aa1245ae67eafbebedcf7bc69b3b2fc5cfee1bf934de81958e83c2e9e0cb72aff58669169f35b2063020c52ac62f0efa75bcdcf2c01d50",
+            "id": "component-AppComponent-b45d110156f9743357276c0ad28839b3e327aa0861a610e5af4b600d63270ee63949a3cfea9f2d4867b09b54044fcdd7efc12e29c0f565313d4c83edebcc3b42",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -125,6 +125,32 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "model",
+                    "defaultValue": "new go.TreeModel([\n    { key: 1, name: 'Alpha', parent: null },\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n  ])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.TreeModel",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "selectedNode",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "null",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
                     "name": "title",
                     "defaultValue": "'tree-visualizer'",
                     "deprecated": false,
@@ -132,10 +158,42 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 10
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "setSelectedNode",
+                    "args": [
+                        {
+                            "name": "node",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "node",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -143,7 +201,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.sass']\n})\nexport class AppComponent {\n  title = 'tree-visualizer';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport * as go from 'gojs';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.sass']\n})\nexport class AppComponent {\n  title = 'tree-visualizer';\n\n  public selectedNode = null;\n\n  public model: go.TreeModel = new go.TreeModel([\n    { key: 1, name: 'Alpha', parent: null },\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n  ]);\n\n  public setSelectedNode(node){\n    this.selectedNode = node;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -152,7 +210,7 @@
                 }
             ],
             "stylesData": "",
-            "templateData": "<p>This is TreeVisualizer!</p>\n\n<app-graph></app-graph>\n"
+            "templateData": "<p>This is TreeVisualizer!</p>\n\n<app-org-chart [model]=\"model\" (nodeClicked)=\"setSelectedNode($event)\"></app-org-chart>"
         },
         {
             "name": "ButtonComponent",
@@ -461,7 +519,7 @@
         },
         {
             "name": "OrgChartComponent",
-            "id": "component-OrgChartComponent-74eecbfc4e6d839518cc335101c8515e5d5cbee8050cd5882689f6d307d68fa86aeaefe79922e20d65d7d515d3d28f9a74c1438c9c1bc5ca1ca3a3d1408deb60",
+            "id": "component-OrgChartComponent-fe43e7714dc5263b32f5cffa45df10f3b494ccfe59b820d84958d1cfeb7a6b6c4df35ef5cc99be1be5e7c1ef11881a5e0a1b0770078b2db87d7c82cf986b7e22",
             "file": "src/app/components/org-chart/org-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -477,10 +535,68 @@
                 "./org-chart.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
+            "inputsClass": [
+                {
+                    "name": "model",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "go.Model",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "nodeClicked",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "diagram",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Diagram",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -488,16 +604,27 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-org-chart',\n  templateUrl: './org-chart.component.html',\n  styleUrls: ['./org-chart.component.sass']\n})\nexport class OrgChartComponent {\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport * as go from 'gojs';\n\nconst $ = go.GraphObject.make;\n\n@Component({\n  selector: 'app-org-chart',\n  templateUrl: './org-chart.component.html',\n  styleUrls: ['./org-chart.component.sass']\n})\nexport class OrgChartComponent implements OnInit {\n  public diagram: go.Diagram;\n\n\n\n  @Input()\n  public model: go.Model;\n\n  @Output()\n  public nodeClicked = new EventEmitter();\n\n  constructor() { \n    this.diagram = $(go.Diagram, 'app-org-chart')\n  }\n\n  public ngOnInit() {\n    \n  }\n\n  public ngAfterViewInit(): void {\n    this.diagram.model = this.model;\n\n    // when selection changes, emit event to update the selected node\n    this.diagram.addDiagramListener('ChangedSelection', (e) => {\n      const node = this.diagram.selection.first();\n      this.nodeClicked.emit(node);\n    });\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "#app-org-chart\n    width: 1500px\n    height: 500px\n    border: 1px solid black\n    background-color: green\n",
                     "styleUrl": "./org-chart.component.sass"
                 }
             ],
             "stylesData": "",
-            "templateData": "<p>org-chart works!</p>\n"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 20
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div id=\"app-org-chart\">hello</div>"
         },
         {
             "name": "PageComponent",
@@ -675,6 +802,16 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "$",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/org-chart/org-chart.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "go.GraphObject.make"
+            },
+            {
                 "name": "FirstStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -809,6 +946,18 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/components/org-chart/org-chart.component.ts": [
+                {
+                    "name": "$",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/org-chart/org-chart.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "go.GraphObject.make"
+                }
+            ],
             "src/app/components/org-chart/org-chart.component.stories.ts": [
                 {
                     "name": "FirstStory",
@@ -981,7 +1130,7 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -1009,6 +1158,16 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "OrgChartComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/org-chart/org-chart.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "$",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
