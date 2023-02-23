@@ -519,7 +519,7 @@
         },
         {
             "name": "OrgChartComponent",
-            "id": "component-OrgChartComponent-8aca564e755aa0b90f5680157f26242eb7b9653d1625555b0c3aeeb0e05444461fff99531fa57a3b986b92bc0d29292fc12307f8461c3a355ac20e20eb6bfc98",
+            "id": "component-OrgChartComponent-f2976058bc162f71da8ddd7014c4387b708418fa846decbbc3eac902e56028ee4885d578dfbcda2408e902acd5c793bf19240ee29086ad5d0d3575e3cf673813",
             "file": "src/app/components/org-chart/org-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -541,7 +541,7 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
+                    "line": 15,
                     "type": "go.TreeModel",
                     "decorators": []
                 }
@@ -552,7 +552,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 18,
                     "type": "EventEmitter"
                 }
             ],
@@ -565,7 +565,7 @@
                     "type": "go.Diagram",
                     "optional": false,
                     "description": "",
-                    "line": 10,
+                    "line": 12,
                     "modifierKind": [
                         123
                     ]
@@ -578,7 +578,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 24,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -591,7 +591,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 21,
+                    "line": 22,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -606,11 +606,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport * as go from 'gojs';\n\n@Component({\n  selector: 'app-org-chart',\n  templateUrl: './org-chart.component.html',\n  styleUrls: ['./org-chart.component.sass']\n})\nexport class OrgChartComponent implements OnInit {\n  public diagram: go.Diagram = new go.Diagram();\n\n  @Input()\n  public model: go.TreeModel = new go.TreeModel();\n\n  @Output()\n  public nodeClicked = new EventEmitter();\n\n  constructor() {\n  }\n\n  public ngOnInit() {\n    \n  }\n\n  public ngAfterViewInit(): void {\n    this.diagram = go.GraphObject.make(go.Diagram, 'app-org-chart')\n    \n    this.diagram.model = this.model;\n\n    // when selection changes, emit event to update the selected node\n    this.diagram.addDiagramListener('ChangedSelection', (e) => {\n      const node = this.diagram.selection.first();\n      this.nodeClicked.emit(node);\n    });\n  }\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport * as go from 'gojs';\n\nconst $ = go.GraphObject.make;\n\n@Component({\n    selector: 'app-org-chart',\n    templateUrl: './org-chart.component.html',\n    styleUrls: ['./org-chart.component.sass'],\n})\nexport class OrgChartComponent implements OnInit {\n    public diagram: go.Diagram = new go.Diagram();\n\n    @Input()\n    public model: go.TreeModel = new go.TreeModel();\n\n    @Output()\n    public nodeClicked = new EventEmitter();\n\n    constructor() {}\n\n    public ngOnInit() {}\n\n    public ngAfterViewInit(): void {\n        this.diagram = $(go.Diagram, 'app-org-chart', {\n            allowCopy: true,\n            allowDelete: true,\n            maxSelectionCount: 1,\n            validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create trees\n            'clickCreatingTool.archetypeNodeData': {\n                // allow double-click in background to create a new node\n                name: 'new node',\n                parent: '',\n            },\n            layout: $(go.TreeLayout, {\n                isOngoing: true,\n                treeStyle: go.TreeLayout.StyleLastParents,\n                arrangement: go.TreeLayout.ArrangementHorizontal,\n                // properties for most of the tree:\n                angle: 90,\n                layerSpacing: 35,\n                // properties for the \"last parents\":\n                alternateAngle: 90,\n                alternateLayerSpacing: 35,\n                alternateAlignment: go.TreeLayout.AlignmentBus,\n                alternateNodeSpacing: 20,\n            }),\n            'undoManager.isEnabled': true,\n        });\n\n        this.diagram.nodeTemplate = $(\n            go.Node,\n            'Spot',\n            // for sorting, have the Node.text be the data.name\n            new go.Binding('text', 'name'),\n            // bind the Part.layerName to control the Node's layer depending on whether it isSelected\n            new go.Binding('layerName', 'isSelected', (sel) =>\n                sel ? 'Foreground' : ''\n            ).ofObject(),\n            new go.Binding('isTreeExpanded').makeTwoWay(),\n            $(\n                'TreeExpanderButton',\n                {\n                    name: 'BUTTONX',\n                    alignment: go.Spot.Bottom,\n                    opacity: 0, // initially not visible\n                    _treeExpandedFigure: 'TriangleUp',\n                    _treeCollapsedFigure: 'TriangleDown',\n                },\n                // button is visible either when node is selected or on mouse-over\n                new go.Binding('opacity', 'isSelected', (s) =>\n                    s ? 1 : 0\n                ).ofObject()\n            )\n        );\n\n        this.diagram.model = this.model;\n\n        // when selection changes, emit event to update the selected node\n        this.diagram.addDiagramListener('ChangedSelection', (e) => {\n            const node = this.diagram.selection.first();\n            this.nodeClicked.emit(node);\n        });\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "#app-org-chart\n    width: 1500px\n    height: 500px\n    border: 1px solid black\n    background-color: green\n",
+                    "data": "#app-org-chart\n    width: 1280px\n    height: 720px\n    border: 1px solid black\n    background-color: white\n",
                     "styleUrl": "./org-chart.component.sass"
                 }
             ],
@@ -621,7 +621,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 16
+                "line": 18
             },
             "implements": [
                 "OnInit"
@@ -804,6 +804,16 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "$",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/org-chart/org-chart.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "go.GraphObject.make"
+            },
+            {
                 "name": "FirstStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -864,6 +874,16 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "model",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/org-chart/org-chart.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "new go.TreeModel([\n    { key: 1, name: 'Alpha', parent: '' },\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n])"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -897,21 +917,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/Button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<Button>",
                 "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Header>",
+                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -931,13 +951,25 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "(args) => ({\n  props:args,\n})"
+                "defaultValue": "(args) => ({\n    props: args,\n})"
             }
         ],
         "functions": [],
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/components/org-chart/org-chart.component.ts": [
+                {
+                    "name": "$",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/org-chart/org-chart.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "go.GraphObject.make"
+                }
+            ],
             "src/app/components/org-chart/org-chart.component.stories.ts": [
                 {
                     "name": "FirstStory",
@@ -950,6 +982,16 @@
                     "defaultValue": "Template.bind({})"
                 },
                 {
+                    "name": "model",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/org-chart/org-chart.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new go.TreeModel([\n    { key: 1, name: 'Alpha', parent: '' },\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n])"
+                },
+                {
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -957,7 +999,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "(args) => ({\n  props:args,\n})"
+                    "defaultValue": "(args) => ({\n    props: args,\n})"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -1128,6 +1170,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "model",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/org-chart/org-chart.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -1140,6 +1192,16 @@
                 "name": "OrgChartComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/org-chart/org-chart.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "$",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
