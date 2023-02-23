@@ -105,7 +105,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-b45d110156f9743357276c0ad28839b3e327aa0861a610e5af4b600d63270ee63949a3cfea9f2d4867b09b54044fcdd7efc12e29c0f565313d4c83edebcc3b42",
+            "id": "component-AppComponent-79258e7eb80e0596898732abb5b8891264c8574927e849af597bd2aeb8e8d9e5481afaf559dbdec9889d62e603dd5ec411869032c97362cf4c15a46aeccdb69c",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -126,7 +126,7 @@
             "propertiesClass": [
                 {
                     "name": "model",
-                    "defaultValue": "new go.TreeModel([\n    { key: 1, name: 'Alpha', parent: null },\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n  ])",
+                    "defaultValue": "new go.TreeModel([\n    { key: 1, name: 'Alpha'},\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n  ])",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "go.TreeModel",
@@ -142,7 +142,7 @@
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "null",
+                    "type": "go.Part | null",
                     "optional": false,
                     "description": "",
                     "line": 12,
@@ -167,7 +167,7 @@
                     "args": [
                         {
                             "name": "node",
-                            "type": "",
+                            "type": "go.Part | null",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -184,7 +184,7 @@
                     "jsdoctags": [
                         {
                             "name": "node",
-                            "type": "",
+                            "type": "go.Part | null",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -201,7 +201,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\nimport * as go from 'gojs';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.sass']\n})\nexport class AppComponent {\n  title = 'tree-visualizer';\n\n  public selectedNode = null;\n\n  public model: go.TreeModel = new go.TreeModel([\n    { key: 1, name: 'Alpha', parent: null },\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n  ]);\n\n  public setSelectedNode(node){\n    this.selectedNode = node;\n  }\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\nimport * as go from 'gojs';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.sass']\n})\nexport class AppComponent {\n  title = 'tree-visualizer';\n\n  public selectedNode: go.Part | null = null;\n\n  public model: go.TreeModel = new go.TreeModel([\n    { key: 1, name: 'Alpha'},\n    { key: 2, name: 'Beta', parent: 1 },\n    { key: 3, name: 'Gamma', parent: 1 },\n    { key: 4, name: 'Delta', parent: 2 },\n    { key: 5, name: 'Epsilon', parent: 2 },\n  ]);\n\n  public setSelectedNode(node: go.Part | null){\n    this.selectedNode = node;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -519,7 +519,7 @@
         },
         {
             "name": "OrgChartComponent",
-            "id": "component-OrgChartComponent-fe43e7714dc5263b32f5cffa45df10f3b494ccfe59b820d84958d1cfeb7a6b6c4df35ef5cc99be1be5e7c1ef11881a5e0a1b0770078b2db87d7c82cf986b7e22",
+            "id": "component-OrgChartComponent-8aca564e755aa0b90f5680157f26242eb7b9653d1625555b0c3aeeb0e05444461fff99531fa57a3b986b92bc0d29292fc12307f8461c3a355ac20e20eb6bfc98",
             "file": "src/app/components/org-chart/org-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -538,10 +538,11 @@
             "inputsClass": [
                 {
                     "name": "model",
+                    "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
-                    "type": "go.Model",
+                    "line": 13,
+                    "type": "go.TreeModel",
                     "decorators": []
                 }
             ],
@@ -551,19 +552,20 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 16,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
                 {
                     "name": "diagram",
+                    "defaultValue": "new go.Diagram()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "go.Diagram",
                     "optional": false,
                     "description": "",
-                    "line": 12,
+                    "line": 10,
                     "modifierKind": [
                         123
                     ]
@@ -576,7 +578,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -589,7 +591,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 21,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -604,7 +606,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport * as go from 'gojs';\n\nconst $ = go.GraphObject.make;\n\n@Component({\n  selector: 'app-org-chart',\n  templateUrl: './org-chart.component.html',\n  styleUrls: ['./org-chart.component.sass']\n})\nexport class OrgChartComponent implements OnInit {\n  public diagram: go.Diagram;\n\n\n\n  @Input()\n  public model: go.Model;\n\n  @Output()\n  public nodeClicked = new EventEmitter();\n\n  constructor() { \n    this.diagram = $(go.Diagram, 'app-org-chart')\n  }\n\n  public ngOnInit() {\n    \n  }\n\n  public ngAfterViewInit(): void {\n    this.diagram.model = this.model;\n\n    // when selection changes, emit event to update the selected node\n    this.diagram.addDiagramListener('ChangedSelection', (e) => {\n      const node = this.diagram.selection.first();\n      this.nodeClicked.emit(node);\n    });\n  }\n\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport * as go from 'gojs';\n\n@Component({\n  selector: 'app-org-chart',\n  templateUrl: './org-chart.component.html',\n  styleUrls: ['./org-chart.component.sass']\n})\nexport class OrgChartComponent implements OnInit {\n  public diagram: go.Diagram = new go.Diagram();\n\n  @Input()\n  public model: go.TreeModel = new go.TreeModel();\n\n  @Output()\n  public nodeClicked = new EventEmitter();\n\n  constructor() {\n  }\n\n  public ngOnInit() {\n    \n  }\n\n  public ngAfterViewInit(): void {\n    this.diagram = go.GraphObject.make(go.Diagram, 'app-org-chart')\n    \n    this.diagram.model = this.model;\n\n    // when selection changes, emit event to update the selected node\n    this.diagram.addDiagramListener('ChangedSelection', (e) => {\n      const node = this.diagram.selection.first();\n      this.nodeClicked.emit(node);\n    });\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -619,7 +621,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 20
+                "line": 16
             },
             "implements": [
                 "OnInit"
@@ -802,16 +804,6 @@
     "miscellaneous": {
         "variables": [
             {
-                "name": "$",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/org-chart/org-chart.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "go.GraphObject.make"
-            },
-            {
                 "name": "FirstStory",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -946,18 +938,6 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
-            "src/app/components/org-chart/org-chart.component.ts": [
-                {
-                    "name": "$",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/org-chart/org-chart.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "go.GraphObject.make"
-                }
-            ],
             "src/app/components/org-chart/org-chart.component.stories.ts": [
                 {
                     "name": "FirstStory",
@@ -1160,16 +1140,6 @@
                 "name": "OrgChartComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/org-chart/org-chart.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "$",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
                 "status": "low"
             },
             {

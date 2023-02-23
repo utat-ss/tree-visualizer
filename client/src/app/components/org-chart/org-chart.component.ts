@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as go from 'gojs';
 
-const $ = go.GraphObject.make;
-
 @Component({
   selector: 'app-org-chart',
   templateUrl: './org-chart.component.html',
@@ -12,7 +10,7 @@ export class OrgChartComponent implements OnInit {
   public diagram: go.Diagram = new go.Diagram();
 
   @Input()
-  public model: go.Model = new go.GraphLinksModel();
+  public model: go.TreeModel = new go.TreeModel();
 
   @Output()
   public nodeClicked = new EventEmitter();
@@ -25,6 +23,8 @@ export class OrgChartComponent implements OnInit {
   }
 
   public ngAfterViewInit(): void {
+    this.diagram = go.GraphObject.make(go.Diagram, 'app-org-chart')
+    
     this.diagram.model = this.model;
 
     // when selection changes, emit event to update the selected node
