@@ -53,8 +53,46 @@ export class OrgChartComponent implements OnInit {
                 shadowOffset: new go.Point(2, 2),
                 shadowColor: "#DDD",
                 shadowBlur: 6,
+                mouseDragEnter: (e, node, prev) => {
+                    const shape: go.Shape = (node as go.Part).findObject(
+                        "SHAPE"
+                    ) as go.Shape
+                    shape.stroke = "dodgerblue"
+                    shape.strokeWidth = 3
+
+                    const shape2: go.Shape = (prev as go.Part).findObject(
+                        "SHAPE"
+                    ) as go.Shape
+                    shape2.stroke = "green"
+                    shape2.strokeWidth = 3
+                },
+                mouseDragLeave: (e, node, next) => {
+                    const shape: go.Shape = (node as go.Part).findObject(
+                        "SHAPE"
+                    ) as go.Shape
+                    shape.stroke = "dodgerblue"
+                    shape.strokeWidth = 0
+                },
+                mouseDrop: (e, node) => {
+                    const diagram = node.diagram
+                    const selnode = diagram?.selection.first() as go.Node // assume just one Node in selection
+                    // find any existing link into the selected node
+                    const link = selnode.findTreeParentLink()
+                    if (link !== null) {
+                        // reconnect any existing link
+                        link.fromNode = node as go.Node
+                    } else {
+                        // else create a new link
+                        diagram?.toolManager.linkingTool.insertLink(
+                            node as go.Node,
+                            (node as go.Node).port,
+                            selnode,
+                            selnode.port
+                        )
+                    }
+                },
             },
-            $(go.Shape, "Rectangle", { fill: "white", strokeWidth: 0 }),
+            $(go.Shape, "Rectangle", { name: "SHAPE", fill: "white", strokeWidth: 0 }),
             $(
                 go.Panel,
                 "Table",
