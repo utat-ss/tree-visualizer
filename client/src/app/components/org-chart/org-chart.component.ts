@@ -1,37 +1,31 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import * as go from 'gojs';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+import * as go from "gojs"
 
-const $ = go.GraphObject.make;
+const $ = go.GraphObject.make
 
 @Component({
-    selector: 'app-org-chart',
-    templateUrl: './org-chart.component.html',
-    styleUrls: ['./org-chart.component.sass'],
+    selector: "app-org-chart",
+    templateUrl: "./org-chart.component.html",
+    styleUrls: ["./org-chart.component.sass"],
 })
 export class OrgChartComponent implements OnInit {
-    public diagram: go.Diagram = new go.Diagram();
+    public diagram: go.Diagram = new go.Diagram()
 
     @Input()
-    public model: go.TreeModel = new go.TreeModel();
+    public model: go.TreeModel = new go.TreeModel()
 
     @Output()
-    public nodeClicked = new EventEmitter();
+    public nodeClicked = new EventEmitter()
 
     constructor() {}
 
     public ngOnInit() {}
 
     public ngAfterViewInit(): void {
-        this.diagram = $(go.Diagram, 'app-org-chart', {
-            allowCopy: true,
-            allowDelete: true,
-            maxSelectionCount: 1,
+        this.diagram = $(go.Diagram, "app-org-chart", {
+            allowCopy: false,
+            allowDelete: false,
             validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create trees
-            'clickCreatingTool.archetypeNodeData': {
-                // allow double-click in background to create a new node
-                name: 'new node',
-                parent: '',
-            },
             layout: $(go.TreeLayout, {
                 isOngoing: true,
                 treeStyle: go.TreeLayout.StyleLastParents,
@@ -45,41 +39,52 @@ export class OrgChartComponent implements OnInit {
                 alternateAlignment: go.TreeLayout.AlignmentBus,
                 alternateNodeSpacing: 20,
             }),
-            'undoManager.isEnabled': true,
-        });
+            "undoManager.isEnabled": true,
+        })
 
         this.diagram.nodeTemplate = $(
             go.Node,
-            'Spot',
-            // for sorting, have the Node.text be the data.name
-            new go.Binding('text', 'name'),
-            // bind the Part.layerName to control the Node's layer depending on whether it isSelected
-            new go.Binding('layerName', 'isSelected', (sel) =>
-                sel ? 'Foreground' : ''
-            ).ofObject(),
-            new go.Binding('isTreeExpanded').makeTwoWay(),
+            "Auto",
+            { desiredSize: new go.Size(200, 100) },
+            {
+                isShadowed: true,
+                shadowOffset: new go.Point(2, 2),
+                shadowColor: "#DDD",
+                shadowBlur: 6,
+            },
+            $(go.Shape, "Rectangle", { fill: "white", strokeWidth: 0 }),
             $(
-                'TreeExpanderButton',
-                {
-                    name: 'BUTTONX',
-                    alignment: go.Spot.Bottom,
-                    opacity: 0, // initially not visible
-                    _treeExpandedFigure: 'TriangleUp',
-                    _treeCollapsedFigure: 'TriangleDown',
-                },
-                // button is visible either when node is selected or on mouse-over
-                new go.Binding('opacity', 'isSelected', (s) =>
-                    s ? 1 : 0
-                ).ofObject()
+                go.Panel,
+                "Table",
+                { defaultAlignment: go.Spot.Left },
+                $(go.RowColumnDefinition, { column: 1, width: 4 }),
+                $(
+                    go.TextBlock,
+                    { row: 0, column: 0 },
+                    { font: "bold 12pt sans-serif" },
+                    new go.Binding("text", "title")
+                ),
+                $(go.TextBlock, "Description", { row: 1, column: 0 }),
+                $(
+                    go.TextBlock,
+                    { row: 1, column: 2 },
+                    new go.Binding("text", "description")
+                ),
+                $(go.TextBlock, "Rationale", { row: 2, column: 0 }),
+                $(
+                    go.TextBlock,
+                    { row: 2, column: 2 },
+                    new go.Binding("text", "rationale")
+                )
             )
-        );
+        )
 
-        this.diagram.model = this.model;
+        this.diagram.model = this.model
 
         // when selection changes, emit event to update the selected node
-        this.diagram.addDiagramListener('ChangedSelection', (e) => {
-            const node = this.diagram.selection.first();
-            this.nodeClicked.emit(node);
-        });
+        this.diagram.addDiagramListener("ChangedSelection", (e) => {
+            const node = this.diagram.selection.first()
+            this.nodeClicked.emit(node)
+        })
     }
 }
