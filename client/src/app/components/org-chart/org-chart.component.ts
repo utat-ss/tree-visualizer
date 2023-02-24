@@ -10,6 +10,8 @@ const $ = go.GraphObject.make
 })
 export class OrgChartComponent implements OnInit {
     public diagram: go.Diagram = new go.Diagram()
+    private nodeSize = new go.Size(256, 128)
+    private font = "sans-serif"
 
     @Input()
     public model: go.TreeModel = new go.TreeModel()
@@ -33,7 +35,7 @@ export class OrgChartComponent implements OnInit {
                 // properties for most of the tree:
                 angle: 90,
                 layerSpacing: 35,
-                // properties for the "last parents":
+                // properties for the leaf parents:
                 alternateAngle: 90,
                 alternateLayerSpacing: 35,
                 alternateAlignment: go.TreeLayout.AlignmentBus,
@@ -46,7 +48,7 @@ export class OrgChartComponent implements OnInit {
             go.Node,
             "Auto",
             {
-                desiredSize: new go.Size(200, 100),
+                desiredSize: this.nodeSize,
                 isShadowed: true,
                 shadowOffset: new go.Point(2, 2),
                 shadowColor: "#DDD",
@@ -56,34 +58,36 @@ export class OrgChartComponent implements OnInit {
             $(
                 go.Panel,
                 "Table",
-                { defaultAlignment: go.Spot.Left },
-                $(go.RowColumnDefinition, { column: 1 }),
+                {
+                    alignment: go.Spot.TopLeft,
+                    padding: 16,
+                    defaultAlignment: go.Spot.Left,
+                },
+                $(go.RowColumnDefinition, {
+                    column: 0,
+                    width: this.nodeSize.width - 50,
+                }),
                 $(
                     go.TextBlock,
-                    { row: 0, column: 0 },
-                    { font: "bold 12pt sans-serif" },
+                    {
+                        row: 0,
+                        column: 0,
+                        font: "bold 12pt " + this.font,
+                        overflow: go.TextBlock.OverflowEllipsis,
+                    },
                     new go.Binding("text", "title")
                 ),
-                // $(
-                //     go.Part,
-                //     "Auto",
-                //     { row: 1, column: 0 },
-                //     $(go.Shape, "RoundRectangle", {
-                //         fill: "blue",
-                //         strokeWidth: 0,
-                //         desiredSize: new go.Size(10, 5),
-                //     }),
-                //     $(go.TextBlock, new go.Binding("text", "type"))
-                // ),
                 $(
                     go.TextBlock,
-                    { row: 2, column: 0 },
-                    new go.Binding("text", "description"),
                     {
-                        font: "10pt sans-serif",
+                        row: 1,
+                        column: 0,
+                        font: "10pt " + this.font,
+                        stretch: go.GraphObject.Fill,
+                        maxLines: 6,
                         overflow: go.TextBlock.OverflowEllipsis,
-                        maxLines: 2,
-                    }
+                    },
+                    new go.Binding("text", "description")
                 )
             )
         )

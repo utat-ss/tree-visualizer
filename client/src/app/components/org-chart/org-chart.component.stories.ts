@@ -38,7 +38,7 @@ const model = new go.TreeModel({
             title: "UTAT-Team-C",
             type: "Component Selection",
             description:
-                "A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog.",
+                "A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.",
             rationale: "A rationale",
             url: "https://www.notion.so/Child-2-abcdefghi",
         },
