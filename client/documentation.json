@@ -655,13 +655,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-fe0f76e9dea74ff797e33aca544be24b68c11d0bdd9a3476b9b0b7870ab5bcdd7301dd318b3a6677ff6e747356fa2fe1c8d807512808e6b5abc2e1c139e2b4f5",
+            "id": "module-AppRoutingModule-300d8db993c2e4f6937a80d5621f170604c487e0b8cc75c75c0bfb3a5795d4adbad63ad38ab98380f2f6bed4d335641a600295f5592ff6447d6dcb768aa5bfaf",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { RouterModule, Routes } from '@angular/router';\n\nimport { GraphComponent } from './graph/graph.component';\n\nconst routes: Routes = [\n  { path: \"requirements\", component: GraphComponent },\n];\n\n@NgModule({\n  imports: [RouterModule.forRoot(routes)],\n  exports: [RouterModule]\n})\nexport class AppRoutingModule { }\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { RouterModule, Routes } from \"@angular/router\"\n\nconst routes: Routes = []\n\n@NgModule({\n    imports: [RouterModule.forRoot(routes)],\n    exports: [RouterModule],\n})\nexport class AppRoutingModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -1021,12 +1021,7 @@
                 "name": "routes",
                 "filename": "src/app/app-routing.module.ts",
                 "module": "AppRoutingModule",
-                "children": [
-                    {
-                        "path": "requirements",
-                        "component": "GraphComponent"
-                    }
-                ],
+                "children": [],
                 "kind": "module"
             }
         ]

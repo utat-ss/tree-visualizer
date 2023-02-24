@@ -45,8 +45,8 @@ export class OrgChartComponent implements OnInit {
         this.diagram.nodeTemplate = $(
             go.Node,
             "Auto",
-            { desiredSize: new go.Size(200, 100) },
             {
+                desiredSize: new go.Size(200, 100),
                 isShadowed: true,
                 shadowOffset: new go.Point(2, 2),
                 shadowColor: "#DDD",
@@ -57,24 +57,33 @@ export class OrgChartComponent implements OnInit {
                 go.Panel,
                 "Table",
                 { defaultAlignment: go.Spot.Left },
-                $(go.RowColumnDefinition, { column: 1, width: 4 }),
+                $(go.RowColumnDefinition, { column: 1 }),
                 $(
                     go.TextBlock,
                     { row: 0, column: 0 },
                     { font: "bold 12pt sans-serif" },
                     new go.Binding("text", "title")
                 ),
-                $(go.TextBlock, "Description", { row: 1, column: 0 }),
+                // $(
+                //     go.Part,
+                //     "Auto",
+                //     { row: 1, column: 0 },
+                //     $(go.Shape, "RoundRectangle", {
+                //         fill: "blue",
+                //         strokeWidth: 0,
+                //         desiredSize: new go.Size(10, 5),
+                //     }),
+                //     $(go.TextBlock, new go.Binding("text", "type"))
+                // ),
                 $(
                     go.TextBlock,
-                    { row: 1, column: 2 },
-                    new go.Binding("text", "description")
-                ),
-                $(go.TextBlock, "Rationale", { row: 2, column: 0 }),
-                $(
-                    go.TextBlock,
-                    { row: 2, column: 2 },
-                    new go.Binding("text", "rationale")
+                    { row: 2, column: 0 },
+                    new go.Binding("text", "description"),
+                    {
+                        font: "10pt sans-serif",
+                        overflow: go.TextBlock.OverflowEllipsis,
+                        maxLines: 2,
+                    }
                 )
             )
         )
