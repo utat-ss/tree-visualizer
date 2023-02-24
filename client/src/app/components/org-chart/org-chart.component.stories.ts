@@ -49,8 +49,8 @@ const model = new go.TreeModel({
     ],
 })
 
-export const FirstStory = Template.bind({})
-FirstStory.args = {
+export const Default = Template.bind({})
+Default.args = {
     model,
     nodeClicked: action("nodeClicked"),
 }

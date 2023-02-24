@@ -337,114 +337,6 @@
             }
         },
         {
-            "name": "GraphComponent",
-            "id": "component-GraphComponent-ffbf23a76bae2947d428218d7ea597d632c8fa91695dd805f4cdfa6ed40063997f67fa2f0b3e4a4baa67856a7c4182e496e2fe2b75648c4efc17952a37cc4484",
-            "file": "src/app/graph/graph.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-graph",
-            "styleUrls": [
-                "./graph.component.sass"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./graph.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 75,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "showGraph",
-                    "args": [
-                        {
-                            "name": "r",
-                            "type": "Requirements",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 17,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "r",
-                            "type": "Requirements",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { DataSet, Network } from 'vis-network/standalone';\n\nimport { BackendService, Requirements } from '../services/backend.service'\n\n@Component({\n  selector: 'app-graph',\n  templateUrl: './graph.component.html',\n  styleUrls: ['./graph.component.sass']\n})\n\nexport class GraphComponent implements OnInit {\n\n  constructor(private backend: BackendService) {};\n\n  // Subscriber for HTTP req\n  showGraph(r: Requirements) {\n    // log\n    console.log(\"GraphComponent: \", r.nodes.length + \" nodes and \" + r.edges.length + \" edges loaded!\");\n\n    // create datasets\n    const nodes = new DataSet(r.nodes);\n    const edges = new DataSet(r.edges);\n\n    const container = document.getElementById('graph')!;  // #graph div should always exist in template\n\n    // TODO: put config options into config file\n    // config\n    const data = {\n      nodes: nodes,\n      edges: edges,\n    };\n\n    const options = {\n      edges: {\n        arrows: {\n          to: {\n            enabled: true\n          }\n        },\n        width: 3,\n        hoverWidth: 3,\n        selectionWidth: 6\n      },\n      nodes: {\n        shape: 'circle',\n        mass: 5,\n        widthConstraint: {\n          maximum: 180\n        },\n        font: {\n          size: 30\n        },\n        shadow: {\n          enabled: true\n        }\n      },\n      layout: {\n        hierarchical: {\n          enabled: false,\n          nodeSpacing: 500,\n          levelSeparation: 500,\n          sortMethod: 'directed'\n        }\n      },\n      interaction: {\n        hover: true\n      }\n    };\n\n    // create network\n    const network = new Network(container, data, options);\n  }\n\n  ngOnInit(): void {\n    // Fire HTTML req and set callback\n    this.backend.getRequirements().subscribe(this.showGraph);\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "#graph\n  width: 1600px\n  height: 900px\n  border: 1px solid lightgray\n",
-                    "styleUrl": "./graph.component.sass"
-                }
-            ],
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "backend",
-                        "type": "BackendService",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 12,
-                "jsdoctags": [
-                    {
-                        "name": "backend",
-                        "type": "BackendService",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<div id=\"graph\"></div>\n"
-        },
-        {
             "name": "HeaderComponent",
             "id": "component-HeaderComponent-a557eec14f72c438a8033301f4d6ce023e0a1844a3b06ec2b38794a612acc31735ae78a5ee10071b230c8c20d699eb914554e69d07ade54adb371da8efb464cc",
             "file": "src/stories/header.component.ts",
@@ -519,7 +411,7 @@
         },
         {
             "name": "OrgChartComponent",
-            "id": "component-OrgChartComponent-6c7f6db397c6ff9085ea5e64a83afd3fa01d840581c61851998c6a430239800baffc384557c0c077b8ed9273183ead30c13d3d6c7878369cdd85ded79c8b49db",
+            "id": "component-OrgChartComponent-9f99e90dd03fb333df076c9e14b0d69870c38620143765c299fc7629e3f97eacc7d9cec98fafb5ec4f1655b92cde712351125de4f2767dde2ffea9b6298afe05",
             "file": "src/app/components/org-chart/org-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -606,11 +498,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-org-chart\",\n    templateUrl: \"./org-chart.component.html\",\n    styleUrls: [\"./org-chart.component.sass\"],\n})\nexport class OrgChartComponent implements OnInit {\n    public diagram: go.Diagram = new go.Diagram()\n\n    @Input()\n    public model: go.TreeModel = new go.TreeModel()\n\n    @Output()\n    public nodeClicked = new EventEmitter()\n\n    constructor() {}\n\n    public ngOnInit() {}\n\n    public ngAfterViewInit(): void {\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\n            allowCopy: false,\n            allowDelete: false,\n            maxSelectionCount: 1,\n            validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create trees\n            layout: $(go.TreeLayout, {\n                isOngoing: true,\n                treeStyle: go.TreeLayout.StyleLastParents,\n                arrangement: go.TreeLayout.ArrangementHorizontal,\n                // properties for most of the tree:\n                angle: 90,\n                layerSpacing: 35,\n                // properties for the \"last parents\":\n                alternateAngle: 90,\n                alternateLayerSpacing: 35,\n                alternateAlignment: go.TreeLayout.AlignmentBus,\n                alternateNodeSpacing: 20,\n            }),\n            \"undoManager.isEnabled\": true,\n        })\n\n        this.diagram.nodeTemplate = $(\n            go.Node,\n            \"Auto\",\n            { desiredSize: new go.Size(200, 100) },\n            $(go.Shape, \"Rectangle\", { fill: \"white\" }),\n            $(\n                go.Panel,\n                \"Table\",\n                { defaultAlignment: go.Spot.Left },\n                $(go.RowColumnDefinition, { column: 1, width: 4 }),\n                $(\n                    go.TextBlock,\n                    { row: 0, column: 0 },\n                    { font: \"bold 12pt sans-serif\" },\n                    new go.Binding(\"text\", \"title\")\n                ),\n                $(go.TextBlock, \"Description\", { row: 1, column: 0 }),\n                $(\n                    go.TextBlock,\n                    { row: 1, column: 2 },\n                    new go.Binding(\"text\", \"description\")\n                ),\n                $(go.TextBlock, \"Rationale\", { row: 2, column: 0 }),\n                $(\n                    go.TextBlock,\n                    { row: 2, column: 2 },\n                    new go.Binding(\"text\", \"rationale\")\n                )\n            )\n        )\n\n        this.diagram.model = this.model\n\n        // when selection changes, emit event to update the selected node\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\n            const node = this.diagram.selection.first()\n            this.nodeClicked.emit(node)\n        })\n    }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-org-chart\",\n    templateUrl: \"./org-chart.component.html\",\n    styleUrls: [\"./org-chart.component.sass\"],\n})\nexport class OrgChartComponent implements OnInit {\n    public diagram: go.Diagram = new go.Diagram()\n\n    @Input()\n    public model: go.TreeModel = new go.TreeModel()\n\n    @Output()\n    public nodeClicked = new EventEmitter()\n\n    constructor() {}\n\n    public ngOnInit() {}\n\n    public ngAfterViewInit(): void {\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\n            allowCopy: false,\n            allowDelete: false,\n            validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create trees\n            layout: $(go.TreeLayout, {\n                isOngoing: true,\n                treeStyle: go.TreeLayout.StyleLastParents,\n                arrangement: go.TreeLayout.ArrangementHorizontal,\n                // properties for most of the tree:\n                angle: 90,\n                layerSpacing: 35,\n                // properties for the \"last parents\":\n                alternateAngle: 90,\n                alternateLayerSpacing: 35,\n                alternateAlignment: go.TreeLayout.AlignmentBus,\n                alternateNodeSpacing: 20,\n            }),\n            \"undoManager.isEnabled\": true,\n        })\n\n        this.diagram.nodeTemplate = $(\n            go.Node,\n            \"Auto\",\n            { desiredSize: new go.Size(200, 100) },\n            {\n                isShadowed: true,\n                shadowOffset: new go.Point(2, 2),\n                shadowColor: \"#DDD\",\n                shadowBlur: 6,\n            },\n            $(go.Shape, \"Rectangle\", { fill: \"white\", strokeWidth: 0 }),\n            $(\n                go.Panel,\n                \"Table\",\n                { defaultAlignment: go.Spot.Left },\n                $(go.RowColumnDefinition, { column: 1, width: 4 }),\n                $(\n                    go.TextBlock,\n                    { row: 0, column: 0 },\n                    { font: \"bold 12pt sans-serif\" },\n                    new go.Binding(\"text\", \"title\")\n                ),\n                $(go.TextBlock, \"Description\", { row: 1, column: 0 }),\n                $(\n                    go.TextBlock,\n                    { row: 1, column: 2 },\n                    new go.Binding(\"text\", \"description\")\n                ),\n                $(go.TextBlock, \"Rationale\", { row: 2, column: 0 }),\n                $(\n                    go.TextBlock,\n                    { row: 2, column: 2 },\n                    new go.Binding(\"text\", \"rationale\")\n                )\n            )\n        )\n\n        this.diagram.model = this.model\n\n        // when selection changes, emit event to update the selected node\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\n            const node = this.diagram.selection.first()\n            this.nodeClicked.emit(node)\n        })\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "#app-org-chart\n    width: 1280px\n    height: 720px\n    border: 1px solid black\n    background-color: white\n",
+                    "data": "#app-org-chart\n    position: absolute\n    top: 0\n    right: 0\n    bottom: 0\n    left: 0\n    width: 100%\n    height: 100%\n    background-color: #F8F8F8\n",
                     "styleUrl": "./org-chart.component.sass"
                 }
             ],
@@ -626,7 +518,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div id=\"app-org-chart\">hello</div>"
+            "templateData": "<div id=\"app-org-chart\"></div>\n"
         },
         {
             "name": "PageComponent",
@@ -712,13 +604,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-3705a6691f1240cf573f49b2b52a0bfff24f00e550dc4e3d7b22afd97b8bcace74472609cdb2cc8aa2a7e4a3bec86aa1ae70d82a5021ea44e67185d18316d33d",
+            "id": "module-AppModule-729ee837bb303ba3d6daf9b49ea7a23e0f68d7839d08ab5433facaea9713d1962a73f2af435135a87868dfb94095b1114fb590eee3ee757af037827fc6b70e36",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { HttpClientModule } from '@angular/common/http';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { GraphComponent } from './graph/graph.component';\nimport { OrgChartComponent } from './components/org-chart/org-chart.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    GraphComponent,\n    OrgChartComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    HttpClientModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { BrowserModule } from \"@angular/platform-browser\"\nimport { HttpClientModule } from \"@angular/common/http\"\n\nimport { AppRoutingModule } from \"./app-routing.module\"\nimport { AppComponent } from \"./app.component\"\nimport { BrowserAnimationsModule } from \"@angular/platform-browser/animations\"\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\"\n\n@NgModule({\n    declarations: [AppComponent, OrgChartComponent],\n    imports: [\n        BrowserModule,\n        AppRoutingModule,\n        BrowserAnimationsModule,\n        HttpClientModule,\n    ],\n    providers: [],\n    bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -729,9 +621,6 @@
                     "elements": [
                         {
                             "name": "AppComponent"
-                        },
-                        {
-                            "name": "GraphComponent"
                         },
                         {
                             "name": "OrgChartComponent"
@@ -814,7 +703,7 @@
                 "defaultValue": "go.GraphObject.make"
             },
             {
-                "name": "FirstStory",
+                "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/org-chart/org-chart.component.stories.ts",
@@ -881,7 +770,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new go.TreeModel([\n    {\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n        parent: \"\",\n        title: \"UTAT-Team-A\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n    },\n    {\n        key: \"123456789\",\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n        title: \"UTAT-Team-B\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/Child-1-123456789\",\n    },\n    {\n        key: \"abcdefghi\",\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n        title: \"UTAT-Team-C\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\n    },\n    {\n        key: \"qwertyuiop\",\n        parent: \"123456789\",\n        title: \"UTAT-Team-D\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n    },\n])"
+                "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n        },\n    ],\n})"
             },
             {
                 "name": "Primary",
@@ -972,7 +861,7 @@
             ],
             "src/app/components/org-chart/org-chart.component.stories.ts": [
                 {
-                    "name": "FirstStory",
+                    "name": "Default",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/components/org-chart/org-chart.component.stories.ts",
@@ -989,7 +878,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new go.TreeModel([\n    {\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n        parent: \"\",\n        title: \"UTAT-Team-A\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n    },\n    {\n        key: \"123456789\",\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n        title: \"UTAT-Team-B\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/Child-1-123456789\",\n    },\n    {\n        key: \"abcdefghi\",\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n        title: \"UTAT-Team-C\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\n    },\n    {\n        key: \"qwertyuiop\",\n        parent: \"123456789\",\n        title: \"UTAT-Team-D\",\n        description: \"A description\",\n        rationale: \"A rationale\",\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n    },\n])"
+                    "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n        },\n    ],\n})"
                 },
                 {
                     "name": "Template",
@@ -1160,7 +1049,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "FirstStory",
+                "name": "Default",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1202,15 +1091,6 @@
                 "name": "$",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/graph/graph.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "GraphComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/4",
                 "status": "low"
             },
             {
