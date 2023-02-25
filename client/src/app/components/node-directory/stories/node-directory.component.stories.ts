@@ -12,7 +12,7 @@ const Template: Story = (args) => ({
 })
 
 var nodeDataArray = [{ key: 0 }];
-var max = 25;
+var max = 499;
 var count = 0;
 while (count < max) {
 count = makeTree(3, count, max, nodeDataArray, nodeDataArray[0]);
