@@ -29,7 +29,8 @@ export class NodeDirectoryComponent implements OnInit {
         allowDelete: false,
         allowHorizontalScroll: true,
         allowVerticalScroll: true,
-        padding: new go.Margin(75, 1, 1, 1),
+        contentAlignment: go.Spot.Left,
+        padding: new go.Margin(75, 0, 0, 0),
         layout:
           $(go.TreeLayout,
             {
@@ -91,7 +92,7 @@ export class NodeDirectoryComponent implements OnInit {
           new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
         $(go.TextBlock,
           { font: '9pt Verdana, sans-serif' },
-          new go.Binding("text", "key", s => "item itemitemitemlonglonglongerlongerrrrrrrrrlonger " + s))
+          new go.Binding("text", "key", s => "very long item number horizontal scroll " + s))
       )  // end Horizontal Panel
     );  // end Node
 
