@@ -10,7 +10,7 @@ export default {
 const Template: Story = (args) => ({
     props: args,
 })
-
+/*
 var nodeDataArray = [{ key: 0 }];
 var max = 499;
 var count = 0;
@@ -33,6 +33,22 @@ function makeTree(level: number, count: number, max: number, nodeDataArray: { ke
 }
 
 const model = new go.TreeModel(nodeDataArray)
+*/
+
+const model: go.TreeModel = new go.TreeModel([
+  { key: 1, name: 'TreeVisualizer'},
+  { key: 2, name: 'NCRHandling', parent: 1 },
+  { key: 3, name: 'SynchronousEdits', parent: 1 },
+  { key: 4, name: 'WarnDuplicateID', parent: 2 },
+  { key: 5, name: 'WarnCircularDependencies', parent: 2 },
+  { key: 6, name: 'VPNAccess', parent: 1},
+  { key: 7, name: 'VisualizeDatabase', parent: 3,},
+  { key: 8, name: 'EditDatabase', parent: 3},
+  { key: 9, name: 'SynchronousTeamwork', parent: 3},
+  { key: 10, name: 'Payload'},
+  { key: 11, name: 'SNR', parent: 10},
+  { key: 12, name: 'SlitWidth', parent: 10}
+]);
 
 export const Default = Template.bind({})
 Default.args = {

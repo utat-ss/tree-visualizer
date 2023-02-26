@@ -89,7 +89,7 @@ export class NodeDirectoryComponent implements OnInit {
           new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
         $(go.TextBlock,
           { font: '9pt Verdana, sans-serif' },
-          new go.Binding("text", "key", s => "item " + s))
+          new go.Binding("text", "name", s => "ID: " + s))
       )  // end Horizontal Panel
     );  // end Node
 
