@@ -25,23 +25,25 @@ export class NodeDirectoryComponent implements OnInit {
       this.diagram = $(go.Diagram, "app-node-directory",
       {
         allowMove: false,
-            allowCopy: false,
-            allowDelete: false,
-            allowHorizontalScroll: false,
-            layout:
-              $(go.TreeLayout,
-                {
-                  alignment: go.TreeLayout.AlignmentStart,
-                  angle: 0,
-                  compaction: go.TreeLayout.CompactionNone,
-                  layerSpacing: 16,
-                  layerSpacingParentOverlap: 1,
-                  nodeIndentPastParent: 1.0,
-                  nodeSpacing: 0,
-                  setsPortSpot: false,
-                  setsChildPortSpot: false
-                })
-          });
+        allowCopy: false,
+        allowDelete: false,
+        allowHorizontalScroll: true,
+        allowVerticalScroll: true,
+        padding: new go.Margin(75, 1, 1, 1),
+        layout:
+          $(go.TreeLayout,
+            {
+              alignment: go.TreeLayout.AlignmentStart,
+              angle: 0,
+              compaction: go.TreeLayout.CompactionNone,
+              layerSpacing: 16,
+              layerSpacingParentOverlap: 1,
+              nodeIndentPastParent: 1.0,
+              nodeSpacing: 0,
+              setsPortSpot: false,
+              setsChildPortSpot: false
+            })
+      });
 
     // define the Node template
     this.diagram.nodeTemplate =
@@ -89,7 +91,7 @@ export class NodeDirectoryComponent implements OnInit {
           new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
         $(go.TextBlock,
           { font: '9pt Verdana, sans-serif' },
-          new go.Binding("text", "name", s => "ID: " + s))
+          new go.Binding("text", "key", s => "item itemitemitemlonglonglongerlongerrrrrrrrrlonger " + s))
       )  // end Horizontal Panel
     );  // end Node
 
@@ -101,12 +103,12 @@ export class NodeDirectoryComponent implements OnInit {
   function imageConverter(prop: any, picture: any) {
     var node = picture.part;
     if (node.isTreeLeaf) {
-      return "images/document.svg";
+      return "https://www.iconpacks.net/icons/1/free-document-icon-901-thumb.png";
     } else {
       if (node.isTreeExpanded) {
-        return "images/openFolder.svg";
+        return "https://www.clipartmax.com/png/middle/129-1292051_lower-nursery-open-folder-icon-png.png";
       } else {
-        return "images/closedFolder.svg";
+        return "https://img.icons8.com/color/512/folder-invoices--v1.png";
       }
     }
   }
