@@ -12,6 +12,7 @@ export class OrgChartComponent implements OnInit {
     public diagram: go.Diagram = new go.Diagram()
     private nodeSize = new go.Size(256, 128)
     private font = "sans-serif"
+    public showMap = true
 
     @Input()
     public model: go.TreeModel = new go.TreeModel()
