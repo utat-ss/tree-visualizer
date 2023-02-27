@@ -211,7 +211,7 @@
         },
         {
             "name": "MinimapComponent",
-            "id": "component-MinimapComponent-4064cb5f46ee2619984175486f1f560c7a86804763a2e5fa650e9f2434a5b0f2d7142b8ef56dd1b754308b7c07cefd6ca1034a19c8aaa1a083c97472183d9899",
+            "id": "component-MinimapComponent-34bc05deaa197643b7c85b4e463e5a97e55a3bdcb860892598ac70b5742ff3d0d0128342db83064e0ce989ac216d11da4fc7992a27985b884f15f2377a1b86ad",
             "file": "src/app/components/minimap/minimap.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -230,11 +230,11 @@
             "inputsClass": [
                 {
                     "name": "observedDiagram",
-                    "defaultValue": "new go.Diagram()",
+                    "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 13,
-                    "type": "go.Diagram",
+                    "line": 12,
+                    "type": "go.Diagram | null",
                     "decorators": []
                 }
             ],
@@ -242,13 +242,13 @@
             "propertiesClass": [
                 {
                     "name": "overview",
-                    "defaultValue": "new go.Overview()",
+                    "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.Overview",
+                    "type": "go.Overview | null",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 13,
                     "modifierKind": [
                         121
                     ]
@@ -261,7 +261,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 17,
+                    "line": 15,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -276,11 +276,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-minimap\",\n    templateUrl: \"./minimap.component.html\",\n    styleUrls: [\"./minimap.component.sass\"],\n})\nexport class MinimapComponent {\n    @Input()\n    public observedDiagram: go.Diagram = new go.Diagram()\n\n    private overview: go.Overview = new go.Overview()\n\n    public ngAfterViewInit(): void {\n        this.overview = $(go.Overview, \"app-minimap\", {\n            observed: this.observedDiagram,\n        })\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-minimap\",\n    templateUrl: \"./minimap.component.html\",\n    styleUrls: [\"./minimap.component.sass\"],\n})\nexport class MinimapComponent {\n    @Input() public observedDiagram: go.Diagram | null = null\n    private overview: go.Overview | null = null\n\n    public ngAfterViewInit(): void {\n        this.overview = $(go.Overview, \"app-minimap\", {\n            observed: this.observedDiagram,\n        })\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "#app-minimap\n    position: absolute\n    top: 0\n    right: 0\n    bottom: 0\n    left: 0\n    width: 100%\n    height: 100%\n    background-color: #000000\n",
                     "styleUrl": "./minimap.component.sass"
                 }
             ],
@@ -435,7 +435,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div id=\"app-org-chart\"><app-minimap *ngIf=\"showMap\" [observedDiagram]=\"diagram\"></app-minimap></div>\n\n"
+            "templateData": "<div>\n    <div id=\"app-org-chart\"></div>\n    <app-minimap *ngIf=\"showMap\" [observedDiagram]=\"diagram\"></app-minimap>\n</div>\n\n\n"
         }
     ],
     "modules": [
@@ -573,16 +573,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "diagram",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/minimap/minimap.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "new go.Diagram()"
-            },
-            {
                 "name": "model",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -651,16 +641,6 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "diagram",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/minimap/minimap.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "new go.Diagram()"
                 },
                 {
                     "name": "Template",
@@ -762,16 +742,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Default",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/minimap/minimap.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "diagram",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -9,22 +9,18 @@ const $ = go.GraphObject.make
     styleUrls: ["./org-chart.component.sass"],
 })
 export class OrgChartComponent implements OnInit {
-    public diagram: go.Diagram = new go.Diagram()
-    private nodeSize = new go.Size(256, 128)
-    private font = "sans-serif"
+    @Input() public model: go.TreeModel = new go.TreeModel()
+
+    @Output() public nodeClicked = new EventEmitter()
+
     public showMap = true
 
-    @Input()
-    public model: go.TreeModel = new go.TreeModel()
+    private diagram: go.Diagram | null = null
+    private minimap: go.Overview | null = null
+    private nodeSize = new go.Size(256, 128)
+    private font = "sans-serif"
 
-    @Output()
-    public nodeClicked = new EventEmitter()
-
-    constructor() {}
-
-    public ngOnInit() {}
-
-    public ngAfterViewInit(): void {
+    public ngOnInit() {
         this.diagram = $(go.Diagram, "app-org-chart", {
             allowCopy: false,
             allowDelete: false,
@@ -136,12 +132,16 @@ export class OrgChartComponent implements OnInit {
             go.Link.Orthogonal,
             $(go.Shape) // the link shape, default black stroke
         )
+    
+        this.minimap =
+            $(go.Overview, "app-minimap",
+            { observed: this.diagram })
 
         this.diagram.model = this.model
 
         // when selection changes, emit event to update the selected node
         this.diagram.addDiagramListener("ChangedSelection", (e) => {
-            const node = this.diagram.selection.first()
+            const node = this.diagram?.selection.first()
             this.nodeClicked.emit(node)
         })
     }
