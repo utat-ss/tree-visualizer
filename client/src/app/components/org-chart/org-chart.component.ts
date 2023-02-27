@@ -130,6 +130,12 @@ export class OrgChartComponent implements OnInit {
             )
         )
 
+        this.diagram.linkTemplate = $(
+            go.Link, // the whole link panel
+            go.Link.Orthogonal,
+            $(go.Shape) // the link shape, default black stroke
+        )
+
         this.diagram.model = this.model
 
         // when selection changes, emit event to update the selected node
