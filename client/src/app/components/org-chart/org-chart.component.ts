@@ -132,10 +132,8 @@ export class OrgChartComponent implements OnInit {
             go.Link.Orthogonal,
             $(go.Shape) // the link shape, default black stroke
         )
-    
-        this.minimap =
-            $(go.Overview, "app-minimap",
-            { observed: this.diagram })
+
+        this.minimap = $(go.Overview, "app-minimap", { observed: this.diagram })
 
         this.diagram.model = this.model
 
