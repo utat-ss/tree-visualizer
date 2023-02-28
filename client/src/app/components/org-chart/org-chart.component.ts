@@ -24,9 +24,7 @@ export class OrgChartComponent implements OnInit {
         this.diagram = $(go.Diagram, "app-org-chart", {
             allowCopy: false,
             allowDelete: false,
-            validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create trees
             layout: $(go.TreeLayout, {
-                isOngoing: true,
                 treeStyle: go.TreeLayout.StyleLastParents,
                 arrangement: go.TreeLayout.ArrangementHorizontal,
                 // properties for most of the tree:
@@ -119,7 +117,7 @@ export class OrgChartComponent implements OnInit {
                         row: 1,
                         column: 0,
                         width: 70,
-                        height: 20,
+                        height: 18,
                         parameter1: 100,
                         strokeWidth: 0,
                     },
@@ -172,6 +170,7 @@ export class OrgChartComponent implements OnInit {
         // when selection changes, emit event to update the selected node
         this.diagram.addDiagramListener("ChangedSelection", (e) => {
             const node = this.diagram?.selection.first()
+            console.log(this.model.toJson())
             this.nodeClicked.emit(node)
         })
     }
