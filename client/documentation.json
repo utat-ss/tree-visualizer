@@ -210,86 +210,8 @@
             "templateData": "<p>This is TreeVisualizer!</p>\n\n\n<app-org-chart [model]=\"model\" (nodeClicked)=\"setSelectedNode($event)\"></app-org-chart>"
         },
         {
-            "name": "MinimapComponent",
-            "id": "component-MinimapComponent-34bc05deaa197643b7c85b4e463e5a97e55a3bdcb860892598ac70b5742ff3d0d0128342db83064e0ce989ac216d11da4fc7992a27985b884f15f2377a1b86ad",
-            "file": "src/app/components/minimap/minimap.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-minimap",
-            "styleUrls": [
-                "./minimap.component.sass"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./minimap.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "observedDiagram",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 12,
-                    "type": "go.Diagram | null",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "overview",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "go.Overview | null",
-                    "optional": false,
-                    "description": "",
-                    "line": 13,
-                    "modifierKind": [
-                        121
-                    ]
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "ngAfterViewInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 15,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        123
-                    ]
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, Input } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-minimap\",\n    templateUrl: \"./minimap.component.html\",\n    styleUrls: [\"./minimap.component.sass\"],\n})\nexport class MinimapComponent {\n    @Input() public observedDiagram: go.Diagram | null = null\n    private overview: go.Overview | null = null\n\n    public ngAfterViewInit(): void {\n        this.overview = $(go.Overview, \"app-minimap\", {\n            observed: this.observedDiagram,\n        })\n    }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "#app-minimap\n    position: absolute\n    top: 0\n    right: 0\n    bottom: 0\n    left: 0\n    width: 100%\n    height: 100%\n    background-color: #000000\n",
-                    "styleUrl": "./minimap.component.sass"
-                }
-            ],
-            "stylesData": "",
-            "templateData": "<div id=\"app-minimap\"></div>\n"
-        },
-        {
             "name": "OrgChartComponent",
-            "id": "component-OrgChartComponent-56c65b933b29beeef78f520756c68f9a1fe1745f33f9a50fc1c61df7e3c795b6772e8e2ab64433b5486ce0f53d6e8ab59bc21b21cb00c21fd7264321123941b5",
+            "id": "component-OrgChartComponent-e04f31a19f8a84bca8190250ffdf9fbf9feb6f32b63fd5d08929675f1b228d8f27e89bacb012499f195805c9e9675f7154823c330af7bbfbaad3787ffe6d5442",
             "file": "src/app/components/org-chart/org-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -311,7 +233,7 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 12,
                     "type": "go.TreeModel",
                     "decorators": []
                 }
@@ -322,22 +244,22 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 14,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
                 {
                     "name": "diagram",
-                    "defaultValue": "new go.Diagram()",
+                    "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.Diagram",
+                    "type": "go.Diagram | null",
                     "optional": false,
                     "description": "",
-                    "line": 12,
+                    "line": 18,
                     "modifierKind": [
-                        123
+                        121
                     ]
                 },
                 {
@@ -348,7 +270,20 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 14,
+                    "line": 21,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "minimap",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Overview | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
                     "modifierKind": [
                         121
                     ]
@@ -361,7 +296,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 20,
                     "modifierKind": [
                         121
                     ]
@@ -374,7 +309,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 16,
                     "modifierKind": [
                         123
                     ]
@@ -382,25 +317,12 @@
             ],
             "methodsClass": [
                 {
-                    "name": "ngAfterViewInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 27,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        123
-                    ]
-                },
-                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 23,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -415,39 +337,31 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-org-chart\",\n    templateUrl: \"./org-chart.component.html\",\n    styleUrls: [\"./org-chart.component.sass\"],\n})\nexport class OrgChartComponent implements OnInit {\n    public diagram: go.Diagram = new go.Diagram()\n    private nodeSize = new go.Size(256, 128)\n    private font = \"sans-serif\"\n    public showMap = true\n\n    @Input()\n    public model: go.TreeModel = new go.TreeModel()\n\n    @Output()\n    public nodeClicked = new EventEmitter()\n\n    constructor() {}\n\n    public ngOnInit() {}\n\n    public ngAfterViewInit(): void {\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\n            allowCopy: false,\n            allowDelete: false,\n            validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create trees\n            layout: $(go.TreeLayout, {\n                isOngoing: true,\n                treeStyle: go.TreeLayout.StyleLastParents,\n                arrangement: go.TreeLayout.ArrangementHorizontal,\n                // properties for most of the tree:\n                angle: 90,\n                layerSpacing: 35,\n                // properties for the leaf parents:\n                alternateAngle: 90,\n                alternateLayerSpacing: 35,\n                alternateAlignment: go.TreeLayout.AlignmentBus,\n                alternateNodeSpacing: 20,\n            }),\n            \"undoManager.isEnabled\": true,\n        })\n\n        this.diagram.nodeTemplate = $(\n            go.Node,\n            \"Auto\",\n            {\n                desiredSize: this.nodeSize,\n                isShadowed: true,\n                shadowOffset: new go.Point(2, 2),\n                shadowColor: \"#DDD\",\n                shadowBlur: 6,\n                mouseDragEnter: (e, node, prev) => {\n                    const shape: go.Shape = (node as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape.stroke = \"dodgerblue\"\n                    shape.strokeWidth = 3\n\n                    const shape2: go.Shape = (prev as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape2.stroke = \"green\"\n                    shape2.strokeWidth = 3\n                },\n                mouseDragLeave: (e, node, next) => {\n                    const shape: go.Shape = (node as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape.stroke = \"dodgerblue\"\n                    shape.strokeWidth = 0\n                },\n                mouseDrop: (e, node) => {\n                    const diagram = node.diagram\n                    const selnode = diagram?.selection.first() as go.Node // assume just one Node in selection\n                    // find any existing link into the selected node\n                    const link = selnode.findTreeParentLink()\n                    if (link !== null) {\n                        // reconnect any existing link\n                        link.fromNode = node as go.Node\n                    } else {\n                        // else create a new link\n                        diagram?.toolManager.linkingTool.insertLink(\n                            node as go.Node,\n                            (node as go.Node).port,\n                            selnode,\n                            selnode.port\n                        )\n                    }\n                },\n            },\n            $(go.Shape, \"Rectangle\", { name: \"SHAPE\", fill: \"white\", strokeWidth: 0 }),\n            $(\n                go.Panel,\n                \"Table\",\n                {\n                    alignment: go.Spot.TopLeft,\n                    padding: 16,\n                    defaultAlignment: go.Spot.Left,\n                },\n                $(go.RowColumnDefinition, {\n                    column: 0,\n                    width: this.nodeSize.width - 50,\n                }),\n                $(\n                    go.TextBlock,\n                    {\n                        row: 0,\n                        column: 0,\n                        font: \"bold 12pt \" + this.font,\n                        overflow: go.TextBlock.OverflowEllipsis,\n                    },\n                    new go.Binding(\"text\", \"title\")\n                ),\n                $(\n                    go.TextBlock,\n                    {\n                        row: 1,\n                        column: 0,\n                        font: \"10pt \" + this.font,\n                        stretch: go.GraphObject.Fill,\n                        maxLines: 6,\n                        overflow: go.TextBlock.OverflowEllipsis,\n                    },\n                    new go.Binding(\"text\", \"description\")\n                )\n            )\n        )\n\n        this.diagram.linkTemplate = $(\n            go.Link, // the whole link panel\n            go.Link.Orthogonal,\n            $(go.Shape) // the link shape, default black stroke\n        )\n\n        this.diagram.model = this.model\n\n        // when selection changes, emit event to update the selected node\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\n            const node = this.diagram.selection.first()\n            this.nodeClicked.emit(node)\n        })\n    }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-org-chart\",\n    templateUrl: \"./org-chart.component.html\",\n    styleUrls: [\"./org-chart.component.sass\"],\n})\nexport class OrgChartComponent implements OnInit {\n    @Input() public model: go.TreeModel = new go.TreeModel()\n\n    @Output() public nodeClicked = new EventEmitter()\n\n    public showMap = true\n\n    private diagram: go.Diagram | null = null\n    private minimap: go.Overview | null = null\n    private nodeSize = new go.Size(256, 128)\n    private font = \"sans-serif\"\n\n    public ngOnInit() {\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\n            allowCopy: false,\n            allowDelete: false,\n            validCycle: go.Diagram.CycleDestinationTree, // make sure users can only create trees\n            layout: $(go.TreeLayout, {\n                isOngoing: true,\n                treeStyle: go.TreeLayout.StyleLastParents,\n                arrangement: go.TreeLayout.ArrangementHorizontal,\n                // properties for most of the tree:\n                angle: 90,\n                layerSpacing: 35,\n                // properties for the leaf parents:\n                alternateAngle: 90,\n                alternateLayerSpacing: 35,\n                alternateAlignment: go.TreeLayout.AlignmentBus,\n                alternateNodeSpacing: 20,\n            }),\n            \"undoManager.isEnabled\": true,\n        })\n\n        this.diagram.nodeTemplate = $(\n            go.Node,\n            \"Auto\",\n            {\n                desiredSize: this.nodeSize,\n                isShadowed: true,\n                shadowOffset: new go.Point(2, 2),\n                shadowColor: \"#DDD\",\n                shadowBlur: 6,\n                mouseDragEnter: (e, node, prev) => {\n                    const shape: go.Shape = (node as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape.stroke = \"dodgerblue\"\n                    shape.strokeWidth = 3\n\n                    const shape2: go.Shape = (prev as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape2.stroke = \"green\"\n                    shape2.strokeWidth = 3\n                },\n                mouseDragLeave: (e, node, next) => {\n                    const shape: go.Shape = (node as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape.stroke = \"dodgerblue\"\n                    shape.strokeWidth = 0\n                },\n                mouseDrop: (e, node) => {\n                    const diagram = node.diagram\n                    const selnode = diagram?.selection.first() as go.Node // assume just one Node in selection\n                    // find any existing link into the selected node\n                    const link = selnode.findTreeParentLink()\n                    if (link !== null) {\n                        // reconnect any existing link\n                        link.fromNode = node as go.Node\n                    } else {\n                        // else create a new link\n                        diagram?.toolManager.linkingTool.insertLink(\n                            node as go.Node,\n                            (node as go.Node).port,\n                            selnode,\n                            selnode.port\n                        )\n                    }\n                },\n            },\n            $(go.Shape, \"Rectangle\", { name: \"SHAPE\", fill: \"white\", strokeWidth: 0 }),\n            $(\n                go.Panel,\n                \"Table\",\n                {\n                    alignment: go.Spot.TopLeft,\n                    padding: 16,\n                    defaultAlignment: go.Spot.Left,\n                },\n                $(go.RowColumnDefinition, {\n                    column: 0,\n                    width: this.nodeSize.width - 50,\n                }),\n                $(\n                    go.TextBlock,\n                    {\n                        row: 0,\n                        column: 0,\n                        font: \"bold 12pt \" + this.font,\n                        overflow: go.TextBlock.OverflowEllipsis,\n                    },\n                    new go.Binding(\"text\", \"title\")\n                ),\n                $(\n                    go.Shape,\n                    \"RoundedRectangle\",\n                    {\n                        row: 1,\n                        column: 0,\n                        width: 64,\n                        height: 16,\n                        margin: 4,\n                        parameter1: 100,\n                        strokeWidth: 0,\n                    },\n                    new go.Binding(\"fill\", \"qualifier\", (qualifier) => {\n                        if (qualifier === \"A\") {\n                            return \"#2196f3\" // blue color\n                        } else if (qualifier === \"B\") {\n                            return \"#00e676\" // green color\n                        } else {\n                            return \"#cccccc\" // default gray color\n                        }\n                    })\n                )\n            ),\n            $(\n                go.TextBlock,\n                { row: 1, column: 0, font: \"10pt \" + this.font },\n                new go.Binding(\"text\", \"qualifier\"),\n                $(\n                    go.TextBlock,\n                    {\n                        row: 2,\n                        column: 0,\n                        font: \"10pt \" + this.font,\n                        stretch: go.GraphObject.Fill,\n                        maxLines: 5,\n                        overflow: go.TextBlock.OverflowEllipsis,\n                    },\n                    new go.Binding(\"text\", \"description\")\n                )\n            )\n        )\n\n        this.diagram.linkTemplate = $(\n            go.Link, // the whole link panel\n            go.Link.Orthogonal,\n            $(go.Shape) // the link shape, default black stroke\n        )\n\n        this.minimap = $(go.Overview, \"app-minimap\", { observed: this.diagram })\n\n        this.diagram.model = this.model\n\n        // when selection changes, emit event to update the selected node\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\n            const node = this.diagram?.selection.first()\n            this.nodeClicked.emit(node)\n        })\n    }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "#app-org-chart\n    position: absolute\n    top: 0\n    right: 0\n    bottom: 0\n    left: 0\n    width: 100%\n    height: 100%\n    background-color: #F8F8F8\n",
+                    "data": "#app-org-chart\n    position: absolute\n    top: 0\n    right: 0\n    bottom: 0\n    left: 0\n    width: 100%\n    height: 100%\n    background-color: #F8F8F8\n\n#app-minimap\n    position: absolute\n    margin: 32px\n    top: 0\n    right: 0\n    width: 16%\n    height: 16%\n    border: 1px solid black\n",
                     "styleUrl": "./org-chart.component.sass"
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 21
-            },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div>\n    <div id=\"app-org-chart\"></div>\n    <app-minimap *ngIf=\"showMap\" [observedDiagram]=\"diagram\"></app-minimap>\n</div>\n\n\n"
+            "templateData": "<div>\n    <div id=\"app-org-chart\"></div>\n    <div id=\"app-minimap\"></div>\n</div>\n\n\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-ea87936c6f09d386e522ff8c7f5b162889e8d0a5f41e0b04af405cf536a72aae02ab9095b5323e7fae11188ecd8f7358c9032b42d1c0323fab770004c1bf96d6",
+            "id": "module-AppModule-c61aacf9878d6ba12ef8a0559baccb99d0294337cba87f48606a5a9cc129d017b867b352be60d97d24e8eecb1898ffc314a8bc216137a1f94921dcb849f8a57a",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { BrowserModule } from \"@angular/platform-browser\"\nimport { HttpClientModule } from \"@angular/common/http\"\n\nimport { AppRoutingModule } from \"./app-routing.module\"\nimport { AppComponent } from \"./app.component\"\nimport { BrowserAnimationsModule } from \"@angular/platform-browser/animations\"\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\nimport { MinimapComponent } from './components/minimap/minimap.component'\n\n@NgModule({\n    declarations: [AppComponent, OrgChartComponent, MinimapComponent],\n    imports: [\n        BrowserModule,\n        AppRoutingModule,\n        BrowserAnimationsModule,\n        HttpClientModule,\n    ],\n    providers: [],\n    bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { BrowserModule } from \"@angular/platform-browser\"\nimport { HttpClientModule } from \"@angular/common/http\"\n\nimport { AppRoutingModule } from \"./app-routing.module\"\nimport { AppComponent } from \"./app.component\"\nimport { BrowserAnimationsModule } from \"@angular/platform-browser/animations\"\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\n\n@NgModule({\n    declarations: [AppComponent, OrgChartComponent],\n    imports: [\n        BrowserModule,\n        AppRoutingModule,\n        BrowserAnimationsModule,\n        HttpClientModule,\n    ],\n    providers: [],\n    bootstrap: [AppComponent],\n})\nexport class AppModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -458,9 +372,6 @@
                     "elements": [
                         {
                             "name": "AppComponent"
-                        },
-                        {
-                            "name": "MinimapComponent"
                         },
                         {
                             "name": "OrgChartComponent"
@@ -536,31 +447,11 @@
                 "name": "$",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/minimap/minimap.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "go.GraphObject.make"
-            },
-            {
-                "name": "$",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/org-chart/org-chart.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "go.GraphObject.make"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/minimap/minimap.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Default",
@@ -580,17 +471,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            type: \"Performance\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            type: \"Constraint\",\n            description: \"Another description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            type: \"Component Selection\",\n            description:\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            type: \"A type\",\n            description: \"Yet another description that is just a little bit longer\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n        },\n    ],\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/minimap/minimap.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "(args) => ({\n    props: args,\n})"
+                "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            qualifier: \"SHALL\",\n            type: \"Performance\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            qualifier: \"SHOULD\",\n            type: \"Constraint\",\n            description: \"Another description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            qualifier: \"SHALL\",\n            type: \"Component Selection\",\n            description:\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            qualifier: \"SHOULD\",\n            type: \"A type\",\n            description: \"Yet another description that is just a little bit longer\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n        },\n    ],\n})"
             },
             {
                 "name": "Template",
@@ -607,18 +488,6 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
-            "src/app/components/minimap/minimap.component.ts": [
-                {
-                    "name": "$",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/minimap/minimap.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "go.GraphObject.make"
-                }
-            ],
             "src/app/components/org-chart/org-chart.component.ts": [
                 {
                     "name": "$",
@@ -629,28 +498,6 @@
                     "deprecationMessage": "",
                     "type": "",
                     "defaultValue": "go.GraphObject.make"
-                }
-            ],
-            "src/app/components/minimap/minimap.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/minimap/minimap.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/minimap/minimap.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "(args) => ({\n    props: args,\n})"
                 }
             ],
             "src/app/components/org-chart/org-chart.component.stories.ts": [
@@ -672,7 +519,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            type: \"Performance\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            type: \"Constraint\",\n            description: \"Another description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            type: \"Component Selection\",\n            description:\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            type: \"A type\",\n            description: \"Yet another description that is just a little bit longer\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n        },\n    ],\n})"
+                    "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            qualifier: \"SHALL\",\n            type: \"Performance\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            qualifier: \"SHOULD\",\n            type: \"Constraint\",\n            description: \"Another description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            qualifier: \"SHALL\",\n            type: \"Component Selection\",\n            description:\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            qualifier: \"SHOULD\",\n            type: \"A type\",\n            description: \"Yet another description that is just a little bit longer\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n        },\n    ],\n})"
                 },
                 {
                     "name": "Template",
@@ -718,45 +565,6 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/minimap/minimap.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "MinimapComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/4",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/minimap/minimap.component.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "$",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/minimap/minimap.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Default",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/minimap/minimap.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
                 "filePath": "src/app/components/org-chart/org-chart.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -792,7 +600,7 @@
                 "linktype": "component",
                 "name": "OrgChartComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/10",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {

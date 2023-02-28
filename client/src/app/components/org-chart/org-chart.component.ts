@@ -95,7 +95,7 @@ export class OrgChartComponent implements OnInit {
                 "Table",
                 {
                     alignment: go.Spot.TopLeft,
-                    padding: 16,
+                    margin: 16,
                     defaultAlignment: go.Spot.Left,
                 },
                 $(go.RowColumnDefinition, {
@@ -113,13 +113,45 @@ export class OrgChartComponent implements OnInit {
                     new go.Binding("text", "title")
                 ),
                 $(
+                    go.Shape, // chip
+                    "RoundedRectangle",
+                    {
+                        row: 1,
+                        column: 0,
+                        width: 70,
+                        height: 20,
+                        parameter1: 100,
+                        strokeWidth: 0,
+                    },
+                    new go.Binding("fill", "qualifier", (qualifier) => {
+                        if (qualifier === "SHALL") {
+                            return "#06c769" // green
+                        } else if (qualifier === "SHOULD") {
+                            return "#2196f3" // blue
+                        } else {
+                            return "#cccccc" // default grey
+                        }
+                    })
+                ),
+                $(
                     go.TextBlock,
                     {
                         row: 1,
                         column: 0,
                         font: "10pt " + this.font,
+                        stroke: "white",
+                        margin: 6,
+                    },
+                    new go.Binding("text", "qualifier")
+                ),
+                $(
+                    go.TextBlock,
+                    {
+                        row: 2,
+                        column: 0,
+                        font: "10pt " + this.font,
                         stretch: go.GraphObject.Fill,
-                        maxLines: 6,
+                        maxLines: 3,
                         overflow: go.TextBlock.OverflowEllipsis,
                     },
                     new go.Binding("text", "description")
