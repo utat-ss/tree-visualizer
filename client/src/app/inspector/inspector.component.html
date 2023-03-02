@@ -1,0 +1,90 @@
+<p>inspector works!</p>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Requirement</mat-label>
+    <input matInput [readonly]="read_only" [value]="requirement">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Created By</mat-label>
+    <input matInput [readonly]="read_only" [value]="created_by">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Parent</mat-label>
+    <input matInput [readonly]="read_only" [value]="parent">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Last Edited</mat-label>
+    <input matInput [matDatepicker]="last_edited_picker" [value]="last_edited">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="last_edited_picker"></mat-datepicker-toggle>
+    <mat-datepicker #last_edited_picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Qualifier</mat-label>
+    <input matInput [readonly]="read_only" [value]="qualifer">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Collection</mat-label>
+    <input matInput [readonly]="read_only" [value]="collection">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Type</mat-label>
+    <input matInput [readonly]="read_only" [value]="type">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Verification Plans</mat-label>
+    <input matInput [readonly]="read_only" [value]="verification_plans[0]">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Verification Method</mat-label>
+    <input matInput [readonly]="read_only" [value]="verification_method">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>System</mat-label>
+    <input matInput [readonly]="read_only" [value]="system">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Rationale</mat-label>
+    <input matInput [readonly]="read_only" [value]="rationale">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Trades</mat-label>
+    <input matInput [readonly]="read_only" [value]="trades[0]">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Last Edited By</mat-label>
+    <input matInput [readonly]="read_only" [value]="last_edited_by">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Stakeholder</mat-label>
+    <input matInput [readonly]="read_only" [value]="stakeholder">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Mission</mat-label>
+    <input matInput [readonly]="read_only" [value]="mission">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>Description</mat-label>
+    <input matInput [readonly]="read_only" [value]="description">
+</mat-form-field>
+
+<mat-form-field appearance="outline" floatLabel="always">
+    <mat-label>URL</mat-label>
+    <input matInput [readonly]="read_only" [value]="url.href">
+</mat-form-field>
+

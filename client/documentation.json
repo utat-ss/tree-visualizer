@@ -3,6 +3,38 @@
     "interfaces": [
         {
             "name": "Requirements",
+            "id": "interface-Requirements-48c23364b440fe01f41bed9b1ef04c2f981f8b649611e64457b71f16e91faad660d9ed6c2c1c1ef6f3a90feaca5b715e10154fb82fa8f80bfabeab866709c602",
+            "file": "src/app/services/backend.service.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Observable } from 'rxjs';\r\nimport { Node, Edge } from 'vis-network';\r\n\r\nexport interface Requirements {\r\n  nodes: Array<Node>;\r\n  edges: Array<Edge>;\r\n}\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class BackendService {\r\n  constructor(private http: HttpClient) {}\r\n\r\n  getRequirements(): Observable<Requirements> {\r\n    // TODO: Define URL as env variable\r\n    // let url = \"https://3000--main--tree-visualizer--jdtech3.code.j0e.ca/api/requirements\";\r\n    let url = \"http://localhost:3000/api/requirements\"\r\n\r\n    return this.http.get<Requirements>(url)\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "edges",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<Edge>",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "nodes",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<Node>",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "Requirements",
             "id": "interface-Requirements-c06dbdf83254d7570c4a3c445de7397014fc968c18699a9e985493960627dfa5b2334e80d50d835b1ac85e6cbbf61fddc4910be8eac5343170ec10415a2ae6ea",
             "file": "src/app/services/backend.service.ts",
             "deprecated": false,
@@ -35,12 +67,12 @@
         },
         {
             "name": "User",
-            "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
+            "id": "interface-User-dcc5c3137cd472dd0002d85b562efd23162e3eff53ca4438a6251e6c46e3b8299076255380d1d42f386510cb6f2cbaab49fa5b5f253be459cdc3869428c5c400",
             "file": "src/stories/User.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface User {}\n",
+            "sourceCode": "export interface User {}\r\n",
             "properties": [],
             "indexSignatures": [],
             "methods": []
@@ -744,7 +776,12 @@
                 "name": "routes",
                 "filename": "src/app/app-routing.module.ts",
                 "module": "AppRoutingModule",
-                "children": [],
+                "children": [
+                    {
+                        "path": "requirements",
+                        "component": "GraphComponent"
+                    }
+                ],
                 "kind": "module"
             }
         ]
@@ -836,7 +873,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Template",
+                "name": "Cycle",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
