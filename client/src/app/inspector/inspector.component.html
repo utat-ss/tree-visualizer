@@ -5,27 +5,26 @@
     <input matInput [readonly]="read_only" [value]="requirement">
 </mat-form-field>
 
-<mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>Created By</mat-label>
-    <input matInput [readonly]="read_only" [value]="created_by">
-</mat-form-field>
+<div class="readonly-property">
+    <p><span>Created By: </span>{{ created_by }}</p>
+</div>
 
 <mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Parent</mat-label>
     <input matInput [readonly]="read_only" [value]="parent">
 </mat-form-field>
 
-<mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>Last Edited</mat-label>
-    <input matInput [matDatepicker]="last_edited_picker" [value]="last_edited">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="last_edited_picker"></mat-datepicker-toggle>
-    <mat-datepicker #last_edited_picker></mat-datepicker>
-</mat-form-field>
+<div class="readonly-property">
+    <p><span>Last Edited: </span>{{ last_edited | date:'medium' }}</p>
+</div>
 
 <mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Qualifier</mat-label>
-    <input matInput [readonly]="read_only" [value]="qualifer">
+    <mat-select [value]="qualifier">
+        <mat-option *ngFor="let q of qualifiers" [value]="q" [disabled]="(read_only && q != qualifier) ? 'true' : null">
+            {{ q }}
+        </mat-option>
+    </mat-select>
 </mat-form-field>
 
 <mat-form-field appearance="outline" floatLabel="always">
@@ -35,7 +34,11 @@
 
 <mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Type</mat-label>
-    <input matInput [readonly]="read_only" [value]="type">
+    <mat-select [value]="type" [panelClass]="read_only ? 'readonly' : ''">
+        <mat-option *ngFor="let t of types" [value]="t" [disabled]="(read_only && t != type) ? 'true' : null">
+            {{ t }}
+        </mat-option>
+    </mat-select>
 </mat-form-field>
 
 <mat-form-field appearance="outline" floatLabel="always">
@@ -45,7 +48,11 @@
 
 <mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Verification Method</mat-label>
-    <input matInput [readonly]="read_only" [value]="verification_method">
+    <mat-select [value]="verification_method" [panelClass]="read_only ? 'readonly' : ''">
+        <mat-option *ngFor="let m of verification_methods" [value]="m" [disabled]="(read_only && m != verification_method) ? 'true' : null">
+            {{ m }}
+        </mat-option>
+    </mat-select>
 </mat-form-field>
 
 <mat-form-field appearance="outline" floatLabel="always">
@@ -63,14 +70,13 @@
     <input matInput [readonly]="read_only" [value]="trades[0]">
 </mat-form-field>
 
-<mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>Last Edited By</mat-label>
-    <input matInput [readonly]="read_only" [value]="last_edited_by">
-</mat-form-field>
+<div class="readonly-property">
+    <p><span>Last Edited By: </span>{{ last_edited_by }}</p>
+</div>
 
 <mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>Stakeholder</mat-label>
-    <input matInput [readonly]="read_only" [value]="stakeholder">
+    <mat-label>Stakeholders</mat-label>
+    <input matInput [readonly]="read_only" [value]="stakeholders[0]">
 </mat-form-field>
 
 <mat-form-field appearance="outline" floatLabel="always">
@@ -83,8 +89,7 @@
     <input matInput [readonly]="read_only" [value]="description">
 </mat-form-field>
 
-<mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>URL</mat-label>
-    <input matInput [readonly]="read_only" [value]="url.href">
-</mat-form-field>
+<div class="readonly-property">
+    <p><span>URL: </span><a [href]="url.href">{{ url.href }}</a></p>
+</div>
 
