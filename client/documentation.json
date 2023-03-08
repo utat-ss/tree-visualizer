@@ -578,8 +578,8 @@
                 "filePath": "src/app/components/org-chart/org-chart.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Default",
+                "linksubtype": "function",
+                "name": "makeTree",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
