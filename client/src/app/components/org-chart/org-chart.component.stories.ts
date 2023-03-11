@@ -1,17 +1,19 @@
-import { Component } from "@angular/core"
+import { Meta, Story } from "@storybook/angular"
+import { OrgChartComponent } from "./org-chart.component"
+import { action } from "@storybook/addon-actions"
 import * as go from "gojs"
 
-@Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.sass"],
+export default {
+    component: OrgChartComponent,
+} as Meta
+
+const Template: Story = (args) => ({
+    props: args,
 })
-export class AppComponent {
-    title = "tree-visualizer"
 
-    public selectedNode: go.Part | null = null
-
-    model = new go.TreeModel({
+export const Default = Template.bind({})
+Default.args = {
+    model: new go.TreeModel({
         nodeKeyProperty: "id",
         nodeDataArray: [
             {
@@ -56,9 +58,45 @@ export class AppComponent {
                 url: "https://www.notion.so/Grandchild-1-qwertyuiop",
             },
         ],
-    })
+    }),
+}
 
-    public setSelectedNode(node: go.Part | null) {
-        this.selectedNode = node
-    }
+export const Cycle = Template.bind({})
+Cycle.args = {
+    model: new go.TreeModel({
+        nodeKeyProperty: "id",
+        nodeDataArray: [
+            {
+                id: "A",
+                parent: "C",
+                title: "UTAT-Team-A",
+                qualifier: "SHALL",
+                type: "Performance",
+                description: "A description",
+                rationale: "A rationale",
+                url: "https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759",
+            },
+            {
+                id: "B",
+                parent: "A",
+                title: "UTAT-Team-B",
+                qualifier: "SHOULD",
+                type: "Constraint",
+                description: "Another description",
+                rationale: "A rationale",
+                url: "https://www.notion.so/Child-1-123456789",
+            },
+            {
+                id: "C",
+                parent: "B",
+                title: "UTAT-Team-C",
+                qualifier: "SHALL",
+                type: "Component Selection",
+                description:
+                    "A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.",
+                rationale: "A rationale",
+                url: "https://www.notion.so/Child-2-abcdefghi",
+            },
+        ],
+    }),
 }
