@@ -13,7 +13,7 @@ var indexRouter = require('./src/routes/index');
 
 var app = express();
 
-app.use(cors());    // TODO: restrict CORS once we have deployment up
+app.use(cors());    // ! TODO: restrict CORS once we have deployment up
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src/views'));

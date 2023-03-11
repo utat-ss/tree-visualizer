@@ -6,7 +6,7 @@ var getEnv = function(envVar) {
     return env;
   }
   else {
-    throw new Error(envVar + " environment variable missing!");
+    throw new Error(envVar + ' environment variable missing!');
   }
 }
 
