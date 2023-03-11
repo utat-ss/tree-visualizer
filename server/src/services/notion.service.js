@@ -77,21 +77,21 @@ const _parseRequirementsForAPI = async function(raw_data) {
     let props = elem.properties;
     data[elem.id] = {
       'created-by': props['Created by'].created_by.name,
-      'parent-id': props.Parent.relation?.[0]?.id,                    // Notion enforced limit 1
+      'parent-id': props.Parent.relation?.[0]?.id ?? '',                  // Notion enforced limit 1
       'last-edited': props['Last Edited'].last_edited_time,
-      'qualifier': qualifiers[props.Qualifier.relation?.[0]?.id],     // Notion enforced limit 1
-      'collection': props.Collection.multi_select.map(c => c.name),   // * list
-      'type': types[props['\u{1F344} Type'].relation?.[0]?.id],       // Notion enforced limit 1
-      'verification-plan': props['\u{1F3C1} Verification Plan'].relation.map(r => test_plans[r.id]), // * list
-      'verification-method': props['Verification Method'].select?.name,
-      'system': systems[props.System.relation?.[0]?.id],              // Notion enforced limit 1
-      'rationale': props.Rationale.rich_text?.[0]?.plain_text,
-      'trades': props['\u{1F0CF} Trades'].relation.map(r => trades[r.id]),   // * list
+      'qualifier': qualifiers[props.Qualifier.relation?.[0]?.id] ?? '',   // Notion enforced limit 1
+      'collection': props.Collection.multi_select.map(c => c.name),       // * list
+      'type': types[props['\u{1F344} Type'].relation?.[0]?.id] ?? '',     // Notion enforced limit 1
+      'verification-plan': props['\u{1F3C1} Verification Plan'].relation.map(r => test_plans[r.id]),  // * list
+      'verification-method': props['Verification Method'].select?.name ?? '',
+      'system': systems[props.System.relation?.[0]?.id] ?? '',                  // Notion enforced limit 1
+      'rationale': props.Rationale.rich_text?.[0]?.plain_text ?? '',
+      'trades': props['\u{1F0CF} Trades'].relation.map(r => trades[r.id]),      // * list
       'last-edited-by': props['Last Edited By'].last_edited_by.name,
-      'stakeholder': props.Stakeholder.relation.map(r => teams[r.id]),       // * list
-      'mission': missions[props['\u{1F3C6} Mission'.relation?.[0]?.id]],    // Notion enforced limit 1
-      'description': props.Description.rich_text?.[0]?.plain_text,
-      'title': props.ID.title?.[0]?.plain_text,
+      'stakeholder': props.Stakeholder.relation.map(r => teams[r.id]),          // * list
+      'mission': missions[props['\u{1F3C6} Mission'.relation?.[0]?.id]] ?? '',  // Notion enforced limit 1
+      'description': props.Description.rich_text?.[0]?.plain_text ?? '',
+      'title': props.ID.title?.[0]?.plain_text ?? '',
       'url': elem.url
     }
   }
