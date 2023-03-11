@@ -13,7 +13,7 @@ const getRequirementsData = async function() {
   // Go through pagination to grab all data
   while (has_more) {
     const results = await notionClient.databases.query({
-      database_id: "b9c7195bd9fa414a97ee704f503a0e9f",    // systems -> requirements DB
+      database_id: getEnv("NOTION_REQUIREMENTS_DB_ID"),    // systems -> requirements DB
       start_cursor: cursor
     });
     has_more = results.has_more;
