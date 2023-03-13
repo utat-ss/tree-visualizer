@@ -5,12 +5,13 @@ import { HttpClientModule } from "@angular/common/http"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrgChartComponent } from "./components/org-chart/org-chart.component";
 import { NodeDirectoryComponent } from './components/node-directory/node-directory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraphComponent,
+    OrgChartComponent,
     NodeDirectoryComponent
   ],
   imports: [

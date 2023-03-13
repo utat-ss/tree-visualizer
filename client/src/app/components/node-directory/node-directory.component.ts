@@ -29,7 +29,7 @@ export class NodeDirectoryComponent implements OnInit {
         allowDelete: false,
         allowHorizontalScroll: true,
         allowVerticalScroll: true,
-        contentAlignment: go.Spot.Left,
+        contentAlignment: go.Spot.TopLeft,
         padding: new go.Margin(75, 0, 0, 0),
         layout:
           $(go.TreeLayout,
@@ -49,25 +49,6 @@ export class NodeDirectoryComponent implements OnInit {
     // define the Node template
     this.diagram.nodeTemplate =
       $(go.Node, 
-      /*{ // no Adornment: instead change panel background color by binding to Node.isSelected
-        selectionAdorned: false,
-        // a custom function to allow expanding/collapsing on double-click
-        // this uses similar logic to a TreeExpanderButton
-        doubleClick: (e, node) => {
-          var cmd = this.diagram.commandHandler;
-          if (node.isTreeExpanded) {
-            if (!cmd.canCollapseTree(node)) return;
-          } else {
-            if (!cmd.canExpandTree(node)) return;
-          }
-          e.handled = true;
-          if (node.isTreeExpanded) {
-            cmd.collapseTree(node);
-          } else {
-            cmd.expandTree(node);
-          }
-        }
-      },*/
       $("TreeExpanderButton",
         { // customize the button's appearance
           "_treeExpandedFigure": "LineDown",
@@ -92,7 +73,7 @@ export class NodeDirectoryComponent implements OnInit {
           new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
         $(go.TextBlock,
           { font: '9pt Verdana, sans-serif' },
-          new go.Binding("text", "key", s => "very long item number horizontal scroll " + s))
+          new go.Binding("text", "title", s => "" + s))
       )  // end Horizontal Panel
     );  // end Node
 
