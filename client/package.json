@@ -51,7 +51,6 @@
     "@storybook/manager-webpack5": "^6.5.14",
     "@storybook/testing-library": "^0.0.13",
     "@types/jest": "^29.2.6",
-    "@types/jquery": "^3.5.16",
     "babel-loader": "^8.3.0",
     "canvas": "^2.11.0",
     "cypress": "^12.3.0",
