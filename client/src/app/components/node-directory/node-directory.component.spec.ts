@@ -13,7 +13,6 @@ describe('NodeDirectoryComponent', () => {
 
     fixture = TestBed.createComponent(NodeDirectoryComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it("should create", () => {
