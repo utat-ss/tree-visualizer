@@ -1,18 +1,22 @@
 const notion = require('@notionhq/client');
 const { getEnv } = require('../utils/env.util')
 
-const notionClient = new notion.Client({
-  auth: getEnv('NOTION_TOKEN'),
-})
+const newNotionClient = async function(auth_token = undefined) {
+  if (auth_token === undefined) auth_token = getEnv('NOTION_TOKEN');
 
-const _getNotionDB = async function(database_id) {
+  return new notion.Client({
+    auth: auth_token,
+  });
+}
+
+const _getNotionDB = async function(database_id, notion_client) {
   let data = [];
   let has_more = true;
   let cursor = undefined;
 
   // Go through pagination to grab all data
   while (has_more) {
-    const results = await notionClient.databases.query({
+    const results = await notion_client.databases.query({
       database_id: database_id,
       start_cursor: cursor
     });
@@ -144,4 +148,4 @@ const getRequirements = async function(format = 'api') {
   }
 }
 
-module.exports = { getRequirements };
+module.exports = { newNotionClient, getRequirements, _getNotionDB };
