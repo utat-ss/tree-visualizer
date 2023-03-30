@@ -1,7 +1,7 @@
 const notion = require('@notionhq/client');
 const { getEnv } = require('../utils/env.util')
 
-const newNotionClient = async function(auth_token = undefined) {
+const newNotionClient = function(auth_token = undefined) {
   if (auth_token === undefined) auth_token = getEnv('NOTION_TOKEN');
 
   return new notion.Client({
@@ -140,7 +140,8 @@ const _parseRequirementsForVis = async function(raw_data) {
 }
 
 const getRequirements = async function(format = 'api') {
-  let raw_data = await _getNotionDB(getEnv('NOTION_REQUIREMENTS_DB_ID'));
+  let client = newNotionClient();
+  let raw_data = await _getNotionDB(getEnv('NOTION_REQUIREMENTS_DB_ID'), client);
 
   switch (format) {
     case 'api': return _parseRequirementsForAPI(raw_data);
