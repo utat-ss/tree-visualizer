@@ -14,7 +14,7 @@ describe('exported functions', () => {
     });
     test('newNotionClient exists and returns correct Notion client object', () => {
         expect(notionService.newNotionClient).toBeDefined();
-        expect(notionService.newNotionClient()).resolves.toBeInstanceOf(notion.Client);
+        expect(notionService.newNotionClient()).toBeInstanceOf(notion.Client);
     });
 });
 

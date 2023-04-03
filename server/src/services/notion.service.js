@@ -9,7 +9,9 @@ const newNotionClient = function(auth_token = undefined) {
   });
 }
 
-const _getNotionDB = async function(database_id, notion_client) {
+const _getNotionDB = async function(database_id, notion_client = undefined) {
+  if (notion_client === undefined) notion_client = newNotionClient();
+
   let data = [];
   let has_more = true;
   let cursor = undefined;
@@ -28,8 +30,10 @@ const _getNotionDB = async function(database_id, notion_client) {
   return data;
 }
 
-const _getDBTitles = async function(database_id, col = 'Name') {
-  let raw_data = await _getNotionDB(database_id);
+const _getDBTitles = async function(database_id, col = 'Name', notion_client = undefined) {
+  if (notion_client === undefined) notion_client = newNotionClient();
+
+  let raw_data = await _getNotionDB(database_id, notion_client);
 
   let titles = {};
   for (let elem of raw_data) {
@@ -41,10 +45,6 @@ const _getDBTitles = async function(database_id, col = 'Name') {
 
 const getRequirementQualifiers = async function() {
   return await _getDBTitles(getEnv('NOTION_REQUIREMENT_QUALIFIERS_DB_ID'), 'Qualifiers');
-}
-
-const getRequirementTypes = async function() {
-  return await _getDBTitles(getEnv('NOTION_REQUIREMENT_TYPES_DB_ID'));
 }
 
 const getTestPlans = async function() {
@@ -69,7 +69,6 @@ const getMissions = async function() {
 
 const _parseRequirementsForAPI = async function(raw_data) {
   let qualifiers = await getRequirementQualifiers();
-  let types = await getRequirementTypes();
   let test_plans = await getTestPlans();
   let systems = await getSystems();
   let trades = await getTrades();
@@ -85,9 +84,7 @@ const _parseRequirementsForAPI = async function(raw_data) {
       'last-edited': props['Last Edited'].last_edited_time,
       'qualifier': qualifiers[props.Qualifier.relation?.[0]?.id] ?? '',   // Notion enforced limit 1
       'collection': props.Collection.multi_select.map(c => c.name),       // * list
-      'type': types[props['\u{1F344} Type'].relation?.[0]?.id] ?? '',     // Notion enforced limit 1
       'verification-plan': props['\u{1F3C1} Verification Plan'].relation.map(r => test_plans[r.id]),  // * list
-      'verification-method': props['Verification Method'].select?.name ?? '',
       'system': systems[props.System.relation?.[0]?.id] ?? '',                  // Notion enforced limit 1
       'rationale': props.Rationale.rich_text?.[0]?.plain_text ?? '',
       'trades': props['\u{1F0CF} Trades'].relation.map(r => trades[r.id]),      // * list
@@ -140,8 +137,7 @@ const _parseRequirementsForVis = async function(raw_data) {
 }
 
 const getRequirements = async function(format = 'api') {
-  let client = newNotionClient();
-  let raw_data = await _getNotionDB(getEnv('NOTION_REQUIREMENTS_DB_ID'), client);
+  let raw_data = await _getNotionDB(getEnv('NOTION_REQUIREMENTS_DB_ID'));
 
   switch (format) {
     case 'api': return _parseRequirementsForAPI(raw_data);
