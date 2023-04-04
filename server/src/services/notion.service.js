@@ -68,12 +68,12 @@ const getMissions = async function() {
 }
 
 const _parseRequirementsForAPI = async function(raw_data) {
-  let qualifiers = await getRequirementQualifiers();
-  let test_plans = await getTestPlans();
-  let systems = await getSystems();
-  let trades = await getTrades();
-  let teams = await getTeams();
-  let missions = await getMissions();
+  const qualifiers = await getRequirementQualifiers();
+  const test_plans = await getTestPlans();
+  const systems = await getSystems();
+  const trades = await getTrades();
+  const teams = await getTeams();
+  const missions = await getMissions();
 
   let data = {};
   for (let elem of raw_data) {
