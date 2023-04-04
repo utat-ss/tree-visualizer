@@ -1,3 +1,7 @@
+// load env vars
+var dotenv = require('dotenv');
+dotenv.config();
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,7 +13,7 @@ var indexRouter = require('./src/routes/index');
 
 var app = express();
 
-app.use(cors());    // TODO: restrict CORS once we have deployment up
+app.use(cors());    // ! TODO: restrict CORS once we have deployment up
 
 // view engine setup
 app.set('views', path.join(__dirname, 'src/views'));
