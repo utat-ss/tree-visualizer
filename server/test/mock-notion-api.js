@@ -69,11 +69,6 @@ class NotionAPIMocks {
             multi_select: [
             ],
           },
-          "Type (legacy)": {
-            id: "R%3AvZ",
-            type: "select",
-            select: null,
-          },
           Child: {
             id: "R%5C~k",
             type: "relation",
@@ -87,25 +82,6 @@ class NotionAPIMocks {
             relation: [
             ],
             has_more: false,
-          },
-          "🍄 Type": {
-            id: "Z~z%5D",
-            type: "relation",
-            relation: [
-              {
-                id: "d484af0c-f3f9-41c9-8afc-543693ec608d",
-              },
-            ],
-            has_more: false,
-          },
-          "Verification Method": {
-            id: "%5C%5EHb",
-            type: "select",
-            select: {
-              id: "aac47c3e-998f-4358-86bc-3c326a33c77e",
-              name: "Demonstration",
-              color: "purple",
-            },
           },
           System: {
             id: "l%3Dmw",
@@ -307,11 +283,6 @@ class NotionAPIMocks {
             multi_select: [
             ],
           },
-          "Type (legacy)": {
-            id: "R%3AvZ",
-            type: "select",
-            select: null,
-          },
           Child: {
             id: "R%5C~k",
             type: "relation",
@@ -325,25 +296,6 @@ class NotionAPIMocks {
             relation: [
             ],
             has_more: false,
-          },
-          "🍄 Type": {
-            id: "Z~z%5D",
-            type: "relation",
-            relation: [
-              {
-                id: "d484af0c-f3f9-41c9-8afc-543693ec608d",
-              },
-            ],
-            has_more: false,
-          },
-          "Verification Method": {
-            id: "%5C%5EHb",
-            type: "select",
-            select: {
-              id: "aac47c3e-998f-4358-86bc-3c326a33c77e",
-              name: "Demonstration",
-              color: "purple",
-            },
           },
           System: {
             id: "l%3Dmw",
@@ -545,11 +497,6 @@ class NotionAPIMocks {
             multi_select: [
             ],
           },
-          "Type (legacy)": {
-            id: "R%3AvZ",
-            type: "select",
-            select: null,
-          },
           Child: {
             id: "R%5C~k",
             type: "relation",
@@ -563,25 +510,6 @@ class NotionAPIMocks {
             relation: [
             ],
             has_more: false,
-          },
-          "🍄 Type": {
-            id: "Z~z%5D",
-            type: "relation",
-            relation: [
-              {
-                id: "d484af0c-f3f9-41c9-8afc-543693ec608d",
-              },
-            ],
-            has_more: false,
-          },
-          "Verification Method": {
-            id: "%5C%5EHb",
-            type: "select",
-            select: {
-              id: "aac47c3e-998f-4358-86bc-3c326a33c77e",
-              name: "Demonstration",
-              color: "purple",
-            },
           },
           System: {
             id: "l%3Dmw",
