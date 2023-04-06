@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrgChartComponent } from "./components/org-chart/org-chart.component";
 import { NodeDirectoryComponent } from './components/node-directory/node-directory.component';
+import { MergedComponentsComponent } from './components/merged-components/merged-components.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrgChartComponent,
-    NodeDirectoryComponent
+    NodeDirectoryComponent,
+    MergedComponentsComponent
   ],
   imports: [
     BrowserModule,

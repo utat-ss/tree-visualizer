@@ -210,6 +210,82 @@
             "templateData": "<p>This is TreeVisualizer!</p>\n\n\n<app-org-chart [model]=\"model\" (nodeClicked)=\"setSelectedNode($event)\"></app-org-chart>"
         },
         {
+            "name": "MergedComponentsComponent",
+            "id": "component-MergedComponentsComponent-808b091dd533b17999f64d8d66cbdff005ef27b7504a197b97894b7096428b89ea5b5b8e9932986edc445fcf1a77014fef0619f00a5cc23189446ebac691dfff",
+            "file": "src/app/components/merged-components/merged-components.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-merged-components",
+            "styleUrls": [
+                "./merged-components.component.sass"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./merged-components.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "model",
+                    "defaultValue": "new go.TreeModel()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "go.TreeModel",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "nodeClicked",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nimport { NodeDirectoryComponent } from '../node-directory/node-directory.component';\nimport { OrgChartComponent } from '../org-chart/org-chart.component';\n\n@Component({\n  selector: 'app-merged-components',\n  templateUrl: './merged-components.component.html',\n  styleUrls: ['./merged-components.component.sass']\n})\nexport class MergedComponentsComponent implements OnInit{\n  @Input()\n  public model: go.TreeModel = new go.TreeModel()\n\n  @Output()\n  public nodeClicked = new EventEmitter()\n\n  public ngOnInit() {}\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\n",
+                    "styleUrl": "./merged-components.component.sass"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<app-org-chart\n    [model]=\"model\"\n>\n</app-org-chart>\n<app-node-directory\n    [model]=\"model\"\n>\n</app-node-directory>"
+        },
+        {
             "name": "NodeDirectoryComponent",
             "id": "component-NodeDirectoryComponent-52a04097fb5fc6c9afca10872377b322a9cfa5dc9ec79ba9081754ee2f283dc129fa660936ed327ca470e5a9e3c1b981fa81c15deb97a2ad5fac15755c99a4ca",
             "file": "src/app/components/node-directory/node-directory.component.ts",
@@ -302,7 +378,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "#app-node-directory\n    position: absolute\n    top: 0\n    bottom: 0\n    left: 0\n    right: 0\n    width: 25%\n    height: 100%\n    background: #ffffff",
+                    "data": "#app-node-directory\n    position: absolute\n    top: 0\n    bottom: 0\n    left: 0\n    right: 0\n    width: 20%\n    height: 100%\n    background: #ffffff",
                     "styleUrl": "./node-directory.component.sass"
                 }
             ],
@@ -466,13 +542,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-032a8ac7cd41f4b9116678d3ad9caece1638fffd8de7b90df7bbae102e9afac4e4510b9024d391fc43a511e2b5d9411246d353ee5d314ac220f54ab1d96126eb",
+            "id": "module-AppModule-01384699fd65760d5ab6d488aa5468f1ede99ca83e60116eb062da16610d82470dbc0da842e6bbd77d548c688469b5ed0c64d3eaebd46dc4440a4f2be3f9459e",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { BrowserModule } from \"@angular/platform-browser\"\nimport { HttpClientModule } from \"@angular/common/http\"\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\nimport { NodeDirectoryComponent } from './components/node-directory/node-directory.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    OrgChartComponent,\n    NodeDirectoryComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    HttpClientModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule {}\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { BrowserModule } from \"@angular/platform-browser\"\nimport { HttpClientModule } from \"@angular/common/http\"\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\nimport { NodeDirectoryComponent } from './components/node-directory/node-directory.component';\nimport { MergedComponentsComponent } from './components/merged-components/merged-components.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    OrgChartComponent,\n    NodeDirectoryComponent,\n    MergedComponentsComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    HttpClientModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -483,6 +559,9 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "MergedComponentsComponent"
                         },
                         {
                             "name": "NodeDirectoryComponent"
@@ -591,6 +670,16 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/merged-components/merged-components.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/node-directory/node-directory.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -611,11 +700,31 @@
                 "name": "model",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/merged-components/merged-components.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "go.TreeModel",
+                "defaultValue": "new go.TreeModel({\n  nodeKeyProperty: \"id\",\n  nodeDataArray: [\n      {\n          id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          parent: \"\",\n          title: \"UTAT-Team-A\",\n          qualifier: \"SHALL\",\n          type: \"Performance\",\n          description: \"A description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n      },\n      {\n          id: \"123456789\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-B\",\n          qualifier: \"SHOULD\",\n          type: \"Constraint\",\n          description: \"Another description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-1-123456789\",\n      },\n      {\n          id: \"abcdefghi\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-C\",\n          qualifier: \"SHALL\",\n          type: \"Component Selection\",\n          description:\n              \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-2-abcdefghi\",\n      },\n      {\n          id: \"qwertyuiop\",\n          parent: \"123456789\",\n          title: \"UTAT-Team-D\",\n          qualifier: \"SHOULD\",\n          type: \"A type\",\n          description: \"Yet another description that is just a little bit longer\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n      },\n  ],\n})"
+            },
+            {
+                "name": "model",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/node-directory/node-directory.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "go.TreeModel",
                 "defaultValue": "new go.TreeModel({\n  nodeKeyProperty: \"id\",\n  nodeDataArray: [\n      {\n          id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          parent: \"\",\n          title: \"UTAT-Team-A\",\n          qualifier: \"SHALL\",\n          type: \"Performance\",\n          description: \"A description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n      },\n      {\n          id: \"123456789\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-B\",\n          qualifier: \"SHOULD\",\n          type: \"Constraint\",\n          description: \"Another description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-1-123456789\",\n      },\n      {\n          id: \"abcdefghi\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-C\",\n          qualifier: \"SHALL\",\n          type: \"Component Selection\",\n          description:\n              \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-2-abcdefghi\",\n      },\n      {\n          id: \"qwertyuiop\",\n          parent: \"123456789\",\n          title: \"UTAT-Team-D\",\n          qualifier: \"SHOULD\",\n          type: \"A type\",\n          description: \"Yet another description that is just a little bit longer\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n      },\n  ],\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/merged-components/merged-components.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "(args) => ({\n    props: args,\n})"
             },
             {
                 "name": "Template",
@@ -698,6 +807,38 @@
                     "defaultValue": "(args) => ({\n    props: args,\n})"
                 }
             ],
+            "src/app/components/merged-components/merged-components.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/merged-components/merged-components.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "model",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/merged-components/merged-components.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.TreeModel",
+                    "defaultValue": "new go.TreeModel({\n  nodeKeyProperty: \"id\",\n  nodeDataArray: [\n      {\n          id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          parent: \"\",\n          title: \"UTAT-Team-A\",\n          qualifier: \"SHALL\",\n          type: \"Performance\",\n          description: \"A description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n      },\n      {\n          id: \"123456789\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-B\",\n          qualifier: \"SHOULD\",\n          type: \"Constraint\",\n          description: \"Another description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-1-123456789\",\n      },\n      {\n          id: \"abcdefghi\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-C\",\n          qualifier: \"SHALL\",\n          type: \"Component Selection\",\n          description:\n              \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-2-abcdefghi\",\n      },\n      {\n          id: \"qwertyuiop\",\n          parent: \"123456789\",\n          title: \"UTAT-Team-D\",\n          qualifier: \"SHOULD\",\n          type: \"A type\",\n          description: \"Yet another description that is just a little bit longer\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n      },\n  ],\n})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/merged-components/merged-components.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "(args) => ({\n    props: args,\n})"
+                }
+            ],
             "src/app/components/node-directory/node-directory.component.stories.ts": [
                 {
                     "name": "Default",
@@ -760,6 +901,45 @@
                 "name": "AppComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/merged-components/merged-components.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/merged-components/merged-components.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "model",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/merged-components/merged-components.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/merged-components/merged-components.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MergedComponentsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
