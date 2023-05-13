@@ -84,7 +84,7 @@ const _parseRequirementsForAPI = async function(raw_data) {
       'last-edited': props['Last Edited'].last_edited_time,
       'qualifier': qualifiers[props.Qualifier.relation?.[0]?.id] ?? '',   // Notion enforced limit 1
       'collection': props.Collection.multi_select.map(c => c.name),       // * list
-      'verification-plan': props['\u{1F3C1} Verification Plan'].relation.map(r => test_plans[r.id]),  // * list
+      'test-plans': props['\u{1F3C1} Test Plans'].relation.map(r => test_plans[r.id]),  // * list
       'system': systems[props.System.relation?.[0]?.id] ?? '',                  // Notion enforced limit 1
       'rationale': props.Rationale.rich_text?.[0]?.plain_text ?? '',
       'trades': props['\u{1F0CF} Trades'].relation.map(r => trades[r.id]),      // * list
