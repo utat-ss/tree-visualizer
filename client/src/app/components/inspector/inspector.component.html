@@ -31,26 +31,8 @@
 </mat-form-field>
 
 <mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>Type</mat-label>
-    <mat-select [value]="type">
-        <mat-option *ngFor="let t of types" [value]="t" [disabled]="(read_only && t != type) ? 'true' : null">
-            {{ t }}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
-
-<mat-form-field appearance="outline" floatLabel="always">
     <mat-label>Verification Plans</mat-label>
-    <input matInput [readonly]="read_only" [value]="verification_plans[0]">
-</mat-form-field>
-
-<mat-form-field appearance="outline" floatLabel="always">
-    <mat-label>Verification Method</mat-label>
-    <mat-select [value]="verification_method">
-        <mat-option *ngFor="let m of verification_methods" [value]="m" [disabled]="(read_only && m != verification_method) ? 'true' : null">
-            {{ m }}
-        </mat-option>
-    </mat-select>
+    <input matInput [readonly]="read_only" [value]="test_plans[0]">
 </mat-form-field>
 
 <mat-form-field appearance="outline" floatLabel="always">
@@ -88,6 +70,6 @@
 </mat-form-field>
 
 <div class="readonly-property">
-    <p><span>URL: </span><a [href]="url.href">{{ url.href }}</a></p>
+    <p><span>URL: </span><a [href]="url ? url.href : '#'">{{ url ? url.href : '#' }}</a></p>
 </div>
 

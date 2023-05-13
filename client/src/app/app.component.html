@@ -1,4 +1,4 @@
 <h1 id="title">TreeVisualizer</h1>
 
 <app-org-chart [model]="model" (nodeClicked)="setSelectedNode($event)"></app-org-chart>
-<app-inspector></app-inspector>
+<app-inspector [selectedNode]="selectedNode"></app-inspector>
