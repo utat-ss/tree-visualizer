@@ -75,12 +75,13 @@ const _parseRequirementsForAPI = async function(raw_data) {
   const teams = await getTeams();
   const missions = await getMissions();
 
-  let data = {};
+  let data = [];
   for (let elem of raw_data) {
     let props = elem.properties;
-    data[elem.id] = {
+    data.push({
+      'id': elem.id,
       'created-by': props['Created by'].created_by.name,
-      'parent-id': props.Parent.relation?.[0]?.id ?? '',                  // Notion enforced limit 1
+      'parent': props.Parent.relation?.[0]?.id ?? '',                     // Notion enforced limit 1
       'last-edited': props['Last Edited'].last_edited_time,
       'qualifier': qualifiers[props.Qualifier.relation?.[0]?.id] ?? '',   // Notion enforced limit 1
       'collection': props.Collection.multi_select.map(c => c.name),       // * list
@@ -94,7 +95,7 @@ const _parseRequirementsForAPI = async function(raw_data) {
       'description': props.Description.rich_text?.[0]?.plain_text ?? '',
       'title': props.ID.title?.[0]?.plain_text ?? '',
       'url': elem.url
-    }
+    });
   }
 
   return data;
