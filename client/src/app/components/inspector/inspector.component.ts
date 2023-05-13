@@ -36,16 +36,16 @@ export class InspectorComponent implements OnChanges {
             this.created_by = '-';
             this.parent = '-';
             this.last_edited = null;
-            this.qualifier = '';
-            this.collection = '';
+            this.qualifier = '-';
+            this.collection = '-';
             this.test_plans = ['-'];
-            this.system = '';
-            this.rationale = '';
+            this.system = '-';
+            this.rationale = '-';
             this.trades = ['-'];
-            this.last_edited_by = '';
+            this.last_edited_by = '-';
             this.stakeholders = ['-'];
-            this.mission = '';
-            this.description = '';
+            this.mission = '-';
+            this.description = '-';
             this.url = null;
         }
         else {
@@ -57,12 +57,12 @@ export class InspectorComponent implements OnChanges {
             this.last_edited = new Date(data['last-edited']);
             this.qualifier = data.qualifier;
             this.collection = data.collection.join(', ');
-            this.test_plans = data['test-plans'].length > 0 ? data['test-plans'] : ['-'];
+            this.test_plans = data['test-plans'].length > 0 ? data['test-plans'] : [''];
             this.system = data.system;
             this.rationale = data.rationale;
-            this.trades = data.trades.length > 0 ? data.trades : ['-'];
+            this.trades = data.trades.length > 0 ? data.trades : [''];
             this.last_edited_by = data['last-edited-by'];
-            this.stakeholders = data.stakeholder.length > 0 ? data.stakeholder : ['-'];
+            this.stakeholders = data.stakeholder.length > 0 ? data.stakeholder : [''];
             this.mission = data.mission;
             this.description = data.description;
             this.url = data.url ? new URL(data.url) : null;
