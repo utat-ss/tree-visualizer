@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OrgChartComponent } from "./components/org-chart/org-chart.component";
 import { NodeDirectoryComponent } from './components/node-directory/node-directory.component';
-import { InspectorComponent } from './inspector/inspector.component';
+import { InspectorComponent } from './components/inspector/inspector.component';
 
 @NgModule({
   declarations: [

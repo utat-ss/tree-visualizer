@@ -202,17 +202,17 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "#title\r\n    background-color: #fff\r\n    position: absolute\r\n    z-index: 10\r\n    margin: 1vh 1vh\r\n    padding: 3vh 3vh\r\n",
                     "styleUrl": "./app.component.sass"
                 }
             ],
             "stylesData": "",
-            "templateData": "<p>This is TreeVisualizer!</p>\r\n\r\n<app-inspector></app-inspector>\r\n\r\n\r\n<app-org-chart [model]=\"model\" (nodeClicked)=\"setSelectedNode($event)\"></app-org-chart>\r\n"
+            "templateData": "<h1 id=\"title\">TreeVisualizer</h1>\r\n\r\n<app-org-chart [model]=\"model\" (nodeClicked)=\"setSelectedNode($event)\"></app-org-chart>\r\n<app-inspector></app-inspector>\r\n"
         },
         {
             "name": "InspectorComponent",
             "id": "component-InspectorComponent-cb14db340cd6e64247c580501281befb2f0efce6dee428a4a889b40ce0b7333cbddb7f87a1288dc0f6d2886f534af6477218249167149a035471aa280883c6d0",
-            "file": "src/app/inspector/inspector.component.ts",
+            "file": "src/app/components/inspector/inspector.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -703,7 +703,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "#app-org-chart\r\n    position: absolute\r\n    top: 0\r\n    right: 0\r\n    bottom: 0\r\n    left: 0\r\n    width: 100%\r\n    height: 100%\r\n    background-color: #F8F8F8\r\n\r\n#app-minimap\r\n    position: absolute\r\n    margin: 32px\r\n    top: 0\r\n    right: 0\r\n    width: 16%\r\n    height: 16%\r\n    border: 1px solid black\r\n",
+                    "data": "#app-org-chart\r\n    background: whitesmoke\r\n    margin: 5px 5px\r\n    width: 98vw\r\n    height: 98vh\r\n    border: 1px solid black\r\n\r\n#app-minimap\r\n    position: absolute\r\n    margin: 32px\r\n    top: 0\r\n    right: 0\r\n    width: 16%\r\n    height: 16%\r\n    border: 1px solid black\r\n",
                     "styleUrl": "./org-chart.component.sass"
                 }
             ],
@@ -717,13 +717,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-4199bc912f3f86d7e6b5fe9933bd2ece0b8144ef1a872382b34e6cc5aa7b23a409176953aec8cab6352577cf5bc2e590229721f135f05cf9eee7fbe274448c4a",
+            "id": "module-AppModule-5f93730d8ee18b3d0c78e73b076adb77cc913716409ccadec6523d76f878c72f16ae204adabb105905b294c5af7adc1b43d009f0b478e3e2bb30451cc8459c51",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from \"@angular/core\"\r\nimport { BrowserModule } from \"@angular/platform-browser\"\r\nimport { HttpClientModule } from \"@angular/common/http\"\r\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSelectModule } from '@angular/material/select';\r\n\r\nimport { AppRoutingModule } from './app-routing.module';\r\nimport { AppComponent } from './app.component';\r\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\r\nimport { NodeDirectoryComponent } from './components/node-directory/node-directory.component';\r\nimport { InspectorComponent } from './inspector/inspector.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    OrgChartComponent,\r\n    NodeDirectoryComponent,\r\n    InspectorComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    AppRoutingModule,\r\n    BrowserAnimationsModule,\r\n    HttpClientModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatSelectModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule {}\r\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\"\r\nimport { BrowserModule } from \"@angular/platform-browser\"\r\nimport { HttpClientModule } from \"@angular/common/http\"\r\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSelectModule } from '@angular/material/select';\r\n\r\nimport { AppRoutingModule } from './app-routing.module';\r\nimport { AppComponent } from './app.component';\r\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\r\nimport { NodeDirectoryComponent } from './components/node-directory/node-directory.component';\r\nimport { InspectorComponent } from './components/inspector/inspector.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    OrgChartComponent,\r\n    NodeDirectoryComponent,\r\n    InspectorComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    AppRoutingModule,\r\n    BrowserAnimationsModule,\r\n    HttpClientModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatSelectModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -865,7 +865,7 @@
                 "name": "Editable",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/inspector/inspector.stories.ts",
+                "file": "src/app/components/inspector/inspector.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -885,7 +885,7 @@
                 "name": "Readonly",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/inspector/inspector.stories.ts",
+                "file": "src/app/components/inspector/inspector.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -895,7 +895,7 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/inspector/inspector.stories.ts",
+                "file": "src/app/components/inspector/inspector.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<InspectorComponent>",
@@ -1014,12 +1014,12 @@
                     "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
                 }
             ],
-            "src/app/inspector/inspector.stories.ts": [
+            "src/app/components/inspector/inspector.stories.ts": [
                 {
                     "name": "Editable",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/inspector/inspector.stories.ts",
+                    "file": "src/app/components/inspector/inspector.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -1029,7 +1029,7 @@
                     "name": "Readonly",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/inspector/inspector.stories.ts",
+                    "file": "src/app/components/inspector/inspector.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -1039,7 +1039,7 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/inspector/inspector.stories.ts",
+                    "file": "src/app/components/inspector/inspector.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story<InspectorComponent>",
@@ -1076,6 +1076,45 @@
                 "name": "AppComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InspectorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/22",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Editable",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Readonly",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -1172,45 +1211,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "$",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/inspector/inspector.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "InspectorComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/22",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/inspector/inspector.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Editable",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/inspector/inspector.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Readonly",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/inspector/inspector.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
