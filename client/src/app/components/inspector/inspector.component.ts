@@ -50,10 +50,11 @@ export class InspectorComponent implements OnChanges {
         }
         else {
             const data: Requirement = val.data;
+            const parent: go.Node | null = val.findTreeParentNode();
 
             this.requirement = data.title;
             this.created_by = data['created-by'];
-            this.parent = data.parent;
+            this.parent = parent ? parent.data.title : '';
             this.last_edited = new Date(data['last-edited']);
             this.qualifier = data.qualifier;
             this.collection = data.collection.join(', ');
