@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
 import * as go from "gojs"
+// import { DiagramSyncService } from '../../services/diagram-sync.service';
 
 const $ = go.GraphObject.make
 
@@ -7,18 +8,32 @@ const $ = go.GraphObject.make
   selector: 'app-node-directory',
   templateUrl: './node-directory.component.html',
   styleUrls: ['./node-directory.component.sass']
+  //template: `<button class='btn btn-primary' (click)="nodeClickedFunction()">Click me"</button>`
 })
+
 export class NodeDirectoryComponent implements OnInit {
+  static select(arg0: any) {
+    throw new Error("Method not implemented.");
+  }
+  static findPartForKey(key: any): any {
+    throw new Error("Method not implemented.");
+  }
   public diagram: go.Diagram = new go.Diagram()
 
   @Input()
-  public model: go.TreeModel = new go.TreeModel()
+  public selectedNode: any;
+
+  @Input()
+  public model: go.TreeModel | null = new go.TreeModel()
 
   @Output()
-  public nodeClicked = new EventEmitter()
+  public nodeClicked: EventEmitter<any> = new EventEmitter()
+  
+  static selection: any;
+  static model: go.TreeModel;
 
-  constructor() {}
-
+  // constructor() {}
+  
   public ngOnInit() {}
 
   public ngAfterViewInit(): void {
@@ -31,6 +46,7 @@ export class NodeDirectoryComponent implements OnInit {
         allowVerticalScroll: true,
         contentAlignment: go.Spot.TopLeft,
         padding: new go.Margin(75, 0, 0, 0),
+        maxSelectionCount: 1,
         layout:
           $(go.TreeLayout,
             {
@@ -43,12 +59,14 @@ export class NodeDirectoryComponent implements OnInit {
               nodeSpacing: 0,
               setsPortSpot: false,
               setsChildPortSpot: false
-            })
+            }),
+            "undoManager.isEnabled": true,
       });
 
     // define the Node template
     this.diagram.nodeTemplate =
-      $(go.Node, 
+      $(go.Node,
+        'Auto',
       $("TreeExpanderButton",
         { // customize the button's appearance
           "_treeExpandedFigure": "LineDown",
@@ -79,7 +97,13 @@ export class NodeDirectoryComponent implements OnInit {
 
   this.diagram.linkTemplate = $(go.Link)
 
-  this.diagram.model = this.model;
+  this.diagram.model = this.model as go.TreeModel;
+  
+  this.diagram.addDiagramListener("ChangedSelection", (e) => {
+    const node = this.diagram?.selection.first()
+    console.log(node?.data.id)
+    this.nodeClicked.emit(node)
+})
 
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use
   function imageConverter(prop: any, picture: any) {

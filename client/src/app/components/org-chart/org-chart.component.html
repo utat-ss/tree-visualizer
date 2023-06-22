@@ -1,6 +1,7 @@
 <div>
-    <div id="app-org-chart"></div>
-    <div id="app-minimap"></div>
+    <app-node-directory (nodeClicked)="onNodeClicked($event)"></app-node-directory>
+    <div id="app-org-chart">[selectedNode]="selectedNode"</div>
+    <div id="app-minimap">[selectedNode]="selectedNode"</div>
 </div>
 
 

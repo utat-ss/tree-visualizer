@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+//import { DiagramSyncService } from '../../services/diagram-sync.service';
 import * as go from "gojs"
 
 const $ = go.GraphObject.make
@@ -7,11 +8,27 @@ const $ = go.GraphObject.make
     selector: "app-org-chart",
     templateUrl: "./org-chart.component.html",
     styleUrls: ["./org-chart.component.sass"],
+    //template: `<app-node-directory (nodeClicked)="displayCounter($event)"><app-node-directory>`
 })
 export class OrgChartComponent implements OnInit {
-    @Input() public model: go.TreeModel = new go.TreeModel()
+    static scrollToRect(actualBounds: any) {
+      throw new Error("Method not implemented.")
+    }
 
-    @Output() public nodeClicked = new EventEmitter()
+    @Input() public model: go.TreeModel | null = new go.TreeModel()
+
+    @Output() 
+    // public nodeClicked: EventEmitter<any> = new EventEmitter()
+
+    /*displayNode(nodeClicked: any) {
+        console.log(nodeClicked)
+    }*/
+
+    selectedNode: any;
+    selectedOrgNode: any;
+
+    onNodeClicked(node: any) {
+        this.selectedNode = node;}
 
     public showMap = true
 
@@ -19,11 +36,13 @@ export class OrgChartComponent implements OnInit {
     private minimap: go.Overview | null = null
     private nodeSize = new go.Size(256, 128)
     private font = "sans-serif"
+    static selection: any
 
     public ngOnInit() {
         this.diagram = $(go.Diagram, "app-org-chart", {
             allowCopy: false,
             allowDelete: false,
+            maxSelectionCount: 1,
             layout: $(go.TreeLayout, {
                 treeStyle: go.TreeLayout.StyleLastParents,
                 arrangement: go.TreeLayout.ArrangementHorizontal,
@@ -165,13 +184,28 @@ export class OrgChartComponent implements OnInit {
 
         this.minimap = $(go.Overview, "app-minimap", { observed: this.diagram })
 
-        this.diagram.model = this.model
+        this.diagram.model = this.model as go.TreeModel;
+
+        this.selectedOrgNode = this.diagram.findNodesByExample({ key: this.selectedNode.key }, 
+                                                            { value: this.selectedNode.value },
+                                                            { id: this.selectedNode.id });
+
+        this.selectedOrgNode.color = 'red'
 
         // when selection changes, emit event to update the selected node
-        this.diagram.addDiagramListener("ChangedSelection", (e) => {
+        
+        /*this.diagram.addDiagramListener("ChangedSelection", (e) => {
             const node = this.diagram?.selection.first()
-            console.log(this.model.toJson())
+            console.log(node?.data.id)
             this.nodeClicked.emit(node)
-        })
+        })*/
+
+        // Add node click event listener
+        /*this.diagram.addDiagramListener('ObjectSingleClicked', (e: go.DiagramEvent) => {
+            const node = e.subject.part;
+            if (node instanceof go.Node) {
+              this.diagramSyncService.notifyNodeClick(node);
+            }
+          });*/
     }
 }
