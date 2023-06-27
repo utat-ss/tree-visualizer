@@ -129,33 +129,26 @@
                     "defaultValue": "new go.TreeModel({\r\n        nodeKeyProperty: \"id\",\r\n        nodeDataArray: [\r\n            {\r\n                id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n                parent: \"\",\r\n                title: \"UTAT-Team-A\",\r\n                qualifier: \"SHALL\",\r\n                type: \"Performance\",\r\n                description: \"A description\",\r\n                rationale: \"A rationale\",\r\n                url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n            },\r\n            {\r\n                id: \"123456789\",\r\n                parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n                title: \"UTAT-Team-B\",\r\n                qualifier: \"SHOULD\",\r\n                type: \"Constraint\",\r\n                description: \"Another description\",\r\n                rationale: \"A rationale\",\r\n                url: \"https://www.notion.so/Child-1-123456789\",\r\n            },\r\n            {\r\n                id: \"abcdefghi\",\r\n                parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n                title: \"UTAT-Team-C\",\r\n                qualifier: \"SHALL\",\r\n                type: \"Component Selection\",\r\n                description:\r\n                    \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n                rationale: \"A rationale\",\r\n                url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n            },\r\n            {\r\n                id: \"qwertyuiop\",\r\n                parent: \"123456789\",\r\n                title: \"UTAT-Team-D\",\r\n                qualifier: \"SHOULD\",\r\n                type: \"A type\",\r\n                description: \"Yet another description that is just a little bit longer\",\r\n                rationale: \"A rationale\",\r\n                url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n            },\r\n        ],\r\n    })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "go.TreeModel",
                     "optional": false,
                     "description": "",
-                    "line": 14
-                },
-                {
-                    "name": "selectedNode",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "go.Part | null",
-                    "optional": false,
-                    "description": "",
-                    "line": 12,
+                    "line": 13,
                     "modifierKind": [
                         123
                     ]
                 },
                 {
-                    "name": "title",
-                    "defaultValue": "\"tree-visualizer\"",
+                    "name": "selectedNode",
+                    "defaultValue": "new go.Node",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
+                    "type": "go.Node",
                     "optional": false,
                     "description": "",
-                    "line": 10
+                    "line": 11,
+                    "modifierKind": [
+                        123
+                    ]
                 }
             ],
             "methodsClass": [
@@ -164,7 +157,7 @@
                     "args": [
                         {
                             "name": "node",
-                            "type": "go.Part | null",
+                            "type": "go.Node",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -172,7 +165,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 61,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -181,7 +174,7 @@
                     "jsdoctags": [
                         {
                             "name": "node",
-                            "type": "go.Part | null",
+                            "type": "go.Node",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -487,18 +480,17 @@
                     "line": 15,
                     "type": "go.TreeModel",
                     "decorators": []
-                }
-            ],
-            "outputsClass": [
+                },
                 {
-                    "name": "nodeClicked",
-                    "defaultValue": "new EventEmitter()",
+                    "name": "selectedNode",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 18,
-                    "type": "EventEmitter"
+                    "type": "any",
+                    "decorators": []
                 }
             ],
+            "outputsClass": [],
             "propertiesClass": [
                 {
                     "name": "diagram",
@@ -521,7 +513,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -534,7 +526,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -569,7 +561,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div id=\"app-node-directory\"></div>"
+            "templateData": "<div id=\"app-node-directory\"> {{ selectedNode }} </div>"
         },
         {
             "name": "OrgChartComponent",
@@ -595,7 +587,7 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 18,
                     "type": "go.TreeModel",
                     "decorators": []
                 }
@@ -606,7 +598,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 21,
                     "type": "EventEmitter"
                 }
             ],
@@ -619,9 +611,9 @@
                     "type": "go.Diagram | null",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 12,
                     "modifierKind": [
-                        121
+                        123
                     ]
                 },
                 {
@@ -632,22 +624,9 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 15,
                     "modifierKind": [
-                        121
-                    ]
-                },
-                {
-                    "name": "minimap",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "go.Overview | null",
-                    "optional": false,
-                    "description": "",
-                    "line": 19,
-                    "modifierKind": [
-                        121
+                        123
                     ]
                 },
                 {
@@ -658,20 +637,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 20,
-                    "modifierKind": [
-                        121
-                    ]
-                },
-                {
-                    "name": "showMap",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 16,
+                    "line": 14,
                     "modifierKind": [
                         123
                     ]
@@ -679,12 +645,25 @@
             ],
             "methodsClass": [
                 {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 182,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -708,6 +687,14 @@
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 21
+            },
             "implements": [
                 "OnInit"
             ],
@@ -743,6 +730,9 @@
                         },
                         {
                             "name": "OrgChartComponent"
+                        },
+                        {
+                            "name": "TestComponent"
                         }
                     ]
                 },
@@ -815,6 +805,16 @@
                 "name": "$",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/diagram/diagram.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "go.GraphObject.make"
+            },
+            {
+                "name": "$",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/node-directory/node-directory.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -836,6 +836,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/org-chart/org-chart.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -875,6 +885,16 @@
                 "name": "model",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "go.TreeModel",
+                "defaultValue": "new go.TreeModel(\n    [\n      { 'key': 1, 'name': 'Stella Payne Diaz', 'title': 'CEO' },\n      { 'key': 2, 'name': 'Luke Warm', 'title': 'VP Marketing/Sales', 'parent': 1 },\n      { 'key': 3, 'name': 'Meg Meehan Hoffa', 'title': 'Sales', 'parent': 2 },\n      { 'key': 4, 'name': 'Peggy Flaming', 'title': 'VP Engineering', 'parent': 1 },\n      { 'key': 5, 'name': 'Saul Wellingood', 'title': 'Manufacturing', 'parent': 4 },\n      { 'key': 6, 'name': 'Al Ligori', 'title': 'Marketing', 'parent': 2 },\n      { 'key': 7, 'name': 'Dot Stubadd', 'title': 'Sales Rep', 'parent': 3 },\n      { 'key': 8, 'name': 'Les Ismore', 'title': 'Project Mgr', 'parent': 5 },\n      { 'key': 9, 'name': 'April Lynn Parris', 'title': 'Events Mgr', 'parent': 6 },\n      { 'key': 10, 'name': 'Xavier Breath', 'title': 'Engineering', 'parent': 4 },\n      { 'key': 11, 'name': 'Anita Hammer', 'title': 'Process', 'parent': 5 },\n      { 'key': 12, 'name': 'Billy Aiken', 'title': 'Software', 'parent': 10 },\n      { 'key': 13, 'name': 'Stan Wellback', 'title': 'Testing', 'parent': 10 },\n      { 'key': 14, 'name': 'Marge Innovera', 'title': 'Hardware', 'parent': 10 },\n      { 'key': 15, 'name': 'Evan Elpus', 'title': 'Quality', 'parent': 5 },\n      { 'key': 16, 'name': 'Lotta B. Essen', 'title': 'Sales Rep', 'parent': 3 }\n    ]\n  )"
+            },
+            {
+                "name": "model",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/node-directory/node-directory.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -905,6 +925,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "(args) => ({\n    props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/node-directory/node-directory.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -926,6 +956,18 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
+            "src/app/components/diagram/diagram.component.ts": [
+                {
+                    "name": "$",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/diagram/diagram.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "go.GraphObject.make"
+                }
+            ],
             "src/app/components/node-directory/node-directory.component.ts": [
                 {
                     "name": "$",
@@ -980,6 +1022,38 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
+                }
+            ],
+            "src/app/app.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "model",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.TreeModel",
+                    "defaultValue": "new go.TreeModel(\n    [\n      { 'key': 1, 'name': 'Stella Payne Diaz', 'title': 'CEO' },\n      { 'key': 2, 'name': 'Luke Warm', 'title': 'VP Marketing/Sales', 'parent': 1 },\n      { 'key': 3, 'name': 'Meg Meehan Hoffa', 'title': 'Sales', 'parent': 2 },\n      { 'key': 4, 'name': 'Peggy Flaming', 'title': 'VP Engineering', 'parent': 1 },\n      { 'key': 5, 'name': 'Saul Wellingood', 'title': 'Manufacturing', 'parent': 4 },\n      { 'key': 6, 'name': 'Al Ligori', 'title': 'Marketing', 'parent': 2 },\n      { 'key': 7, 'name': 'Dot Stubadd', 'title': 'Sales Rep', 'parent': 3 },\n      { 'key': 8, 'name': 'Les Ismore', 'title': 'Project Mgr', 'parent': 5 },\n      { 'key': 9, 'name': 'April Lynn Parris', 'title': 'Events Mgr', 'parent': 6 },\n      { 'key': 10, 'name': 'Xavier Breath', 'title': 'Engineering', 'parent': 4 },\n      { 'key': 11, 'name': 'Anita Hammer', 'title': 'Process', 'parent': 5 },\n      { 'key': 12, 'name': 'Billy Aiken', 'title': 'Software', 'parent': 10 },\n      { 'key': 13, 'name': 'Stan Wellback', 'title': 'Testing', 'parent': 10 },\n      { 'key': 14, 'name': 'Marge Innovera', 'title': 'Hardware', 'parent': 10 },\n      { 'key': 15, 'name': 'Evan Elpus', 'title': 'Quality', 'parent': 5 },\n      { 'key': 16, 'name': 'Lotta B. Essen', 'title': 'Sales Rep', 'parent': 3 }\n    ]\n  )"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "(args) => ({\n    props: args,\n})"
                 }
             ],
             "src/app/components/node-directory/node-directory.component.stories.ts": [
@@ -1070,12 +1144,61 @@
         "status": "low",
         "files": [
             {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "model",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/app.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/diagram/diagram.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DiagramComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/diagram/diagram.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "$",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -1213,6 +1336,15 @@
                 "name": "$",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/test/test.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TestComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {

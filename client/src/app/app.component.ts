@@ -4,9 +4,9 @@ import { Requirements } from "./interfaces/requirements"
 import { BackendService } from "./services/backend.service";
 
 @Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.sass"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
     title = "tree-visualizer";
@@ -25,7 +25,8 @@ export class AppComponent {
         this.model.commit(m => m.mergeNodeDataArray(r))
     }
 
-    public setSelectedNode(node: go.Part | null) {
-        this.selectedNode = node
-    }
+  public setSelectedNode(node: go.Node) {
+    this.selectedNode = node;
+  }
+
 }

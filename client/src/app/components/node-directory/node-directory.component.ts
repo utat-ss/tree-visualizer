@@ -14,14 +14,18 @@ export class NodeDirectoryComponent implements OnInit {
   @Input()
   public model: go.TreeModel = new go.TreeModel()
 
-  @Output()
-  public nodeClicked = new EventEmitter()
+  @Input()
+  public selectedNode: any
+
+  /*@Output()
+  public nodeClicked = new EventEmitter()*/
 
   constructor() {}
 
   public ngOnInit() {}
 
   public ngAfterViewInit(): void {
+
       this.diagram = $(go.Diagram, "app-node-directory",
       {
         allowMove: false,

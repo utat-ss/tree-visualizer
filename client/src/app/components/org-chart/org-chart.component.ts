@@ -9,18 +9,24 @@ const $ = go.GraphObject.make
     styleUrls: ["./org-chart.component.sass"],
 })
 export class OrgChartComponent implements OnInit {
-    @Input() public model: go.TreeModel = new go.TreeModel()
+    public diagram: go.Diagram | null = null
+    public minimap: go.Overview | null = null
+    public nodeSize = new go.Size(256, 128)
+    public font = "sans-serif"
 
-    @Output() public nodeClicked = new EventEmitter()
+    @Input() 
+    public model: go.TreeModel = new go.TreeModel()
+
+    @Output() 
+    public nodeClicked = new EventEmitter()
 
     public showMap = true
 
-    private diagram: go.Diagram | null = null
-    private minimap: go.Overview | null = null
-    private nodeSize = new go.Size(256, 128)
-    private font = "sans-serif"
+    constructor() {}
 
-    public ngOnInit() {
+    public ngOnInit() {}
+
+    public ngAfterViewInit() {
         this.diagram = $(go.Diagram, "app-org-chart", {
             allowCopy: false,
             allowDelete: false,
