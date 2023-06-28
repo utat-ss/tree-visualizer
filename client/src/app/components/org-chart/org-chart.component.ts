@@ -17,8 +17,7 @@ export class OrgChartComponent implements OnInit {
 
     public _selectedNode2: go.Node | null = null;
     public node_found: go.Node | null = null;
-    public prev: string | null = null;
-    public prev_node: go.Node | null = null;
+    // public prev: string | null = null;
 
     @Input() 
     public model: go.TreeModel = new go.TreeModel()
@@ -33,7 +32,8 @@ export class OrgChartComponent implements OnInit {
 
         if (this.node_found != null) {
             // set the previous selected node to false
-            this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
+            // this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
+            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
             this.diagram.updateAllTargetBindings();
         }
         this.node_found = this.diagram.findNodeForKey(this._selectedNode2.data.id)
@@ -42,10 +42,11 @@ export class OrgChartComponent implements OnInit {
             console.log('Node found:')
             console.log(this.node_found.data)
 
-            console.log(this.node_found.data.qualifier)
-            this.prev = this.node_found.data.qualifier
-            this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', 'SELECTED')
-            console.log(this.node_found.data.qualifier)
+            console.log(this.node_found.data.isSelected)
+            // this.prev = this.node_found.data.qualifier
+            // this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', 'SELECTED')
+            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', 'true')
+            console.log(this.node_found.data.isSelected)
             this.diagram.updateAllTargetBindings();
         } else {
             // Node not found
@@ -56,7 +57,8 @@ export class OrgChartComponent implements OnInit {
         this._selectedNode2 = null;
         if (this.node_found != null) {
             // set the previous selected node to false
-            this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
+            // this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
+            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
             this.diagram.updateAllTargetBindings();
         }
         }
@@ -141,7 +143,16 @@ export class OrgChartComponent implements OnInit {
                     }
                 },
             },
-            $(go.Shape, "Rectangle", { name: "SHAPE", fill: "white", strokeWidth: 0 }),
+            $(go.Shape,
+                "Rectangle",
+                {
+                  name: "SHAPE",
+                  strokeWidth: 0,
+                },
+                new go.Binding("fill", "", function(data) {
+                  return data.isSelected ? "lightblue" : "white";
+                })
+              ),
             $(
                 go.Panel,
                 "Table",
