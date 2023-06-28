@@ -10,10 +10,9 @@ const $ = go.GraphObject.make
 })
 export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   public diagram: go.Diagram = new go.Diagram()
+  
   public _selectedNode: go.Node | null = null;
-  public newColor = "red";
-
-  public node_found: go.Node | null = null;
+  public node_found: go.Node | null = null; 
 
   @Input()
   public model: go.TreeModel = new go.TreeModel()
@@ -56,8 +55,8 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /*@Output()
-  public nodeClicked = new EventEmitter()*/
+  @Output()
+  public nodeClicked2 = new EventEmitter()
 
   constructor() {}
 
@@ -129,6 +128,13 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   this.diagram.linkTemplate = $(go.Link)
 
   this.diagram.model = this.model;
+
+  // when selection changes, emit event to update the selected node
+  this.diagram.addDiagramListener("ChangedSelection", (e) => {
+    const node = this.diagram?.selection.first()
+    console.log(this.model.toJson())
+    this.nodeClicked2.emit(node)
+  })
 
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use
   function imageConverter(prop: any, picture: any) {

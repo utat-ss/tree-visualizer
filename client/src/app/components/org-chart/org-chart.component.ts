@@ -9,13 +9,58 @@ const $ = go.GraphObject.make
     styleUrls: ["./org-chart.component.sass"],
 })
 export class OrgChartComponent implements OnInit {
-    public diagram: go.Diagram | null = null
+    // public diagram: go.Diagram | null = null
+    public diagram: go.Diagram = new go.Diagram()
     public minimap: go.Overview | null = null
     public nodeSize = new go.Size(256, 128)
     public font = "sans-serif"
 
+    public _selectedNode2: go.Node | null = null;
+    public node_found: go.Node | null = null;
+    public prev: string | null = null;
+    public prev_node: go.Node | null = null;
+
     @Input() 
     public model: go.TreeModel = new go.TreeModel()
+
+    @Input()
+    get selectedNode2() { return this._selectedNode2; }
+    set selectedNode2(node: go.Node | null) {
+        if (node != null) {
+        this._selectedNode2 = node;
+        console.log('Node clicked:')
+        console.log(this._selectedNode2.data)
+
+        if (this.node_found != null) {
+            // set the previous selected node to false
+            this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
+            this.diagram.updateAllTargetBindings();
+        }
+        this.node_found = this.diagram.findNodeForKey(this._selectedNode2.data.id)
+        console.log('Looking for node')
+        if (this.node_found !== null) {
+            console.log('Node found:')
+            console.log(this.node_found.data)
+
+            console.log(this.node_found.data.qualifier)
+            this.prev = this.node_found.data.qualifier
+            this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', 'SELECTED')
+            console.log(this.node_found.data.qualifier)
+            this.diagram.updateAllTargetBindings();
+        } else {
+            // Node not found
+            console.log("Node not found");
+        }
+
+        } else {
+        this._selectedNode2 = null;
+        if (this.node_found != null) {
+            // set the previous selected node to false
+            this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
+            this.diagram.updateAllTargetBindings();
+        }
+        }
+    }
 
     @Output() 
     public nodeClicked = new EventEmitter()
@@ -24,7 +69,10 @@ export class OrgChartComponent implements OnInit {
 
     constructor() {}
 
-    public ngOnInit() {}
+    public ngOnInit() {
+        console.log(this.selectedNode2)
+        console.log('hii')
+    }
 
     public ngAfterViewInit() {
         this.diagram = $(go.Diagram, "app-org-chart", {

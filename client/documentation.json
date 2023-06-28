@@ -132,20 +132,33 @@
                     "type": "go.TreeModel",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 14,
                     "modifierKind": [
                         123
                     ]
                 },
                 {
                     "name": "selectedNode",
-                    "defaultValue": "new go.Node",
+                    "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.Node",
+                    "type": "go.Node | null",
                     "optional": false,
                     "description": "",
                     "line": 11,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "selectedNode2",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Node | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
                     "modifierKind": [
                         123
                     ]
@@ -165,7 +178,38 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34,
+                    "line": 61,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "node",
+                            "type": "go.Node",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setSelectedNode2",
+                    "args": [
+                        {
+                            "name": "node",
+                            "type": "go.Node",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -477,7 +521,7 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 18,
                     "type": "go.TreeModel",
                     "decorators": []
                 },
@@ -485,22 +529,31 @@
                     "name": "selectedNode",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
-                    "type": "go.Node",
+                    "line": 21,
+                    "type": "any",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "nodeClicked2",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 59,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [
                 {
                     "name": "_selectedNode",
-                    "defaultValue": "new go.Node",
+                    "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.Node",
+                    "type": "go.Node | null",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 14,
                     "modifierKind": [
                         123
                     ]
@@ -517,6 +570,19 @@
                     "modifierKind": [
                         123
                     ]
+                },
+                {
+                    "name": "node_found",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Node | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "modifierKind": [
+                        123
+                    ]
                 }
             ],
             "methodsClass": [
@@ -526,7 +592,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 68,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -539,7 +605,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -569,10 +635,11 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 28
+                "line": 59
             },
             "implements": [
-                "OnInit"
+                "OnInit",
+                "AfterViewInit"
             ],
             "accessors": {
                 "selectedNode": {
@@ -585,17 +652,17 @@
                         "args": [
                             {
                                 "name": "node",
-                                "type": "go.Node",
+                                "type": "go.Node | null",
                                 "deprecated": false,
                                 "deprecationMessage": ""
                             }
                         ],
                         "returnType": "void",
-                        "line": 20,
+                        "line": 22,
                         "jsdoctags": [
                             {
                                 "name": "node",
-                                "type": "go.Node",
+                                "type": "go.Node | null",
                                 "deprecated": false,
                                 "deprecationMessage": "",
                                 "tagName": {
@@ -608,7 +675,7 @@
                         "name": "selectedNode",
                         "type": "",
                         "returnType": "",
-                        "line": 19
+                        "line": 21
                     }
                 }
             },
@@ -638,8 +705,16 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 23,
                     "type": "go.TreeModel",
+                    "decorators": []
+                },
+                {
+                    "name": "selectedNode2",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "any",
                     "decorators": []
                 }
             ],
@@ -649,20 +724,33 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 21,
+                    "line": 65,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
                 {
-                    "name": "diagram",
+                    "name": "_selectedNode2",
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.Diagram | null",
+                    "type": "go.Node | null",
                     "optional": false,
                     "description": "",
-                    "line": 12,
+                    "line": 18,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "diagram",
+                    "defaultValue": "new go.Diagram()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Diagram",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
                     "modifierKind": [
                         123
                     ]
@@ -675,7 +763,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 16,
                     "modifierKind": [
                         123
                     ]
@@ -688,7 +776,20 @@
                     "type": "go.Overview | null",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 14,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "node_found",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Node | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
                     "modifierKind": [
                         123
                     ]
@@ -701,7 +802,20 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 14,
+                    "line": 15,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "prev",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
                     "modifierKind": [
                         123
                     ]
@@ -714,7 +828,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 23,
+                    "line": 67,
                     "modifierKind": [
                         123
                     ]
@@ -727,7 +841,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 29,
+                    "line": 76,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -740,7 +854,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 71,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -770,7 +884,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 23
+                "line": 67
             },
             "implements": [
                 "OnInit"
@@ -807,9 +921,6 @@
                         },
                         {
                             "name": "OrgChartComponent"
-                        },
-                        {
-                            "name": "TestComponent"
                         }
                     ]
                 },
@@ -878,16 +989,6 @@
     ],
     "miscellaneous": {
         "variables": [
-            {
-                "name": "$",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/diagram/diagram.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "go.GraphObject.make"
-            },
             {
                 "name": "$",
                 "ctype": "miscellaneous",
@@ -966,7 +1067,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "go.TreeModel",
-                "defaultValue": "new go.TreeModel(\n    [\n      { 'key': 1, 'name': 'Stella Payne Diaz', 'title': 'CEO' },\n      { 'key': 2, 'name': 'Luke Warm', 'title': 'VP Marketing/Sales', 'parent': 1 },\n      { 'key': 3, 'name': 'Meg Meehan Hoffa', 'title': 'Sales', 'parent': 2 },\n      { 'key': 4, 'name': 'Peggy Flaming', 'title': 'VP Engineering', 'parent': 1 },\n      { 'key': 5, 'name': 'Saul Wellingood', 'title': 'Manufacturing', 'parent': 4 },\n      { 'key': 6, 'name': 'Al Ligori', 'title': 'Marketing', 'parent': 2 },\n      { 'key': 7, 'name': 'Dot Stubadd', 'title': 'Sales Rep', 'parent': 3 },\n      { 'key': 8, 'name': 'Les Ismore', 'title': 'Project Mgr', 'parent': 5 },\n      { 'key': 9, 'name': 'April Lynn Parris', 'title': 'Events Mgr', 'parent': 6 },\n      { 'key': 10, 'name': 'Xavier Breath', 'title': 'Engineering', 'parent': 4 },\n      { 'key': 11, 'name': 'Anita Hammer', 'title': 'Process', 'parent': 5 },\n      { 'key': 12, 'name': 'Billy Aiken', 'title': 'Software', 'parent': 10 },\n      { 'key': 13, 'name': 'Stan Wellback', 'title': 'Testing', 'parent': 10 },\n      { 'key': 14, 'name': 'Marge Innovera', 'title': 'Hardware', 'parent': 10 },\n      { 'key': 15, 'name': 'Evan Elpus', 'title': 'Quality', 'parent': 5 },\n      { 'key': 16, 'name': 'Lotta B. Essen', 'title': 'Sales Rep', 'parent': 3 }\n    ]\n  )"
+                "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            qualifier: \"SHALL\",\n            type: \"Performance\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n            color: \"red\"\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            qualifier: \"SHOULD\",\n            type: \"Constraint\",\n            description: \"Another description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n            color: \"red\"\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            qualifier: \"SHALL\",\n            type: \"Component Selection\",\n            description:\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n            color: \"red\"\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            qualifier: \"SHOULD\",\n            type: \"A type\",\n            description: \"Yet another description that is just a little bit longer\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n            color: \"red\"\n        },\n    ],\n  })"
             },
             {
                 "name": "model",
@@ -1033,18 +1134,6 @@
         "typealiases": [],
         "enumerations": [],
         "groupedVariables": {
-            "src/app/components/diagram/diagram.component.ts": [
-                {
-                    "name": "$",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/diagram/diagram.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "go.GraphObject.make"
-                }
-            ],
             "src/app/components/node-directory/node-directory.component.ts": [
                 {
                     "name": "$",
@@ -1120,7 +1209,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "go.TreeModel",
-                    "defaultValue": "new go.TreeModel(\n    [\n      { 'key': 1, 'name': 'Stella Payne Diaz', 'title': 'CEO' },\n      { 'key': 2, 'name': 'Luke Warm', 'title': 'VP Marketing/Sales', 'parent': 1 },\n      { 'key': 3, 'name': 'Meg Meehan Hoffa', 'title': 'Sales', 'parent': 2 },\n      { 'key': 4, 'name': 'Peggy Flaming', 'title': 'VP Engineering', 'parent': 1 },\n      { 'key': 5, 'name': 'Saul Wellingood', 'title': 'Manufacturing', 'parent': 4 },\n      { 'key': 6, 'name': 'Al Ligori', 'title': 'Marketing', 'parent': 2 },\n      { 'key': 7, 'name': 'Dot Stubadd', 'title': 'Sales Rep', 'parent': 3 },\n      { 'key': 8, 'name': 'Les Ismore', 'title': 'Project Mgr', 'parent': 5 },\n      { 'key': 9, 'name': 'April Lynn Parris', 'title': 'Events Mgr', 'parent': 6 },\n      { 'key': 10, 'name': 'Xavier Breath', 'title': 'Engineering', 'parent': 4 },\n      { 'key': 11, 'name': 'Anita Hammer', 'title': 'Process', 'parent': 5 },\n      { 'key': 12, 'name': 'Billy Aiken', 'title': 'Software', 'parent': 10 },\n      { 'key': 13, 'name': 'Stan Wellback', 'title': 'Testing', 'parent': 10 },\n      { 'key': 14, 'name': 'Marge Innovera', 'title': 'Hardware', 'parent': 10 },\n      { 'key': 15, 'name': 'Evan Elpus', 'title': 'Quality', 'parent': 5 },\n      { 'key': 16, 'name': 'Lotta B. Essen', 'title': 'Sales Rep', 'parent': 3 }\n    ]\n  )"
+                    "defaultValue": "new go.TreeModel({\n    nodeKeyProperty: \"id\",\n    nodeDataArray: [\n        {\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            parent: \"\",\n            title: \"UTAT-Team-A\",\n            qualifier: \"SHALL\",\n            type: \"Performance\",\n            description: \"A description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n            color: \"red\"\n        },\n        {\n            id: \"123456789\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-B\",\n            qualifier: \"SHOULD\",\n            type: \"Constraint\",\n            description: \"Another description\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-1-123456789\",\n            color: \"red\"\n        },\n        {\n            id: \"abcdefghi\",\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n            title: \"UTAT-Team-C\",\n            qualifier: \"SHALL\",\n            type: \"Component Selection\",\n            description:\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\n            color: \"red\"\n        },\n        {\n            id: \"qwertyuiop\",\n            parent: \"123456789\",\n            title: \"UTAT-Team-D\",\n            qualifier: \"SHOULD\",\n            type: \"A type\",\n            description: \"Yet another description that is just a little bit longer\",\n            rationale: \"A rationale\",\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n            color: \"red\"\n        },\n    ],\n  })"
                 },
                 {
                     "name": "Template",
@@ -1256,15 +1345,6 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/diagram/diagram.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "DiagramComponent",
-                "coveragePercent": 0,
                 "coverageCount": "0/6",
                 "status": "low"
             },
@@ -1353,7 +1433,7 @@
                 "linktype": "component",
                 "name": "NodeDirectoryComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -1402,7 +1482,7 @@
                 "linktype": "component",
                 "name": "OrgChartComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {
@@ -1413,15 +1493,6 @@
                 "name": "$",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/test/test.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "TestComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/7",
                 "status": "low"
             },
             {

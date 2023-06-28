@@ -27,7 +27,12 @@ export class AppComponent {
 
   public setSelectedNode(node: go.Node) {
     this.selectedNode = node;
-    // console.log(this.selectedNode)
+    console.log(this.selectedNode)
+  }
+
+  public setSelectedNode2(node: go.Node) {
+    this.selectedNode2 = node;
+    console.log(this.selectedNode2)
   }
 
 }
