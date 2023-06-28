@@ -36,6 +36,7 @@ const model: go.TreeModel = new go.TreeModel({
             description: "A description",
             rationale: "A rationale",
             url: "https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759",
+            color: "red"
         },
         {
             id: "123456789",
@@ -46,6 +47,7 @@ const model: go.TreeModel = new go.TreeModel({
             description: "Another description",
             rationale: "A rationale",
             url: "https://www.notion.so/Child-1-123456789",
+            color: "red"
         },
         {
             id: "abcdefghi",
@@ -57,6 +59,7 @@ const model: go.TreeModel = new go.TreeModel({
                 "A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.",
             rationale: "A rationale",
             url: "https://www.notion.so/Child-2-abcdefghi",
+            color: "red"
         },
         {
             id: "qwertyuiop",
@@ -67,6 +70,7 @@ const model: go.TreeModel = new go.TreeModel({
             description: "Yet another description that is just a little bit longer",
             rationale: "A rationale",
             url: "https://www.notion.so/Grandchild-1-qwertyuiop",
+            color: "red"
         },
     ],
   });

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
 import * as go from "gojs"
 
 const $ = go.GraphObject.make
@@ -8,7 +8,7 @@ const $ = go.GraphObject.make
   templateUrl: './node-directory.component.html',
   styleUrls: ['./node-directory.component.sass']
 })
-export class NodeDirectoryComponent implements OnInit {
+export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   public diagram: go.Diagram = new go.Diagram()
   public _selectedNode: go.Node | null = null;
   public newColor = "red";
@@ -25,29 +25,34 @@ export class NodeDirectoryComponent implements OnInit {
       this._selectedNode = node;
       console.log('Node clicked:')
       console.log(this._selectedNode.data.title)
-      this.diagram.startTransaction("changeColor");
-      this.diagram.model.setDataProperty(this._selectedNode.data, "background", this.newColor);
-      this.diagram.updateAllTargetBindings();
-      this.diagram.commitTransaction("changeColor");
 
+      if (this.node_found != null) {
+        // set the previous selected node to false
+        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
+        this.diagram.updateAllTargetBindings();
+      }
       this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
       console.log('Looking for node')
       if (this.node_found !== null) {
-        // Node found, you can access and manipulate it here
-        // For example, you can change its color
         console.log('Node found:')
-        console.log(this.node_found.data.title)
-        this.node_found.data.fill = "red";
-        this.diagram.startTransaction('changeColor')
-        this.node_found.data.ButtonBorder = "red";
-        this.diagram.model.setDataProperty(this.node_found.data, 'color', 'red')
-        this.diagram.commitTransaction('changeColor')
+        console.log(this.node_found.data)
+
+        console.log(this.node_found.data.isSelected)
+        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', true)
+        console.log(this.node_found.data.isSelected)
+        this.diagram.updateAllTargetBindings();
       } else {
         // Node not found
         console.log("Node not found");
       }
+
     } else {
       this._selectedNode = null;
+      if (this.node_found != null) {
+        // set the previous selected node to false
+        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
+        this.diagram.updateAllTargetBindings();
+      }
     }
   }
 
@@ -56,12 +61,12 @@ export class NodeDirectoryComponent implements OnInit {
 
   constructor() {}
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    console.log(this.selectedNode)
+    console.log('hii')
+  }
 
-  public ngAfterViewInit(): void {
-
-      console.log(this.selectedNode)
-      console.log('hii')
+  public ngAfterViewInit() {
 
       this.diagram = $(go.Diagram, "app-node-directory",
       {
@@ -101,7 +106,10 @@ export class NodeDirectoryComponent implements OnInit {
         }),
       $(go.Panel, "Horizontal",
         { position: new go.Point(18, 0) },
-        new go.Binding("background", "isSelected", s => s ? "lightblue" : "white").ofObject(),
+        //new go.Binding("background", "isSelected", s => s ? "lightblue" : "white").ofObject(),
+        new go.Binding("background", "", function(data) {
+          return data.isSelected ? "lightblue" : "white";
+        }),
         $(go.Picture,
           {
             width: 18, height: 18,
