@@ -10,12 +10,45 @@ const $ = go.GraphObject.make
 })
 export class NodeDirectoryComponent implements OnInit {
   public diagram: go.Diagram = new go.Diagram()
+  public _selectedNode: go.Node | null = null;
+  public newColor = "red";
+
+  public node_found: go.Node | null = null;
 
   @Input()
   public model: go.TreeModel = new go.TreeModel()
 
   @Input()
-  public selectedNode: any
+  get selectedNode() { return this._selectedNode; }
+  set selectedNode(node: go.Node | null) {
+    if (node && node != null) {
+      this._selectedNode = node;
+      console.log('Node clicked:')
+      console.log(this._selectedNode.data.title)
+      this.diagram.startTransaction("changeColor");
+      this.diagram.model.setDataProperty(this._selectedNode.data, "background", this.newColor);
+      this.diagram.commitTransaction("changeColor");
+
+      this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
+      console.log('Looking for node')
+      if (this.node_found !== null) {
+        // Node found, you can access and manipulate it here
+        // For example, you can change its color
+        console.log('Node found:')
+        console.log(this.node_found.data.title)
+        this.node_found.data.fill = "red";
+        this.diagram.startTransaction('changeColor')
+        this.node_found.data.ButtonBorder = "red";
+        this.diagram.model.setDataProperty(this.node_found.data, 'color', 'red')
+        this.diagram.commitTransaction('changeColor')
+      } else {
+        // Node not found
+        console.log("Node not found");
+      }
+    } else {
+      this._selectedNode = null;
+    }
+  }
 
   /*@Output()
   public nodeClicked = new EventEmitter()*/
@@ -25,6 +58,9 @@ export class NodeDirectoryComponent implements OnInit {
   public ngOnInit() {}
 
   public ngAfterViewInit(): void {
+
+      console.log(this.selectedNode)
+      console.log('hii')
 
       this.diagram = $(go.Diagram, "app-node-directory",
       {
@@ -98,7 +134,7 @@ export class NodeDirectoryComponent implements OnInit {
       }
     }
   }
-  window.addEventListener('DOMContentLoaded', this.ngOnInit);
+  window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);
   }
 
 }

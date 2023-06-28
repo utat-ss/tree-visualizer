@@ -27,6 +27,7 @@ export class AppComponent {
 
   public setSelectedNode(node: go.Node) {
     this.selectedNode = node;
+    // console.log(this.selectedNode)
   }
 
 }

@@ -477,7 +477,7 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 16,
                     "type": "go.TreeModel",
                     "decorators": []
                 },
@@ -485,13 +485,26 @@
                     "name": "selectedNode",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
-                    "type": "any",
+                    "line": 19,
+                    "type": "go.Node",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "_selectedNode",
+                    "defaultValue": "new go.Node",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Node",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "modifierKind": [
+                        123
+                    ]
+                },
                 {
                     "name": "diagram",
                     "defaultValue": "new go.Diagram()",
@@ -513,7 +526,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 37,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -526,7 +539,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 25,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -556,12 +569,50 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 18
+                "line": 28
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div id=\"app-node-directory\"> {{ selectedNode }} </div>"
+            "accessors": {
+                "selectedNode": {
+                    "name": "selectedNode",
+                    "setSignature": {
+                        "name": "selectedNode",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "node",
+                                "type": "go.Node",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 20,
+                        "jsdoctags": [
+                            {
+                                "name": "node",
+                                "type": "go.Node",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "selectedNode",
+                        "type": "",
+                        "returnType": "",
+                        "line": 19
+                    }
+                }
+            },
+            "templateData": "<div id=\"app-node-directory\"></div>\n{{ selectedNode }}"
         },
         {
             "name": "OrgChartComponent",
@@ -630,6 +681,19 @@
                     ]
                 },
                 {
+                    "name": "minimap",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Overview | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
                     "name": "nodeSize",
                     "defaultValue": "new go.Size(256, 128)",
                     "deprecated": false,
@@ -638,6 +702,19 @@
                     "optional": false,
                     "description": "",
                     "line": 14,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "showMap",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
                     "modifierKind": [
                         123
                     ]
@@ -650,7 +727,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 182,
+                    "line": 29,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -693,7 +770,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 21
+                "line": 23
             },
             "implements": [
                 "OnInit"
@@ -1276,7 +1353,7 @@
                 "linktype": "component",
                 "name": "NodeDirectoryComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {
@@ -1325,7 +1402,7 @@
                 "linktype": "component",
                 "name": "OrgChartComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/11",
                 "status": "low"
             },
             {

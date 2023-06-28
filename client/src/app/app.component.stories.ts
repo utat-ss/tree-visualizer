@@ -24,26 +24,52 @@ const Template: Story = (args) => ({
     props: args,
 })
 
-const model: go.TreeModel = new go.TreeModel(
-    [
-      { 'key': 1, 'name': 'Stella Payne Diaz', 'title': 'CEO' },
-      { 'key': 2, 'name': 'Luke Warm', 'title': 'VP Marketing/Sales', 'parent': 1 },
-      { 'key': 3, 'name': 'Meg Meehan Hoffa', 'title': 'Sales', 'parent': 2 },
-      { 'key': 4, 'name': 'Peggy Flaming', 'title': 'VP Engineering', 'parent': 1 },
-      { 'key': 5, 'name': 'Saul Wellingood', 'title': 'Manufacturing', 'parent': 4 },
-      { 'key': 6, 'name': 'Al Ligori', 'title': 'Marketing', 'parent': 2 },
-      { 'key': 7, 'name': 'Dot Stubadd', 'title': 'Sales Rep', 'parent': 3 },
-      { 'key': 8, 'name': 'Les Ismore', 'title': 'Project Mgr', 'parent': 5 },
-      { 'key': 9, 'name': 'April Lynn Parris', 'title': 'Events Mgr', 'parent': 6 },
-      { 'key': 10, 'name': 'Xavier Breath', 'title': 'Engineering', 'parent': 4 },
-      { 'key': 11, 'name': 'Anita Hammer', 'title': 'Process', 'parent': 5 },
-      { 'key': 12, 'name': 'Billy Aiken', 'title': 'Software', 'parent': 10 },
-      { 'key': 13, 'name': 'Stan Wellback', 'title': 'Testing', 'parent': 10 },
-      { 'key': 14, 'name': 'Marge Innovera', 'title': 'Hardware', 'parent': 10 },
-      { 'key': 15, 'name': 'Evan Elpus', 'title': 'Quality', 'parent': 5 },
-      { 'key': 16, 'name': 'Lotta B. Essen', 'title': 'Sales Rep', 'parent': 3 }
-    ]
-  );
+const model: go.TreeModel = new go.TreeModel({
+    nodeKeyProperty: "id",
+    nodeDataArray: [
+        {
+            id: "ff5892a7-b5c9-4a25-97bd-663b2cff5bd7",
+            parent: "",
+            title: "UTAT-Team-A",
+            qualifier: "SHALL",
+            type: "Performance",
+            description: "A description",
+            rationale: "A rationale",
+            url: "https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759",
+        },
+        {
+            id: "123456789",
+            parent: "ff5892a7-b5c9-4a25-97bd-663b2cff5bd7",
+            title: "UTAT-Team-B",
+            qualifier: "SHOULD",
+            type: "Constraint",
+            description: "Another description",
+            rationale: "A rationale",
+            url: "https://www.notion.so/Child-1-123456789",
+        },
+        {
+            id: "abcdefghi",
+            parent: "ff5892a7-b5c9-4a25-97bd-663b2cff5bd7",
+            title: "UTAT-Team-C",
+            qualifier: "SHALL",
+            type: "Component Selection",
+            description:
+                "A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.",
+            rationale: "A rationale",
+            url: "https://www.notion.so/Child-2-abcdefghi",
+        },
+        {
+            id: "qwertyuiop",
+            parent: "123456789",
+            title: "UTAT-Team-D",
+            qualifier: "SHOULD",
+            type: "A type",
+            description: "Yet another description that is just a little bit longer",
+            rationale: "A rationale",
+            url: "https://www.notion.so/Grandchild-1-qwertyuiop",
+        },
+    ],
+  });
   
   export const Default = Template.bind({})
   Default.args = {

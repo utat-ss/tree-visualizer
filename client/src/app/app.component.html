@@ -2,3 +2,5 @@
 
 <app-org-chart [model]="model" (nodeClicked)="setSelectedNode($event)"></app-org-chart>
 <app-inspector [selectedNode]="selectedNode"></app-inspector>
+<app-node-directory [model]="model" [selectedNode]="selectedNode"></app-node-directory>
+{{ selectedNode }}
