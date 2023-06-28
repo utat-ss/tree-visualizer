@@ -1,6 +1,9 @@
 <h1 id="title">TreeVisualizer</h1>
 
-<app-org-chart [model]="model" (nodeClicked)="setSelectedNode($event)"></app-org-chart>
-<app-inspector [selectedNode]="selectedNode"></app-inspector>
-<app-node-directory [model]="model" [selectedNode]="selectedNode"></app-node-directory>
+<div style="display: flex; flex-grow: grow">
+    <app-node-directory [model]="model" [selectedNode]="selectedNode"></app-node-directory>
+    <app-org-chart [model]="model" (nodeClicked)="setSelectedNode($event)"></app-org-chart>
+    <app-inspector [selectedNode]="selectedNode"></app-inspector>
+
+</div>
 {{ selectedNode }}

@@ -21,12 +21,13 @@ export class NodeDirectoryComponent implements OnInit {
   @Input()
   get selectedNode() { return this._selectedNode; }
   set selectedNode(node: go.Node | null) {
-    if (node && node != null) {
+    if (node != null) {
       this._selectedNode = node;
       console.log('Node clicked:')
       console.log(this._selectedNode.data.title)
       this.diagram.startTransaction("changeColor");
       this.diagram.model.setDataProperty(this._selectedNode.data, "background", this.newColor);
+      this.diagram.updateAllTargetBindings();
       this.diagram.commitTransaction("changeColor");
 
       this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
