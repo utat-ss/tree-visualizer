@@ -56,7 +56,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   }
 
   @Output()
-  public nodeClicked2 = new EventEmitter()
+  public nodeClicked = new EventEmitter()
 
   constructor() {}
 
@@ -132,7 +132,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   this.diagram.addDiagramListener("ChangedSelection", (e) => {
     const node = this.diagram?.selection.first()
     console.log(this.model.toJson())
-    this.nodeClicked2.emit(node)
+    this.nodeClicked.emit(node)
   })
 
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use

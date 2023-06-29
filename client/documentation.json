@@ -679,7 +679,7 @@
                     }
                 }
             },
-            "templateData": "<div id=\"app-node-directory\"></div>\n{{ selectedNode }}"
+            "templateData": "<div id=\"app-node-directory\"></div>"
         },
         {
             "name": "OrgChartComponent",
@@ -705,7 +705,7 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
+                    "line": 21,
                     "type": "go.TreeModel",
                     "decorators": []
                 },
@@ -713,7 +713,7 @@
                     "name": "selectedNode2",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 24,
                     "type": "any",
                     "decorators": []
                 }
@@ -724,7 +724,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 68,
+                    "line": 62,
                     "type": "EventEmitter"
                 }
             ],
@@ -737,7 +737,7 @@
                     "type": "go.Node | null",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 17,
                     "modifierKind": [
                         123
                     ]
@@ -750,7 +750,7 @@
                     "type": "go.Diagram",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 12,
                     "modifierKind": [
                         123
                     ]
@@ -763,7 +763,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 15,
                     "modifierKind": [
                         123
                     ]
@@ -776,7 +776,7 @@
                     "type": "go.Overview | null",
                     "optional": false,
                     "description": "",
-                    "line": 14,
+                    "line": 13,
                     "modifierKind": [
                         123
                     ]
@@ -789,7 +789,7 @@
                     "type": "go.Node | null",
                     "optional": false,
                     "description": "",
-                    "line": 19,
+                    "line": 18,
                     "modifierKind": [
                         123
                     ]
@@ -802,7 +802,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 14,
                     "modifierKind": [
                         123
                     ]
@@ -815,7 +815,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 70,
+                    "line": 64,
                     "modifierKind": [
                         123
                     ]
@@ -828,7 +828,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 73,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -841,7 +841,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 74,
+                    "line": 68,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -871,7 +871,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 70
+                "line": 64
             },
             "implements": [
                 "OnInit"

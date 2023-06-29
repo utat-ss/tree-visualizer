@@ -30,9 +30,4 @@ export class AppComponent {
     console.log(this.selectedNode)
   }
 
-  public setSelectedNode2(node: go.Node) {
-    this.selectedNode2 = node;
-    console.log(this.selectedNode2)
-  }
-
 }

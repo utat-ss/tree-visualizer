@@ -14,26 +14,26 @@ export class OrgChartComponent implements OnInit {
     public nodeSize = new go.Size(256, 128)
     public font = "sans-serif"
 
-    public _selectedNode2: go.Node | null = null;
+    public _selectedNode: go.Node | null = null;
     public node_found: go.Node | null = null;
 
     @Input() 
     public model: go.TreeModel = new go.TreeModel()
 
     @Input()
-    get selectedNode2() { return this._selectedNode2; }
-    set selectedNode2(node: go.Node | null) {
+    get selectedNode() { return this._selectedNode; }
+    set selectedNode(node: go.Node | null) {
         if (node != null) {
-        this._selectedNode2 = node;
+        this._selectedNode = node;
         console.log('Node clicked:')
-        console.log(this._selectedNode2.data)
+        console.log(this._selectedNode.data)
 
         if (this.node_found != null) {
             // set the previous selected node to false
             this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
             this.diagram.updateAllTargetBindings();
         }
-        this.node_found = this.diagram.findNodeForKey(this._selectedNode2.data.id)
+        this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
         console.log('Looking for node')
         if (this.node_found !== null) {
             console.log('Node found:')
@@ -49,7 +49,7 @@ export class OrgChartComponent implements OnInit {
         }
 
         } else {
-        this._selectedNode2 = null;
+        this._selectedNode = null;
         if (this.node_found != null) {
             // set the previous selected node to false
             this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
@@ -66,8 +66,8 @@ export class OrgChartComponent implements OnInit {
     constructor() {}
 
     public ngOnInit() {
-        console.log(this.selectedNode2)
-        console.log('hii')
+        console.log(this.selectedNode)
+        console.log('ngOnInig')
     }
 
     public ngAfterViewInit() {
