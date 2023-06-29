@@ -11,7 +11,7 @@ import { BackendService } from "./services/backend.service";
 export class AppComponent {
     title = "tree-visualizer";
 
-    public selectedNode: go.Part | null = null;
+    public selectedNode: go.Node | null = null;
     model = new go.TreeModel({
         nodeKeyProperty: "id",
         nodeDataArray: [],
