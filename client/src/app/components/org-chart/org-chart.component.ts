@@ -9,7 +9,6 @@ const $ = go.GraphObject.make
     styleUrls: ["./org-chart.component.sass"],
 })
 export class OrgChartComponent implements OnInit {
-    // public diagram: go.Diagram | null = null
     public diagram: go.Diagram = new go.Diagram()
     public minimap: go.Overview | null = null
     public nodeSize = new go.Size(256, 128)
@@ -17,7 +16,6 @@ export class OrgChartComponent implements OnInit {
 
     public _selectedNode2: go.Node | null = null;
     public node_found: go.Node | null = null;
-    // public prev: string | null = null;
 
     @Input() 
     public model: go.TreeModel = new go.TreeModel()
@@ -32,7 +30,6 @@ export class OrgChartComponent implements OnInit {
 
         if (this.node_found != null) {
             // set the previous selected node to false
-            // this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
             this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
             this.diagram.updateAllTargetBindings();
         }
@@ -43,8 +40,6 @@ export class OrgChartComponent implements OnInit {
             console.log(this.node_found.data)
 
             console.log(this.node_found.data.isSelected)
-            // this.prev = this.node_found.data.qualifier
-            // this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', 'SELECTED')
             this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', 'true')
             console.log(this.node_found.data.isSelected)
             this.diagram.updateAllTargetBindings();
@@ -57,7 +52,6 @@ export class OrgChartComponent implements OnInit {
         this._selectedNode2 = null;
         if (this.node_found != null) {
             // set the previous selected node to false
-            // this.diagram.model.setDataProperty(this.node_found.data, 'qualifier', this.prev)
             this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
             this.diagram.updateAllTargetBindings();
         }

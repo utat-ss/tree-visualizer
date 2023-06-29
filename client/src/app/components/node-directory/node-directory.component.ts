@@ -62,7 +62,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
 
   public ngOnInit() {
     console.log(this.selectedNode)
-    console.log('hii')
+    console.log('ngOnInit')
   }
 
   public ngAfterViewInit() {
@@ -105,7 +105,6 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         }),
       $(go.Panel, "Horizontal",
         { position: new go.Point(18, 0) },
-        //new go.Binding("background", "isSelected", s => s ? "lightblue" : "white").ofObject(),
         new go.Binding("background", "", function(data) {
           return data.isSelected ? "lightblue" : "white";
         }),

@@ -724,7 +724,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 65,
+                    "line": 68,
                     "type": "EventEmitter"
                 }
             ],
@@ -808,19 +808,6 @@
                     ]
                 },
                 {
-                    "name": "prev",
-                    "defaultValue": "null",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string | null",
-                    "optional": false,
-                    "description": "",
-                    "line": 20,
-                    "modifierKind": [
-                        123
-                    ]
-                },
-                {
                     "name": "showMap",
                     "defaultValue": "true",
                     "deprecated": false,
@@ -828,7 +815,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 67,
+                    "line": 70,
                     "modifierKind": [
                         123
                     ]
@@ -841,7 +828,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 76,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -854,7 +841,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 71,
+                    "line": 74,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -884,7 +871,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 67
+                "line": 70
             },
             "implements": [
                 "OnInit"
@@ -1482,7 +1469,7 @@
                 "linktype": "component",
                 "name": "OrgChartComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/15",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
