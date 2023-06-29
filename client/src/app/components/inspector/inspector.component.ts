@@ -10,7 +10,7 @@ export class InspectorComponent implements OnChanges {
     @Input() public selectedNode: go.Part | null = null;
 
     read_only = true;
-    qualifiers = ['SHALL', 'SHOULD'];
+    qualifiers = ['SHALL', 'SHOULD', 'WILL'];
 
     requirement: string = 'FINCH-TreeVisualizer-Placeholder';
     created_by: string = 'John Doe';
