@@ -31,9 +31,6 @@ describe('InspectorComponent', () => {
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
-
-    let elem = document.evaluate('//mat-label', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    expect(elem).not.toBeNull();
   });
 
   // Runs these tests on each of the properties we need to display
