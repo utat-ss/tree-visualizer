@@ -1,6 +1,7 @@
 import { Meta, moduleMetadata, Story } from "@storybook/angular"
 import { AppComponent } from "./app.component"
 import { CommonModule } from "@angular/common"
+import { HttpClientModule } from "@angular/common/http"
 import { action } from "@storybook/addon-actions"
 import * as go from "gojs"
 
@@ -15,7 +16,7 @@ export default {
     decorators: [
         moduleMetadata({
             declarations: [NodeDirectoryComponent, OrgChartComponent],
-            imports: [CommonModule],
+            imports: [CommonModule, HttpClientModule],
         }),
     ],
 } as Meta
@@ -70,7 +71,7 @@ const model: go.TreeModel = new go.TreeModel({
         },
     ],
   });
-  
+
   export const Default = Template.bind({})
   Default.args = {
       model,
