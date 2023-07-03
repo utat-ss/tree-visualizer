@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, Input } from "@angular/core"
 import * as go from "gojs"
 import { Requirements } from "./interfaces/requirements"
 import { BackendService } from "./services/backend.service";
@@ -11,7 +11,10 @@ import { BackendService } from "./services/backend.service";
 export class AppComponent {
     title = "tree-visualizer";
 
+    @Input()
     public selectedNode: go.Node | null = null;
+
+    @Input()
     model = new go.TreeModel({
         nodeKeyProperty: "id",
         nodeDataArray: [],

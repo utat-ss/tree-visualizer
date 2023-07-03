@@ -93,7 +93,23 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
 
     // define the Node template
     this.diagram.nodeTemplate =
-      $(go.Node, 
+      $(go.Node, {
+        selectionAdorned: false,
+      },
+      $(go.Shape, "Rectangle",
+        {
+          fill: null,
+          strokeWidth: 2,
+        },
+        new go.Binding("stroke", "", function(data) {
+          return data.isSelected ? "dodgerblue" : null;
+        },
+      ),
+        new go.Binding("fill", "", function(data) {
+          return data.isSelected ? "lightblue" : "white";
+        },
+        ),
+      ),
       $("TreeExpanderButton",
         { // customize the button's appearance
           "_treeExpandedFigure": "LineDown",
@@ -105,9 +121,6 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         }),
       $(go.Panel, "Horizontal",
         { position: new go.Point(18, 0) },
-        new go.Binding("background", "", function(data) {
-          return data.isSelected ? "lightblue" : "white";
-        }),
         $(go.Picture,
           {
             width: 18, height: 18,
@@ -121,7 +134,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         $(go.TextBlock,
           { font: '9pt Verdana, sans-serif' },
           new go.Binding("text", "title", s => "" + s))
-      )  // end Horizontal Panel
+      ),  // end Horizontal Panel
     );  // end Node
 
   this.diagram.linkTemplate = $(go.Link)

@@ -93,6 +93,7 @@ export class OrgChartComponent implements OnInit {
             go.Node,
             "Auto",
             {
+                selectionAdorned: false,
                 desiredSize: this.nodeSize,
                 isShadowed: true,
                 shadowOffset: new go.Point(2, 2),
@@ -141,11 +142,14 @@ export class OrgChartComponent implements OnInit {
                 "Rectangle",
                 {
                   name: "SHAPE",
-                  strokeWidth: 0,
+                  strokeWidth: 2,
                 },
                 new go.Binding("fill", "", function(data) {
                   return data.isSelected ? "lightblue" : "white";
-                })
+                }),
+                new go.Binding("stroke", "", function(data) {
+                    return data.isSelected ? "dodgerblue" : null;
+                  })
               ),
             $(
                 go.Panel,
