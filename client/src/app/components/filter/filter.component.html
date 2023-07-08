@@ -1,0 +1,23 @@
+<div id="container">
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Filter for</mat-label>
+        <input matInput [(ngModel)]="selectedFilter" (input)="filterValidFilters()" (change)="setValidValues()" [matAutocomplete]="filterAutocomplete">
+        <mat-autocomplete #filterAutocomplete (optionSelected)="setValidValues()">
+            <mat-option *ngFor="let f of filteredValidFilters" [value]="f">
+                {{ f |titlecase }}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Matching</mat-label>
+        <input matInput [(ngModel)]="selectedValue" (input)="filterValidValues()" [matAutocomplete]="valueAutocomplete">
+        <mat-autocomplete #valueAutocomplete>
+            <mat-option *ngFor="let v of filteredValidValues" [value]="v">
+                {{ v }}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+</div>
