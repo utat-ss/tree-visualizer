@@ -5,8 +5,13 @@ import { HttpClientModule } from "@angular/common/http"
 import { action } from "@storybook/addon-actions"
 import * as go from "gojs"
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
 import { NodeDirectoryComponent } from "./components/node-directory/node-directory.component"
 import { OrgChartComponent } from "./components/org-chart/org-chart.component"
+import { InspectorComponent } from "./components/inspector/inspector.component"
 
 export default {
     component: AppComponent,
@@ -15,8 +20,8 @@ export default {
     },
     decorators: [
         moduleMetadata({
-            declarations: [NodeDirectoryComponent, OrgChartComponent],
-            imports: [CommonModule, HttpClientModule],
+            declarations: [NodeDirectoryComponent, OrgChartComponent, InspectorComponent],
+            imports: [CommonModule, HttpClientModule, MatFormFieldModule, MatInputModule, MatSelectModule],
         }),
     ],
 } as Meta

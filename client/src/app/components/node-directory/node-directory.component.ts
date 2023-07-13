@@ -75,7 +75,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         allowHorizontalScroll: true,
         allowVerticalScroll: true,
         contentAlignment: go.Spot.TopLeft,
-        padding: new go.Margin(75, 0, 0, 0),
+        padding: new go.Margin(100, 0, 0, 0),
         layout:
           $(go.TreeLayout,
             {
@@ -100,6 +100,8 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         {
           fill: null,
           strokeWidth: 2,
+          width: 300,
+          height: 17,
         },
         new go.Binding("stroke", "", function(data) {
           return data.isSelected ? "dodgerblue" : null;

@@ -25,4 +25,4 @@ Readonly.args = {
 export const Editable = Template.bind({})
 Editable.args = {
     read_only: false,
-};
+}; 
