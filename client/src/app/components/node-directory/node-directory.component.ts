@@ -36,6 +36,22 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         console.log('Node found:')
         console.log(this.node_found.data)
 
+        const panToSelectedNode = (node_found: go.Node | null) => {
+          if (node_found !== null) {
+            var nodeBounds = node_found.actualBounds;
+            var viewportBounds = this.diagram.viewportBounds;
+
+            if (!viewportBounds.containsRect(nodeBounds)) {
+              var offsetY = (viewportBounds.height - nodeBounds.height) / 2;
+              var position = new go.Point(0, nodeBounds.y - offsetY);
+              this.diagram.position = position;
+              console.log('PANNED')
+            }
+          }
+        }
+
+        panToSelectedNode(this.node_found)
+
         console.log(this.node_found.data.isSelected)
         this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', true)
         console.log(this.node_found.data.isSelected)
@@ -75,7 +91,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         allowHorizontalScroll: true,
         allowVerticalScroll: true,
         contentAlignment: go.Spot.TopLeft,
-        padding: new go.Margin(100, 0, 0, 0),
+        padding: new go.Margin(100, 0),
         layout:
           $(go.TreeLayout,
             {
@@ -100,7 +116,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         {
           fill: null,
           strokeWidth: 2,
-          width: 300,
+          width: 500,
           height: 17,
         },
         new go.Binding("stroke", "", function(data) {
@@ -119,10 +135,12 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
           "ButtonBorder.fill": "whitesmoke",
           "ButtonBorder.stroke": null,
           "_buttonFillOver": "rgba(0,128,255,0.25)",
-          "_buttonStrokeOver": null
+          "_buttonStrokeOver": null,
         }),
       $(go.Panel, "Horizontal",
-        { position: new go.Point(18, 0) },
+        { 
+          position: new go.Point(18, 0),
+        },
         $(go.Picture,
           {
             width: 18, height: 18,
@@ -134,7 +152,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
           new go.Binding("source", "isTreeExpanded", imageConverter).ofObject(),
           new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
         $(go.TextBlock,
-          { font: '9pt Verdana, sans-serif' },
+          { font: '9pt Verdana, sans-serif'},
           new go.Binding("text", "title", s => "" + s))
       ),  // end Horizontal Panel
     );  // end Node

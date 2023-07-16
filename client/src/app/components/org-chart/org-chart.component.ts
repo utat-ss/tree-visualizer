@@ -39,6 +39,23 @@ export class OrgChartComponent implements OnInit {
             console.log('Node found:')
             console.log(this.node_found.data)
 
+            const panToSelectedNode = (node_found: go.Node | null) => {
+                if (node_found !== null) {
+                  var nodeBounds = node_found.actualBounds;
+                  var viewportBounds = this.diagram.viewportBounds;
+
+                  if (!viewportBounds.containsRect(nodeBounds)) {
+                  var offsetX = (viewportBounds.width - nodeBounds.width) / 2;
+                  var offsetY = (viewportBounds.height - nodeBounds.height) / 2;
+                  var position = new go.Point(nodeBounds.x - offsetX, nodeBounds.y - offsetY);
+                  this.diagram.position = position;
+                  console.log('PANNED')
+                }
+                }
+              }
+      
+            panToSelectedNode(this.node_found)
+
             console.log(this.node_found.data.isSelected)
             this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', 'true')
             console.log(this.node_found.data.isSelected)
