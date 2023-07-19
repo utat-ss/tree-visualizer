@@ -113,24 +113,6 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
       $(go.Node, {
         selectionAdorned: false,
       },
-      /*$(go.Shape, "Rectangle",
-        {
-          fill: null,
-          strokeWidth: 2,
-          width: 500,
-          height: 17,
-        },
-        
-        new go.Binding("stroke", "", function(data) {
-          return data.isSelected ? "dodgerblue" : null;
-        },
-      ),
-        new go.Binding("fill", "", function(data) {
-          return data.isSelected ? "lightblue" : "white";
-        },
-        ),
-        
-      ),*/
       $("TreeExpanderButton",
         { // customize the button's appearance
           "_treeExpandedFigure": "LineDown",

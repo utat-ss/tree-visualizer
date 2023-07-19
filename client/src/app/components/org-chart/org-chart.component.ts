@@ -91,6 +91,7 @@ export class OrgChartComponent implements OnInit {
         this.diagram = $(go.Diagram, "app-org-chart", {
             allowCopy: false,
             allowDelete: false,
+            padding: new go.Margin(100, 0),
             layout: $(go.TreeLayout, {
                 treeStyle: go.TreeLayout.StyleLastParents,
                 arrangement: go.TreeLayout.ArrangementHorizontal,
@@ -185,11 +186,11 @@ export class OrgChartComponent implements OnInit {
                     {
                         row: 0,
                         column: 0,
-                        font: "bold 12pt " + this.font,
+                        font: "bold 11pt " + this.font,
                         overflow: go.TextBlock.OverflowEllipsis,
                         wrap: go.TextBlock.WrapDesiredSize, // Wrap the text to multiple lines if necessary
                         maxSize: new go.Size(this.nodeSize.width - 50, NaN), // Limit the maximum width of the text block
-                        maxLines: 3,
+                        maxLines: 2,
                     },
                     new go.Binding("text", "title")
                 ),
@@ -230,7 +231,7 @@ export class OrgChartComponent implements OnInit {
                     {
                         row: 2,
                         column: 0,
-                        font: "10pt " + this.font,
+                        font: "9pt " + this.font,
                         stretch: go.GraphObject.Fill,
                         maxLines: 3,
                         overflow: go.TextBlock.OverflowEllipsis,
