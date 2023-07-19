@@ -183,6 +183,17 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
     this.nodeClicked.emit(node)
   })
 
+  // Add buttons to control "Collapse All" and "Expand All" functionality
+  const expandAllButton = document.getElementById("expandAllButton");
+  if (expandAllButton) {
+    expandAllButton.addEventListener("click", () => this.expandAll());
+  }
+
+  const collapseAllButton = document.getElementById("collapseAllButton");
+  if (collapseAllButton) {
+    collapseAllButton.addEventListener("click", () => this.collapseAll());
+  }
+
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use
   function imageConverter(prop: any, picture: any) {
     var node = picture.part;
@@ -197,6 +208,28 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
     }
   }
   window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);
+  }
+
+  // Function to expand all tree nodes
+  public expandAll() {
+    this.diagram.startTransaction("expandAll");
+    this.diagram.nodes.each((node) => {
+      if (!node.isTreeLeaf && !node.isTreeExpanded) {
+        node.isTreeExpanded = true;
+      }
+    });
+    this.diagram.commitTransaction("expandAll");
+  }
+
+  // Function to collapse all tree nodes
+  public collapseAll() {
+    this.diagram.startTransaction("collapseAll");
+    this.diagram.nodes.each((node) => {
+      if (!node.isTreeLeaf && node.isTreeExpanded) {
+        node.isTreeExpanded = false;
+      }
+    });
+    this.diagram.commitTransaction("collapseAll");
   }
 
 }
