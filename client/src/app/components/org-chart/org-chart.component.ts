@@ -168,7 +168,7 @@ export class OrgChartComponent implements OnInit {
                     return data.isSelected ? "dodgerblue" : null;
                   })
               ),
-            $(
+              $(
                 go.Panel,
                 "Table",
                 {
@@ -187,6 +187,9 @@ export class OrgChartComponent implements OnInit {
                         column: 0,
                         font: "bold 12pt " + this.font,
                         overflow: go.TextBlock.OverflowEllipsis,
+                        wrap: go.TextBlock.WrapDesiredSize, // Wrap the text to multiple lines if necessary
+                        maxSize: new go.Size(this.nodeSize.width - 50, NaN), // Limit the maximum width of the text block
+                        maxLines: 3,
                     },
                     new go.Binding("text", "title")
                 ),
@@ -203,11 +206,11 @@ export class OrgChartComponent implements OnInit {
                     },
                     new go.Binding("fill", "qualifier", (qualifier) => {
                         if (qualifier === "SHALL") {
-                            return "#06c769" // green
+                            return "#06c769"; // green
                         } else if (qualifier === "SHOULD") {
-                            return "#2196f3" // blue
+                            return "#2196f3"; // blue
                         } else {
-                            return "#cccccc" // default grey
+                            return "#cccccc"; // default grey
                         }
                     })
                 ),
@@ -234,7 +237,7 @@ export class OrgChartComponent implements OnInit {
                     },
                     new go.Binding("text", "description")
                 )
-            )
+            )            
         )
 
         this.diagram.linkTemplate = $(
