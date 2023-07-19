@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
 import * as go from "gojs"
+import { bufferToggle } from "rxjs";
 
 const $ = go.GraphObject.make
 
@@ -112,13 +113,14 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
       $(go.Node, {
         selectionAdorned: false,
       },
-      $(go.Shape, "Rectangle",
+      /*$(go.Shape, "Rectangle",
         {
           fill: null,
           strokeWidth: 2,
           width: 500,
           height: 17,
         },
+        
         new go.Binding("stroke", "", function(data) {
           return data.isSelected ? "dodgerblue" : null;
         },
@@ -127,7 +129,8 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
           return data.isSelected ? "lightblue" : "white";
         },
         ),
-      ),
+        
+      ),*/
       $("TreeExpanderButton",
         { // customize the button's appearance
           "_treeExpandedFigure": "LineDown",
@@ -152,7 +155,19 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
           new go.Binding("source", "isTreeExpanded", imageConverter).ofObject(),
           new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
         $(go.TextBlock,
-          { font: '9pt Verdana, sans-serif'},
+          {},
+          new go.Binding("background", "", function(data) {
+            return data.isSelected ? "lightblue" : null;
+          },
+        ),
+          new go.Binding("font", "", function(data) {
+            return data.isSelected ? 'bold 9pt Verdana, sans-serif' : '9pt Verdana, sans-serif';
+          },
+        ),
+          new go.Binding("stroke", "", function(data) {
+            return data.isSelected ? '#0960D4' : 'black';
+          },
+        ),
           new go.Binding("text", "title", s => "" + s))
       ),  // end Horizontal Panel
     );  // end Node

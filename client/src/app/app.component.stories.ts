@@ -46,7 +46,7 @@ const model: go.TreeModel = new go.TreeModel({
         {
             id: "123456789",
             parent: "ff5892a7-b5c9-4a25-97bd-663b2cff5bd7",
-            title: "UTAT-Team-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+            title: "UTAT-Team-B",
             qualifier: "SHOULD",
             type: "Constraint",
             description: "Another description",
