@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { GojsAngularModule } from 'gojs-angular';
 
 import { NodeDirectoryComponent } from './node-directory.component';
 
@@ -8,6 +9,7 @@ describe('NodeDirectoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ GojsAngularModule ],
       declarations: [ NodeDirectoryComponent ]
     }).compileComponents();
 

@@ -1,17 +1,20 @@
-import { Component } from "@angular/core"
+import { Component, Input } from "@angular/core"
 import * as go from "gojs"
 import { Requirements } from "./interfaces/requirements"
 import { BackendService } from "./services/backend.service";
 
 @Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.sass"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
     title = "tree-visualizer";
 
-    public selectedNode: go.Part | null = null;
+    @Input()
+    public selectedNode: go.Node | null = null;
+
+    @Input()
     model = new go.TreeModel({
         nodeKeyProperty: "id",
         nodeDataArray: [],
@@ -25,7 +28,9 @@ export class AppComponent {
         this.model.commit(m => m.mergeNodeDataArray(r))
     }
 
-    public setSelectedNode(node: go.Part | null) {
-        this.selectedNode = node
-    }
+  public setSelectedNode(node: go.Node) {
+    this.selectedNode = node;
+    console.log(this.selectedNode)
+  }
+
 }

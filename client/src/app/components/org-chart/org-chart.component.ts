@@ -9,21 +9,89 @@ const $ = go.GraphObject.make
     styleUrls: ["./org-chart.component.sass"],
 })
 export class OrgChartComponent implements OnInit {
-    @Input() public model: go.TreeModel = new go.TreeModel()
+    public diagram: go.Diagram = new go.Diagram()
+    public minimap: go.Overview | null = null
+    public nodeSize = new go.Size(256, 128)
+    public font = "sans-serif"
 
-    @Output() public nodeClicked = new EventEmitter()
+    public _selectedNode: go.Node | null = null;
+    public node_found: go.Node | null = null;
+
+    @Input() 
+    public model: go.TreeModel = new go.TreeModel()
+
+    @Input()
+    get selectedNode() { return this._selectedNode; }
+    set selectedNode(node: go.Node | null) {
+        if (node != null) {
+        this._selectedNode = node;
+        console.log('Node clicked:')
+        console.log(this._selectedNode.data)
+
+        if (this.node_found != null) {
+            // set the previous selected node to false
+            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
+            this.diagram.updateAllTargetBindings();
+        }
+        this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
+        console.log('Looking for node')
+        if (this.node_found !== null) {
+            console.log('Node found:')
+            console.log(this.node_found.data)
+
+            const panToSelectedNode = (node_found: go.Node | null) => {
+                if (node_found !== null) {
+                  var nodeBounds = node_found.actualBounds;
+                  var viewportBounds = this.diagram.viewportBounds;
+
+                  if (!viewportBounds.containsRect(nodeBounds)) {
+                  var offsetX = (viewportBounds.width - nodeBounds.width) / 2;
+                  var offsetY = (viewportBounds.height - nodeBounds.height) / 2;
+                  var position = new go.Point(nodeBounds.x - offsetX, nodeBounds.y - offsetY);
+                  this.diagram.position = position;
+                  console.log('PANNED')
+                }
+                }
+              }
+      
+            panToSelectedNode(this.node_found)
+
+            console.log(this.node_found.data.isSelected)
+            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', 'true')
+            console.log(this.node_found.data.isSelected)
+            this.diagram.updateAllTargetBindings();
+        } else {
+            // Node not found
+            console.log("Node not found");
+        }
+
+        } else {
+        this._selectedNode = null;
+        if (this.node_found != null) {
+            // set the previous selected node to false
+            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
+            this.diagram.updateAllTargetBindings();
+        }
+        }
+    }
+
+    @Output() 
+    public nodeClicked = new EventEmitter()
 
     public showMap = true
 
-    private diagram: go.Diagram | null = null
-    private minimap: go.Overview | null = null
-    private nodeSize = new go.Size(256, 128)
-    private font = "sans-serif"
+    constructor() {}
 
     public ngOnInit() {
+        console.log(this.selectedNode)
+        console.log('ngOnInig')
+    }
+
+    public ngAfterViewInit() {
         this.diagram = $(go.Diagram, "app-org-chart", {
             allowCopy: false,
             allowDelete: false,
+            padding: new go.Margin(100, 0),
             layout: $(go.TreeLayout, {
                 treeStyle: go.TreeLayout.StyleLastParents,
                 arrangement: go.TreeLayout.ArrangementHorizontal,
@@ -43,6 +111,7 @@ export class OrgChartComponent implements OnInit {
             go.Node,
             "Auto",
             {
+                selectionAdorned: false,
                 desiredSize: this.nodeSize,
                 isShadowed: true,
                 shadowOffset: new go.Point(2, 2),
@@ -87,8 +156,20 @@ export class OrgChartComponent implements OnInit {
                     }
                 },
             },
-            $(go.Shape, "Rectangle", { name: "SHAPE", fill: "white", strokeWidth: 0 }),
-            $(
+            $(go.Shape,
+                "Rectangle",
+                {
+                  name: "SHAPE",
+                  strokeWidth: 2,
+                },
+                new go.Binding("fill", "", function(data) {
+                  return data.isSelected ? "lightblue" : "white";
+                }),
+                new go.Binding("stroke", "", function(data) {
+                    return data.isSelected ? "dodgerblue" : null;
+                  })
+              ),
+              $(
                 go.Panel,
                 "Table",
                 {
@@ -105,8 +186,11 @@ export class OrgChartComponent implements OnInit {
                     {
                         row: 0,
                         column: 0,
-                        font: "bold 12pt " + this.font,
+                        font: "bold 11pt " + this.font,
                         overflow: go.TextBlock.OverflowEllipsis,
+                        wrap: go.TextBlock.WrapDesiredSize, // Wrap the text to multiple lines if necessary
+                        maxSize: new go.Size(this.nodeSize.width - 50, NaN), // Limit the maximum width of the text block
+                        maxLines: 2,
                     },
                     new go.Binding("text", "title")
                 ),
@@ -123,11 +207,11 @@ export class OrgChartComponent implements OnInit {
                     },
                     new go.Binding("fill", "qualifier", (qualifier) => {
                         if (qualifier === "SHALL") {
-                            return "#06c769" // green
+                            return "#06c769"; // green
                         } else if (qualifier === "SHOULD") {
-                            return "#2196f3" // blue
+                            return "#2196f3"; // blue
                         } else {
-                            return "#cccccc" // default grey
+                            return "#cccccc"; // default grey
                         }
                     })
                 ),
@@ -147,14 +231,14 @@ export class OrgChartComponent implements OnInit {
                     {
                         row: 2,
                         column: 0,
-                        font: "10pt " + this.font,
+                        font: "9pt " + this.font,
                         stretch: go.GraphObject.Fill,
                         maxLines: 3,
                         overflow: go.TextBlock.OverflowEllipsis,
                     },
                     new go.Binding("text", "description")
                 )
-            )
+            )            
         )
 
         this.diagram.linkTemplate = $(
