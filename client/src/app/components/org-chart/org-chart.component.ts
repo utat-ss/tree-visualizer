@@ -14,68 +14,85 @@ export class OrgChartComponent implements OnInit {
     public nodeSize = new go.Size(256, 128)
     public font = "sans-serif"
 
-    public _selectedNode: go.Node | null = null;
-    public node_found: go.Node | null = null;
-
-    @Input() 
-    public model: go.TreeModel = new go.TreeModel()
+    public _selectedNode: go.Node | null = null
+    public node_found: go.Node | null = null
 
     @Input()
-    get selectedNode() { return this._selectedNode; }
+    public model: go.GraphLinksModel = new go.GraphLinksModel()
+
+    @Input()
+    get selectedNode() {
+        return this._selectedNode
+    }
     set selectedNode(node: go.Node | null) {
         if (node != null) {
-        this._selectedNode = node;
-        console.log('Node clicked:')
-        console.log(this._selectedNode.data)
+            this._selectedNode = node
+            console.log("Node clicked:")
+            console.log(this._selectedNode.data)
 
-        if (this.node_found != null) {
-            // set the previous selected node to false
-            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
-            this.diagram.updateAllTargetBindings();
-        }
-        this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
-        console.log('Looking for node')
-        if (this.node_found !== null) {
-            console.log('Node found:')
-            console.log(this.node_found.data)
+            if (this.node_found != null) {
+                // set the previous selected node to false
+                this.diagram.model.setDataProperty(
+                    this.node_found.data,
+                    "isSelected",
+                    false
+                )
+                this.diagram.updateAllTargetBindings()
+            }
+            this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
+            console.log("Looking for node")
+            if (this.node_found !== null) {
+                console.log("Node found:")
+                console.log(this.node_found.data)
 
-            const panToSelectedNode = (node_found: go.Node | null) => {
-                if (node_found !== null) {
-                  var nodeBounds = node_found.actualBounds;
-                  var viewportBounds = this.diagram.viewportBounds;
+                const panToSelectedNode = (node_found: go.Node | null) => {
+                    if (node_found !== null) {
+                        var nodeBounds = node_found.actualBounds
+                        var viewportBounds = this.diagram.viewportBounds
 
-                  if (!viewportBounds.containsRect(nodeBounds)) {
-                  var offsetX = (viewportBounds.width - nodeBounds.width) / 2;
-                  var offsetY = (viewportBounds.height - nodeBounds.height) / 2;
-                  var position = new go.Point(nodeBounds.x - offsetX, nodeBounds.y - offsetY);
-                  this.diagram.position = position;
-                  console.log('PANNED')
+                        if (!viewportBounds.containsRect(nodeBounds)) {
+                            var offsetX = (viewportBounds.width - nodeBounds.width) / 2
+                            var offsetY =
+                                (viewportBounds.height - nodeBounds.height) / 2
+                            var position = new go.Point(
+                                nodeBounds.x - offsetX,
+                                nodeBounds.y - offsetY
+                            )
+                            this.diagram.position = position
+                            console.log("PANNED")
+                        }
+                    }
                 }
-                }
-              }
-      
-            panToSelectedNode(this.node_found)
 
-            console.log(this.node_found.data.isSelected)
-            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', 'true')
-            console.log(this.node_found.data.isSelected)
-            this.diagram.updateAllTargetBindings();
-        } else {
-            // Node not found
-            console.log("Node not found");
-        }
+                panToSelectedNode(this.node_found)
 
+                console.log(this.node_found.data.isSelected)
+                this.diagram.model.setDataProperty(
+                    this.node_found.data,
+                    "isSelected",
+                    "true"
+                )
+                console.log(this.node_found.data.isSelected)
+                this.diagram.updateAllTargetBindings()
+            } else {
+                // Node not found
+                console.log("Node not found")
+            }
         } else {
-        this._selectedNode = null;
-        if (this.node_found != null) {
-            // set the previous selected node to false
-            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
-            this.diagram.updateAllTargetBindings();
-        }
+            this._selectedNode = null
+            if (this.node_found != null) {
+                // set the previous selected node to false
+                this.diagram.model.setDataProperty(
+                    this.node_found.data,
+                    "isSelected",
+                    false
+                )
+                this.diagram.updateAllTargetBindings()
+            }
         }
     }
 
-    @Output() 
+    @Output()
     public nodeClicked = new EventEmitter()
 
     public showMap = true
@@ -84,10 +101,11 @@ export class OrgChartComponent implements OnInit {
 
     public ngOnInit() {
         console.log(this.selectedNode)
-        console.log('ngOnInig')
+        console.log("ngOnInit")
     }
 
     public ngAfterViewInit() {
+        console.log("ngAfterViewInit")
         this.diagram = $(go.Diagram, "app-org-chart", {
             allowCopy: false,
             allowDelete: false,
@@ -156,20 +174,21 @@ export class OrgChartComponent implements OnInit {
                     }
                 },
             },
-            $(go.Shape,
+            $(
+                go.Shape,
                 "Rectangle",
                 {
-                  name: "SHAPE",
-                  strokeWidth: 2,
+                    name: "SHAPE",
+                    strokeWidth: 2,
                 },
-                new go.Binding("fill", "", function(data) {
-                  return data.isSelected ? "lightblue" : "white";
+                new go.Binding("fill", "", function (data) {
+                    return data.isSelected ? "lightblue" : "white"
                 }),
-                new go.Binding("stroke", "", function(data) {
-                    return data.isSelected ? "dodgerblue" : null;
-                  })
-              ),
-              $(
+                new go.Binding("stroke", "", function (data) {
+                    return data.isSelected ? "dodgerblue" : null
+                })
+            ),
+            $(
                 go.Panel,
                 "Table",
                 {
@@ -207,11 +226,11 @@ export class OrgChartComponent implements OnInit {
                     },
                     new go.Binding("fill", "qualifier", (qualifier) => {
                         if (qualifier === "SHALL") {
-                            return "#06c769"; // green
+                            return "#06c769" // green
                         } else if (qualifier === "SHOULD") {
-                            return "#2196f3"; // blue
+                            return "#2196f3" // blue
                         } else {
-                            return "#cccccc"; // default grey
+                            return "#cccccc" // default grey
                         }
                     })
                 ),
@@ -238,7 +257,7 @@ export class OrgChartComponent implements OnInit {
                     },
                     new go.Binding("text", "description")
                 )
-            )            
+            )
         )
 
         this.diagram.linkTemplate = $(
@@ -250,9 +269,11 @@ export class OrgChartComponent implements OnInit {
         this.minimap = $(go.Overview, "app-minimap", { observed: this.diagram })
 
         this.diagram.model = this.model
+        console.log(this.diagram.model)
 
         // when selection changes, emit event to update the selected node
         this.diagram.addDiagramListener("ChangedSelection", (e) => {
+            console.log(e)
             const node = this.diagram?.selection.first()
             console.log(this.model.toJson())
             this.nodeClicked.emit(node)
