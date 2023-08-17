@@ -1,7 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import * as go from 'gojs'
-
-import { Requirements } from 'src/app/interfaces/requirements';
 
 @Component({
   selector: 'app-filter',
@@ -12,23 +10,32 @@ export class FilterComponent {
 
   FilterComponent = FilterComponent;  // workaround to use static field in template
 
-  @Input()
-  public model: go.TreeModel = new go.TreeModel();
+  @Input()  public model = new go.TreeModel();
+  // @Input()  public diagram = new go.Diagram();
+  // @Output() public diagramChange = new EventEmitter<go.Diagram>();
 
   static readonly validFilters: Array<string> = [
-    'stakeholder',
+    'created-by',
+    // 'parent',    // TODO: pending ID -> title translation
+    'last-edited',
+    'qualifer',
+    'collection',
+    'test-plans',
     'system',
+    'stakeholder',
+    'mission',
     'collection'
   ];
 
+  activeFilters: Map<string, string> = new Map();   // note: only allows for string values
+
+  // Form input handling
   filteredValidFilters: Array<string> = FilterComponent.validFilters;
   selectedFilter: string = '';
 
   validValues: Set<string> = new Set();
   filteredValidValues: Set<string> = new Set();
   selectedValue: string = '';
-
-  activeFilters: Map<string, string> = new Map();   // note: only allows for string values
 
   filterValidFilters() {
     this.filteredValidFilters = FilterComponent.validFilters.filter(item => item.includes(this.selectedFilter));
@@ -77,7 +84,7 @@ export class FilterComponent {
   removeFilter(field: string) {
     this.activeFilters.delete(field);
 
-    // TODO: unload and reload all filters here
+    // TODO: unload and reload an AND of all filters here
   }
 
 }
