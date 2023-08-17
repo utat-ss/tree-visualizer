@@ -82,15 +82,15 @@ const _parseRequirementsForAPI = async function(raw_data) {
       'created-by': props['Created by'].created_by.name,
       'parent-id': props.Parent.relation?.[0]?.id ?? '',                  // Notion enforced limit 1
       'last-edited': props['Last Edited'].last_edited_time,
-      'qualifier': qualifiers[props.Qualifier.relation?.[0]?.id] ?? '',   // Notion enforced limit 1
+      'qualifier': qualifiers[props['🛑 Qualifier'].relation?.[0]?.id] ?? '',   // Notion enforced limit 1
       'collection': props.Collection.multi_select.map(c => c.name),       // * list
-      'test-plans': props['\u{1F3C1} Test Plans'].relation.map(r => test_plans[r.id]),  // * list
-      'system': systems[props.System.relation?.[0]?.id] ?? '',                  // Notion enforced limit 1
+      'test-plans': props['🏁 Test Plans'].relation.map(r => test_plans[r.id]),  // * list
+      'system': systems[props['🏗️ System'].relation?.[0]?.id] ?? '',                  // Notion enforced limit 1
       'rationale': props.Rationale.rich_text?.[0]?.plain_text ?? '',
-      'trades': props['\u{1F0CF} Trades'].relation.map(r => trades[r.id]),      // * list
+      'trades': props['🃏 Trades'].relation.map(r => trades[r.id]),      // * list
       'last-edited-by': props['Last Edited By'].last_edited_by.name,
-      'stakeholder': props.Stakeholder.relation.map(r => teams[r.id]),          // * list
-      'mission': missions[props['\u{1F3C6} Mission'.relation?.[0]?.id]] ?? '',  // Notion enforced limit 1
+      'stakeholder': props['⚽ Stakeholder'].relation.map(r => teams[r.id]),          // * list
+      'mission': missions[props['🏆 Mission'.relation?.[0]?.id]] ?? '',  // Notion enforced limit 1
       'description': props.Description.rich_text?.[0]?.plain_text ?? '',
       'title': props.ID.title?.[0]?.plain_text ?? '',
       'url': elem.url
