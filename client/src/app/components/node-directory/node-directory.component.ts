@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
 import * as go from "gojs"
+import { bufferToggle } from "rxjs";
 
 const $ = go.GraphObject.make
 
@@ -8,20 +9,81 @@ const $ = go.GraphObject.make
   templateUrl: './node-directory.component.html',
   styleUrls: ['./node-directory.component.sass']
 })
-export class NodeDirectoryComponent implements OnInit {
+export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   public diagram: go.Diagram = new go.Diagram()
+  
+  public _selectedNode: go.Node | null = null;
+  public node_found: go.Node | null = null; 
 
   @Input()
   public model: go.TreeModel = new go.TreeModel()
+
+  @Input()
+  get selectedNode() { return this._selectedNode; }
+  set selectedNode(node: go.Node | null) {
+    if (node != null) {
+      this._selectedNode = node;
+      console.log('Node clicked:')
+      console.log(this._selectedNode.data.title)
+
+      if (this.node_found != null) {
+        // set the previous selected node to false
+        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
+        this.diagram.updateAllTargetBindings();
+      }
+      this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)
+      console.log('Looking for node')
+      if (this.node_found !== null) {
+        console.log('Node found:')
+        console.log(this.node_found.data)
+
+        const panToSelectedNode = (node_found: go.Node | null) => {
+          if (node_found !== null) {
+            var nodeBounds = node_found.actualBounds;
+            var viewportBounds = this.diagram.viewportBounds;
+
+            if (!viewportBounds.containsRect(nodeBounds)) {
+              var offsetY = (viewportBounds.height - nodeBounds.height) / 2;
+              var position = new go.Point(0, nodeBounds.y - offsetY);
+              this.diagram.position = position;
+              console.log('PANNED')
+            }
+          }
+        }
+
+        panToSelectedNode(this.node_found)
+
+        console.log(this.node_found.data.isSelected)
+        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', true)
+        console.log(this.node_found.data.isSelected)
+        this.diagram.updateAllTargetBindings();
+      } else {
+        // Node not found
+        console.log("Node not found");
+      }
+
+    } else {
+      this._selectedNode = null;
+      if (this.node_found != null) {
+        // set the previous selected node to false
+        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)
+        this.diagram.updateAllTargetBindings();
+      }
+    }
+  }
 
   @Output()
   public nodeClicked = new EventEmitter()
 
   constructor() {}
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    console.log(this.selectedNode)
+    console.log('ngOnInit')
+  }
 
-  public ngAfterViewInit(): void {
+  public ngAfterViewInit() {
+
       this.diagram = $(go.Diagram, "app-node-directory",
       {
         allowMove: false,
@@ -30,7 +92,7 @@ export class NodeDirectoryComponent implements OnInit {
         allowHorizontalScroll: true,
         allowVerticalScroll: true,
         contentAlignment: go.Spot.TopLeft,
-        padding: new go.Margin(75, 0, 0, 0),
+        padding: new go.Margin(100, 0),
         layout:
           $(go.TreeLayout,
             {
@@ -48,7 +110,9 @@ export class NodeDirectoryComponent implements OnInit {
 
     // define the Node template
     this.diagram.nodeTemplate =
-      $(go.Node, 
+      $(go.Node, {
+        selectionAdorned: false,
+      },
       $("TreeExpanderButton",
         { // customize the button's appearance
           "_treeExpandedFigure": "LineDown",
@@ -56,11 +120,12 @@ export class NodeDirectoryComponent implements OnInit {
           "ButtonBorder.fill": "whitesmoke",
           "ButtonBorder.stroke": null,
           "_buttonFillOver": "rgba(0,128,255,0.25)",
-          "_buttonStrokeOver": null
+          "_buttonStrokeOver": null,
         }),
       $(go.Panel, "Horizontal",
-        { position: new go.Point(18, 0) },
-        new go.Binding("background", "isSelected", s => s ? "lightblue" : "white").ofObject(),
+        { 
+          position: new go.Point(18, 0),
+        },
         $(go.Picture,
           {
             width: 18, height: 18,
@@ -72,14 +137,44 @@ export class NodeDirectoryComponent implements OnInit {
           new go.Binding("source", "isTreeExpanded", imageConverter).ofObject(),
           new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
         $(go.TextBlock,
-          { font: '9pt Verdana, sans-serif' },
+          {},
+          new go.Binding("background", "", function(data) {
+            return data.isSelected ? "lightblue" : null;
+          },
+        ),
+          new go.Binding("font", "", function(data) {
+            return data.isSelected ? 'bold 9pt Verdana, sans-serif' : '9pt Verdana, sans-serif';
+          },
+        ),
+          new go.Binding("stroke", "", function(data) {
+            return data.isSelected ? '#0960D4' : 'black';
+          },
+        ),
           new go.Binding("text", "title", s => "" + s))
-      )  // end Horizontal Panel
+      ),  // end Horizontal Panel
     );  // end Node
 
   this.diagram.linkTemplate = $(go.Link)
 
   this.diagram.model = this.model;
+
+  // when selection changes, emit event to update the selected node
+  this.diagram.addDiagramListener("ChangedSelection", (e) => {
+    const node = this.diagram?.selection.first()
+    console.log(this.model.toJson())
+    this.nodeClicked.emit(node)
+  })
+
+  // Add buttons to control "Collapse All" and "Expand All" functionality
+  const expandAllButton = document.getElementById("expandAllButton");
+  if (expandAllButton) {
+    expandAllButton.addEventListener("click", () => this.expandAll());
+  }
+
+  const collapseAllButton = document.getElementById("collapseAllButton");
+  if (collapseAllButton) {
+    collapseAllButton.addEventListener("click", () => this.collapseAll());
+  }
 
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use
   function imageConverter(prop: any, picture: any) {
@@ -94,7 +189,29 @@ export class NodeDirectoryComponent implements OnInit {
       }
     }
   }
-  window.addEventListener('DOMContentLoaded', this.ngOnInit);
+  window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);
+  }
+
+  // Function to expand all tree nodes
+  public expandAll() {
+    this.diagram.startTransaction("expandAll");
+    this.diagram.nodes.each((node) => {
+      if (!node.isTreeLeaf && !node.isTreeExpanded) {
+        node.isTreeExpanded = true;
+      }
+    });
+    this.diagram.commitTransaction("expandAll");
+  }
+
+  // Function to collapse all tree nodes
+  public collapseAll() {
+    this.diagram.startTransaction("collapseAll");
+    this.diagram.nodes.each((node) => {
+      if (!node.isTreeLeaf && node.isTreeExpanded) {
+        node.isTreeExpanded = false;
+      }
+    });
+    this.diagram.commitTransaction("collapseAll");
   }
 
 }

@@ -1,0 +1,76 @@
+<div id="container"> 
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Requirement</mat-label>
+        <input matInput [readonly]="read_only" [value]="requirement">
+    </mat-form-field>
+
+    <div class="readonly-property">
+        <p><span>Created By: </span>{{ created_by }}</p>
+    </div>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Parent</mat-label>
+        <input matInput [readonly]="read_only" [value]="parent">
+    </mat-form-field>
+
+    <div class="readonly-property">
+        <p><span>Last Edited: </span>{{ last_edited | date:'medium' }}</p>
+    </div>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Qualifier</mat-label>
+        <mat-select [value]="qualifier">
+            <mat-option *ngFor="let q of qualifiers" [value]="q" [disabled]="(read_only && q != qualifier) ? 'true' : null">
+                {{ q }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Collection</mat-label>
+        <input matInput [readonly]="read_only" [value]="collection">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Verification Plans</mat-label>
+        <input matInput [readonly]="read_only" [value]="test_plans[0]">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>System</mat-label>
+        <input matInput [readonly]="read_only" [value]="system">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Rationale</mat-label>
+        <input matInput [readonly]="read_only" [value]="rationale">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Trades</mat-label>
+        <input matInput [readonly]="read_only" [value]="trades[0]">
+    </mat-form-field>
+
+    <div class="readonly-property">
+        <p><span>Last Edited By: </span>{{ last_edited_by }}</p>
+    </div>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Stakeholders</mat-label>
+        <input matInput [readonly]="read_only" [value]="stakeholders[0]">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Mission</mat-label>
+        <input matInput [readonly]="read_only" [value]="mission">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Description</mat-label>
+        <input matInput [readonly]="read_only" [value]="description">
+    </mat-form-field>
+
+    <div class="readonly-property">
+        <p><span>URL: </span><a [href]="url ? url.href : '#'" target="_blank">{{ url ? url.href : '#' }}</a></p>
+    </div>
+</div>

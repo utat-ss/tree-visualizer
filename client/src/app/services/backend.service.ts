@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Node, Edge } from 'vis-network';
-
-export interface Requirements {
-  nodes: Array<Node>;
-  edges: Array<Edge>;
-}
+import { Requirements } from '../interfaces/requirements';
 
 @Injectable({
   providedIn: 'root'

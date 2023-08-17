@@ -1,10 +1,29 @@
-import { Meta, Story } from "@storybook/angular"
-import { NodeDirectoryComponent } from "./node-directory.component"
+import { Meta, moduleMetadata, Story } from "@storybook/angular"
+import { AppComponent } from "./app.component"
+import { CommonModule } from "@angular/common"
+import { HttpClientModule } from "@angular/common/http"
 import { action } from "@storybook/addon-actions"
 import * as go from "gojs"
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
+import { NodeDirectoryComponent } from "./components/node-directory/node-directory.component"
+import { OrgChartComponent } from "./components/org-chart/org-chart.component"
+import { InspectorComponent } from "./components/inspector/inspector.component"
+
 export default {
-    component: NodeDirectoryComponent,
+    component: AppComponent,
+    parameters: {
+        layout: 'fullscreen',
+    },
+    decorators: [
+        moduleMetadata({
+            declarations: [NodeDirectoryComponent, OrgChartComponent, InspectorComponent],
+            imports: [CommonModule, HttpClientModule, MatFormFieldModule, MatInputModule, MatSelectModule],
+        }),
+    ],
 } as Meta
 
 const Template: Story = (args) => ({
@@ -56,10 +75,10 @@ const model: go.TreeModel = new go.TreeModel({
             url: "https://www.notion.so/Grandchild-1-qwertyuiop",
         },
     ],
-})
+  });
 
-export const Default = Template.bind({})
-Default.args = {
-    model,
-    nodeClicked: action("nodeClicked"),
-}
+  export const Default = Template.bind({})
+  Default.args = {
+      model,
+      nodeClicked: action("nodeClicked"),
+  }

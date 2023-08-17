@@ -2,31 +2,157 @@
     "pipes": [],
     "interfaces": [
         {
-            "name": "Requirements",
-            "id": "interface-Requirements-c06dbdf83254d7570c4a3c445de7397014fc968c18699a9e985493960627dfa5b2334e80d50d835b1ac85e6cbbf61fddc4910be8eac5343170ec10415a2ae6ea",
-            "file": "src/app/services/backend.service.ts",
+            "name": "Requirement",
+            "id": "interface-Requirement-6bca4c64c0842c889b9d63b07a1469c5d7925cbb85067f5e53a8a5913f8a6954adf4ffcbf9505fc7ae80a9dafd6e96e9c3e912b610632f6b771ab266d7e6f112",
+            "file": "src/app/interfaces/requirement.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { Node, Edge } from 'vis-network';\n\nexport interface Requirements {\n  nodes: Array<Node>;\n  edges: Array<Edge>;\n}\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class BackendService {\n  constructor(private http: HttpClient) {}\n\n  getRequirements(): Observable<Requirements> {\n    // TODO: Define URL as env variable\n    // let url = \"https://3000--main--tree-visualizer--jdtech3.code.j0e.ca/api/requirements\";\n    let url = \"http://localhost:3000/api/requirements\"\n\n    return this.http.get<Requirements>(url)\n  }\n}\n",
+            "sourceCode": "export interface Requirement {\r\n    id: string;\r\n    'created-by': string;\r\n    'parent': string;\r\n    'last-edited': Date;\r\n    qualifier: string;\r\n    collection: Array<string>;\r\n    'test-plans': Array<string>;\r\n    system: string;\r\n    rationale: string;\r\n    trades: Array<string>;\r\n    'last-edited-by': string;\r\n    stakeholder: Array<string>;\r\n    mission: string;\r\n    description: string;\r\n    title: string;\r\n    url: URL;\r\n}\r\n",
             "properties": [
                 {
-                    "name": "edges",
+                    "name": "collection",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Array<Edge>",
+                    "type": "Array<string>",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "created-by",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "description",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "id",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                },
+                {
+                    "name": "last-edited",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "last-edited-by",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "mission",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "parent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "qualifier",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "rationale",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "stakeholder",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<string>",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "system",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "test-plans",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<string>",
                     "optional": false,
                     "description": "",
                     "line": 8
                 },
                 {
-                    "name": "nodes",
+                    "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Array<Node>",
+                    "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 7
+                    "line": 16
+                },
+                {
+                    "name": "trades",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Array<string>",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "url",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "URL",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
                 }
             ],
             "indexSignatures": [],
@@ -34,13 +160,26 @@
             "methods": []
         },
         {
+            "name": "Requirements",
+            "id": "interface-Requirements-13b6ee0b9af3bdb2d8c741c69cc5d462f473031808d5ff2867f8d9d0d652b937a4d63e92518a046f3370ca5e89489c6470ec4edb918fad73cfeda0e013dc1c39",
+            "file": "src/app/interfaces/requirements.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Requirement } from \"./requirement\";\r\n\r\nexport interface Requirements extends Array<Requirement>{};\r\n",
+            "properties": [],
+            "indexSignatures": [],
+            "methods": [],
+            "extends": "Array"
+        },
+        {
             "name": "User",
-            "id": "interface-User-9c7e5f1bbbab702cb032307d130876cb68969b0cd4eedef32a0c8cad8081a54e5f8f577ed6ad4539c1b99a1d246cb34031d198c2ea8eba440e64e91b14f01fdc",
+            "id": "interface-User-dcc5c3137cd472dd0002d85b562efd23162e3eff53ca4438a6251e6c46e3b8299076255380d1d42f386510cb6f2cbaab49fa5b5f253be459cdc3869428c5c400",
             "file": "src/stories/User.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface User {}\n",
+            "sourceCode": "export interface User {}\r\n",
             "properties": [],
             "indexSignatures": [],
             "methods": []
@@ -49,7 +188,7 @@
     "injectables": [
         {
             "name": "BackendService",
-            "id": "injectable-BackendService-c06dbdf83254d7570c4a3c445de7397014fc968c18699a9e985493960627dfa5b2334e80d50d835b1ac85e6cbbf61fddc4910be8eac5343170ec10415a2ae6ea",
+            "id": "injectable-BackendService-353be4cc54298dd02319f3b132473633bc3dec1ff48dcd25c3056766fe45f13a3c4b641a3e0735c534c3ab4b5534f8b147dca33d784649b2a7a52980a6115f50",
             "file": "src/app/services/backend.service.ts",
             "properties": [],
             "methods": [
@@ -59,7 +198,7 @@
                     "optional": false,
                     "returnType": "Observable<Requirements>",
                     "typeParameters": [],
-                    "line": 17,
+                    "line": 12,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -68,7 +207,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\nimport { Observable } from 'rxjs';\nimport { Node, Edge } from 'vis-network';\n\nexport interface Requirements {\n  nodes: Array<Node>;\n  edges: Array<Edge>;\n}\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class BackendService {\n  constructor(private http: HttpClient) {}\n\n  getRequirements(): Observable<Requirements> {\n    // TODO: Define URL as env variable\n    // let url = \"https://3000--main--tree-visualizer--jdtech3.code.j0e.ca/api/requirements\";\n    let url = \"http://localhost:3000/api/requirements\"\n\n    return this.http.get<Requirements>(url)\n  }\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Observable } from 'rxjs';\r\nimport { Requirements } from '../interfaces/requirements';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class BackendService {\r\n  constructor(private http: HttpClient) {}\r\n\r\n  getRequirements(): Observable<Requirements> {\r\n    // TODO: Define URL as env variable\r\n    // let url = \"https://3000--main--tree-visualizer--jdtech3.code.j0e.ca/api/requirements\";\r\n    let url = \"http://localhost:3000/api/requirements\"\r\n\r\n    return this.http.get<Requirements>(url)\r\n  }\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -82,7 +221,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 14,
+                "line": 9,
                 "jsdoctags": [
                     {
                         "name": "http",
@@ -105,7 +244,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-c57b77756dff1b813e4bbac0dabc523ddae1d50e8dd0117f6fbacfe98d76383d26a09ec50d3b75edf178224380e2e056aeb27903c99cbb686edc26bc951b2e47",
+            "id": "component-AppComponent-3a9c7a2b0c4f373f0b875538e1abad6d382cb6bfb611041f4d6320ef4786cc799293720aceb287bc5d7b12dd9595c8e74f492ca1b86c79cd1fb6ec32b5d97197",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -121,32 +260,28 @@
                 "./app.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [
+            "inputsClass": [
                 {
                     "name": "model",
-                    "defaultValue": "new go.TreeModel({\n        nodeKeyProperty: \"id\",\n        nodeDataArray: [\n            {\n                id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n                parent: \"\",\n                title: \"UTAT-Team-A\",\n                qualifier: \"SHALL\",\n                type: \"Performance\",\n                description: \"A description\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n            },\n            {\n                id: \"123456789\",\n                parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n                title: \"UTAT-Team-B\",\n                qualifier: \"SHOULD\",\n                type: \"Constraint\",\n                description: \"Another description\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/Child-1-123456789\",\n            },\n            {\n                id: \"abcdefghi\",\n                parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n                title: \"UTAT-Team-C\",\n                qualifier: \"SHALL\",\n                type: \"Component Selection\",\n                description:\n                    \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/Child-2-abcdefghi\",\n            },\n            {\n                id: \"qwertyuiop\",\n                parent: \"123456789\",\n                title: \"UTAT-Team-D\",\n                qualifier: \"SHOULD\",\n                type: \"A type\",\n                description: \"Yet another description that is just a little bit longer\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n            },\n        ],\n    })",
+                    "defaultValue": "new go.TreeModel({\r\n        nodeKeyProperty: \"id\",\r\n        nodeDataArray: [],\r\n    })",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 14
+                    "line": 18,
+                    "type": "any",
+                    "decorators": []
                 },
                 {
                     "name": "selectedNode",
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.Part | null",
-                    "optional": false,
-                    "description": "",
-                    "line": 12,
-                    "modifierKind": [
-                        123
-                    ]
-                },
+                    "line": 15,
+                    "type": "go.Node | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
                 {
                     "name": "title",
                     "defaultValue": "\"tree-visualizer\"",
@@ -155,16 +290,16 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 10
+                    "line": 12
                 }
             ],
             "methodsClass": [
                 {
-                    "name": "setSelectedNode",
+                    "name": "initModel",
                     "args": [
                         {
-                            "name": "node",
-                            "type": "go.Part | null",
+                            "name": "r",
+                            "type": "Requirements",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -172,7 +307,35 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 61,
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "r",
+                            "type": "Requirements",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setSelectedNode",
+                    "args": [
+                        {
+                            "name": "node",
+                            "type": "go.Node",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -181,7 +344,7 @@
                     "jsdoctags": [
                         {
                             "name": "node",
-                            "type": "go.Part | null",
+                            "type": "go.Node",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -198,20 +361,299 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from \"@angular/core\"\nimport * as go from \"gojs\"\n\n@Component({\n    selector: \"app-root\",\n    templateUrl: \"./app.component.html\",\n    styleUrls: [\"./app.component.sass\"],\n})\nexport class AppComponent {\n    title = \"tree-visualizer\"\n\n    public selectedNode: go.Part | null = null\n\n    model = new go.TreeModel({\n        nodeKeyProperty: \"id\",\n        nodeDataArray: [\n            {\n                id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n                parent: \"\",\n                title: \"UTAT-Team-A\",\n                qualifier: \"SHALL\",\n                type: \"Performance\",\n                description: \"A description\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n            },\n            {\n                id: \"123456789\",\n                parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n                title: \"UTAT-Team-B\",\n                qualifier: \"SHOULD\",\n                type: \"Constraint\",\n                description: \"Another description\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/Child-1-123456789\",\n            },\n            {\n                id: \"abcdefghi\",\n                parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n                title: \"UTAT-Team-C\",\n                qualifier: \"SHALL\",\n                type: \"Component Selection\",\n                description:\n                    \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/Child-2-abcdefghi\",\n            },\n            {\n                id: \"qwertyuiop\",\n                parent: \"123456789\",\n                title: \"UTAT-Team-D\",\n                qualifier: \"SHOULD\",\n                type: \"A type\",\n                description: \"Yet another description that is just a little bit longer\",\n                rationale: \"A rationale\",\n                url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n            },\n        ],\n    })\n\n    public setSelectedNode(node: go.Part | null) {\n        this.selectedNode = node\n    }\n}\n",
+            "sourceCode": "import { Component, Input } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\nimport { Requirements } from \"./interfaces/requirements\"\r\nimport { BackendService } from \"./services/backend.service\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n  styleUrls: ['./app.component.sass']\r\n})\r\nexport class AppComponent {\r\n    title = \"tree-visualizer\";\r\n\r\n    @Input()\r\n    public selectedNode: go.Node | null = null;\r\n\r\n    @Input()\r\n    model = new go.TreeModel({\r\n        nodeKeyProperty: \"id\",\r\n        nodeDataArray: [],\r\n    });\r\n\r\n    constructor(private backend: BackendService) {\r\n        backend.getRequirements().subscribe(r => this.initModel(r))\r\n    };\r\n\r\n    initModel(r: Requirements) {\r\n        this.model.commit(m => m.mergeNodeDataArray(r))\r\n    }\r\n\r\n  public setSelectedNode(node: go.Node) {\r\n    this.selectedNode = node;\r\n    console.log(this.selectedNode)\r\n  }\r\n\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": "#title\r\n    background-color: white\r\n    position: absolute\r\n    font-family: Sans-Serif\r\n    font-weight: bold\r\n    width: 50vw\r\n    z-index: 10\r\n    margin: 1vh 1vh\r\n    padding: 3vh 3vh\r\n    border: #000 solid 2px\r\n",
                     "styleUrl": "./app.component.sass"
                 }
             ],
             "stylesData": "",
-            "templateData": "<p>This is TreeVisualizer!</p>\n\n\n<app-org-chart [model]=\"model\" (nodeClicked)=\"setSelectedNode($event)\"></app-org-chart>"
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "backend",
+                        "type": "BackendService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "backend",
+                        "type": "BackendService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<div style=\"display: flex; flex-grow: grow\">\r\n    <app-node-directory [model]=\"model\" [selectedNode]=\"selectedNode\" (nodeClicked)=\"setSelectedNode($event)\"></app-node-directory>\r\n    <app-org-chart [model]=\"model\" (nodeClicked)=\"setSelectedNode($event)\" [selectedNode]=\"selectedNode\"></app-org-chart>\r\n    <app-inspector [selectedNode]=\"selectedNode\"></app-inspector>\r\n</div>\r\n\r\n"
+        },
+        {
+            "name": "InspectorComponent",
+            "id": "component-InspectorComponent-3a9a9e1ef890cabda33cf35ac39b75c1be39cd8f1b53ae5e05e68514287d7fa382e5b66f7ffc74e1555508e31f813177cdbd5837fd1f798d39f6a50b74f54268",
+            "file": "src/app/components/inspector/inspector.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-inspector",
+            "styleUrls": [
+                "./inspector.component.sass"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./inspector.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "selectedNode",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "go.Part | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "collection",
+                    "defaultValue": "'Tree visualizer'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "created_by",
+                    "defaultValue": "'John Doe'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "description",
+                    "defaultValue": "'The tree visualizer shall do things'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                },
+                {
+                    "name": "last_edited",
+                    "defaultValue": "new Date()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Date | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                },
+                {
+                    "name": "last_edited_by",
+                    "defaultValue": "'Jane Doe'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "mission",
+                    "defaultValue": "'FINCH'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 27
+                },
+                {
+                    "name": "parent",
+                    "defaultValue": "'FINCH-Team-Placeholder'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "qualifier",
+                    "defaultValue": "'SHALL'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "qualifiers",
+                    "defaultValue": "['SHALL', 'SHOULD', 'WILL']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "rationale",
+                    "defaultValue": "'To do stuff'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "read_only",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "requirement",
+                    "defaultValue": "'FINCH-TreeVisualizer-Placeholder'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "stakeholders",
+                    "defaultValue": "['Systems']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "system",
+                    "defaultValue": "'Tree Visualizer'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "test_plans",
+                    "defaultValue": "['Test plan 1 (placeholder link)']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "trades",
+                    "defaultValue": "['Trade 1 (placeholder link)']",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "url",
+                    "defaultValue": "new URL('https://www.notion.so/FINCH-Power-Batteries-74331bc1129c417c850a0a5ca0deb759')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "URL | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnChanges",
+                    "args": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "changes",
+                            "type": "SimpleChanges",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\r\nimport { Requirement } from 'src/app/interfaces/requirement';\r\n\r\n@Component({\r\n    selector: 'app-inspector',\r\n    templateUrl: './inspector.component.html',\r\n    styleUrls: ['./inspector.component.sass']\r\n})\r\nexport class InspectorComponent implements OnChanges {\r\n    @Input() public selectedNode: go.Part | null = null;\r\n\r\n    read_only = true;\r\n    qualifiers = ['SHALL', 'SHOULD', 'WILL'];\r\n\r\n    requirement: string = 'FINCH-TreeVisualizer-Placeholder';\r\n    created_by: string = 'John Doe';\r\n    parent: string = 'FINCH-Team-Placeholder';\r\n    last_edited: Date | null = new Date();\r\n    qualifier: string = 'SHALL';\r\n    collection: string = 'Tree visualizer';\r\n    test_plans: string[] = ['Test plan 1 (placeholder link)'];\r\n    system: string = 'Tree Visualizer';\r\n    rationale: string = 'To do stuff';\r\n    trades: string[] = ['Trade 1 (placeholder link)'];\r\n    last_edited_by: string = 'Jane Doe';\r\n    stakeholders: string[] = ['Systems'];\r\n    mission: string = 'FINCH';\r\n    description: string = 'The tree visualizer shall do things'\r\n    url: URL | null = new URL('https://www.notion.so/FINCH-Power-Batteries-74331bc1129c417c850a0a5ca0deb759')\r\n\r\n    ngOnChanges(changes: SimpleChanges) {\r\n        const val = changes['selectedNode'].currentValue;\r\n\r\n        if (val === null) {\r\n            this.requirement = '-';\r\n            this.created_by = '-';\r\n            this.parent = '-';\r\n            this.last_edited = null;\r\n            this.qualifier = '-';\r\n            this.collection = '-';\r\n            this.test_plans = ['-'];\r\n            this.system = '-';\r\n            this.rationale = '-';\r\n            this.trades = ['-'];\r\n            this.last_edited_by = '-';\r\n            this.stakeholders = ['-'];\r\n            this.mission = '-';\r\n            this.description = '-';\r\n            this.url = null;\r\n        }\r\n        else {\r\n            const data: Requirement = val.data;\r\n            const parent: go.Node | null = val.findTreeParentNode();\r\n\r\n            this.requirement = data.title;\r\n            this.created_by = data['created-by'];\r\n            this.parent = parent ? parent.data.title : '';\r\n            this.last_edited = new Date(data['last-edited']);\r\n            this.qualifier = data.qualifier;\r\n            this.collection = data.collection.join(', ');\r\n            this.test_plans = data['test-plans'].length > 0 ? data['test-plans'] : [''];\r\n            this.system = data.system;\r\n            this.rationale = data.rationale;\r\n            this.trades = data.trades.length > 0 ? data.trades : [''];\r\n            this.last_edited_by = data['last-edited-by'];\r\n            this.stakeholders = data.stakeholder.length > 0 ? data.stakeholder : [''];\r\n            this.mission = data.mission;\r\n            this.description = data.description;\r\n            this.url = data.url ? new URL(data.url) : null;\r\n        }\r\n    }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "#container \r\n    overflow: auto\r\n    height: 98.5vh\r\n    margin: 0%\r\n    padding: 3% 1% 0 1%\r\n    border: #000 solid 1px\r\n\r\nmat-form-field\r\n    width: 100%\r\n    font-size: 12px\r\n\r\n.readonly-property\r\n    border-left: medium solid rgba(0, 0, 0, 0.6)\r\n    margin: -1em 0 2em 0\r\n    padding: 1em 0 1em 0\r\n    font-size: 10px\r\n\r\n.readonly-property p\r\n    margin: 0 0 0 1em\r\n\r\n.readonly-property p > span\r\n    font-weight: bold\r\n\r\n.readonly\r\n    display: none\r\n",
+                    "styleUrl": "./inspector.component.sass"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnChanges"
+            ],
+            "templateData": "<div id=\"container\"> \r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Requirement</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"requirement\">\r\n    </mat-form-field>\r\n\r\n    <div class=\"readonly-property\">\r\n        <p><span>Created By: </span>{{ created_by }}</p>\r\n    </div>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Parent</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"parent\">\r\n    </mat-form-field>\r\n\r\n    <div class=\"readonly-property\">\r\n        <p><span>Last Edited: </span>{{ last_edited | date:'medium' }}</p>\r\n    </div>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Qualifier</mat-label>\r\n        <mat-select [value]=\"qualifier\">\r\n            <mat-option *ngFor=\"let q of qualifiers\" [value]=\"q\" [disabled]=\"(read_only && q != qualifier) ? 'true' : null\">\r\n                {{ q }}\r\n            </mat-option>\r\n        </mat-select>\r\n    </mat-form-field>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Collection</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"collection\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Verification Plans</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"test_plans[0]\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>System</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"system\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Rationale</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"rationale\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Trades</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"trades[0]\">\r\n    </mat-form-field>\r\n\r\n    <div class=\"readonly-property\">\r\n        <p><span>Last Edited By: </span>{{ last_edited_by }}</p>\r\n    </div>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Stakeholders</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"stakeholders[0]\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Mission</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"mission\">\r\n    </mat-form-field>\r\n\r\n    <mat-form-field appearance=\"outline\" floatLabel=\"always\">\r\n        <mat-label>Description</mat-label>\r\n        <input matInput [readonly]=\"read_only\" [value]=\"description\">\r\n    </mat-form-field>\r\n\r\n    <div class=\"readonly-property\">\r\n        <p><span>URL: </span><a [href]=\"url ? url.href : '#'\" target=\"_blank\">{{ url ? url.href : '#' }}</a></p>\r\n    </div>\r\n</div>\r\n"
         },
         {
             "name": "NodeDirectoryComponent",
-            "id": "component-NodeDirectoryComponent-52a04097fb5fc6c9afca10872377b322a9cfa5dc9ec79ba9081754ee2f283dc129fa660936ed327ca470e5a9e3c1b981fa81c15deb97a2ad5fac15755c99a4ca",
+            "id": "component-NodeDirectoryComponent-c52e881f2b823230c01db1edb1ac8015c3fbd5d20e1d006179e9869e98aa1ef092f1d346d11195951147d1c686da7dff67648a4083ede62ccb0517c27cfcea59",
             "file": "src/app/components/node-directory/node-directory.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -233,8 +675,16 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 19,
                     "type": "go.TreeModel",
+                    "decorators": []
+                },
+                {
+                    "name": "selectedNode",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "any",
                     "decorators": []
                 }
             ],
@@ -244,11 +694,24 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 76,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
+                {
+                    "name": "_selectedNode",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Node | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "modifierKind": [
+                        123
+                    ]
+                },
                 {
                     "name": "diagram",
                     "defaultValue": "new go.Diagram()",
@@ -257,7 +720,20 @@
                     "type": "go.Diagram",
                     "optional": false,
                     "description": "",
-                    "line": 12,
+                    "line": 13,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "node_found",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Node | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
                     "modifierKind": [
                         123
                     ]
@@ -265,12 +741,38 @@
             ],
             "methodsClass": [
                 {
+                    "name": "collapseAll",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 207,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "expandAll",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 196,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
                     "name": "ngAfterViewInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 85,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -283,7 +785,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 80,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -298,11 +800,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n  selector: 'app-node-directory',\n  templateUrl: './node-directory.component.html',\n  styleUrls: ['./node-directory.component.sass']\n})\nexport class NodeDirectoryComponent implements OnInit {\n  public diagram: go.Diagram = new go.Diagram()\n\n  @Input()\n  public model: go.TreeModel = new go.TreeModel()\n\n  @Output()\n  public nodeClicked = new EventEmitter()\n\n  constructor() {}\n\n  public ngOnInit() {}\n\n  public ngAfterViewInit(): void {\n      this.diagram = $(go.Diagram, \"app-node-directory\",\n      {\n        allowMove: false,\n        allowCopy: false,\n        allowDelete: false,\n        allowHorizontalScroll: true,\n        allowVerticalScroll: true,\n        contentAlignment: go.Spot.TopLeft,\n        padding: new go.Margin(75, 0, 0, 0),\n        layout:\n          $(go.TreeLayout,\n            {\n              alignment: go.TreeLayout.AlignmentStart,\n              angle: 0,\n              compaction: go.TreeLayout.CompactionNone,\n              layerSpacing: 16,\n              layerSpacingParentOverlap: 1,\n              nodeIndentPastParent: 1.0,\n              nodeSpacing: 0,\n              setsPortSpot: false,\n              setsChildPortSpot: false\n            })\n      });\n\n    // define the Node template\n    this.diagram.nodeTemplate =\n      $(go.Node, \n      $(\"TreeExpanderButton\",\n        { // customize the button's appearance\n          \"_treeExpandedFigure\": \"LineDown\",\n          \"_treeCollapsedFigure\": \"LineRight\",\n          \"ButtonBorder.fill\": \"whitesmoke\",\n          \"ButtonBorder.stroke\": null,\n          \"_buttonFillOver\": \"rgba(0,128,255,0.25)\",\n          \"_buttonStrokeOver\": null\n        }),\n      $(go.Panel, \"Horizontal\",\n        { position: new go.Point(18, 0) },\n        new go.Binding(\"background\", \"isSelected\", s => s ? \"lightblue\" : \"white\").ofObject(),\n        $(go.Picture,\n          {\n            width: 18, height: 18,\n            margin: new go.Margin(0, 4, 0, 0),\n            imageStretch: go.GraphObject.Uniform\n          },\n          // bind the picture source on two properties of the Node\n          // to display open folder, closed folder, or document\n          new go.Binding(\"source\", \"isTreeExpanded\", imageConverter).ofObject(),\n          new go.Binding(\"source\", \"isTreeLeaf\", imageConverter).ofObject()),\n        $(go.TextBlock,\n          { font: '9pt Verdana, sans-serif' },\n          new go.Binding(\"text\", \"title\", s => \"\" + s))\n      )  // end Horizontal Panel\n    );  // end Node\n\n  this.diagram.linkTemplate = $(go.Link)\n\n  this.diagram.model = this.model;\n\n  // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use\n  function imageConverter(prop: any, picture: any) {\n    var node = picture.part;\n    if (node.isTreeLeaf) {\n      return \"https://www.iconpacks.net/icons/1/free-document-icon-901-thumb.png\";\n    } else {\n      if (node.isTreeExpanded) {\n        return \"https://www.clipartmax.com/png/middle/129-1292051_lower-nursery-open-folder-icon-png.png\";\n      } else {\n        return \"https://img.icons8.com/color/512/folder-invoices--v1.png\";\n      }\n    }\n  }\n  window.addEventListener('DOMContentLoaded', this.ngOnInit);\n  }\n\n}",
+            "sourceCode": "import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\nimport { bufferToggle } from \"rxjs\";\r\n\r\nconst $ = go.GraphObject.make\r\n\r\n@Component({\r\n  selector: 'app-node-directory',\r\n  templateUrl: './node-directory.component.html',\r\n  styleUrls: ['./node-directory.component.sass']\r\n})\r\nexport class NodeDirectoryComponent implements OnInit, AfterViewInit {\r\n  public diagram: go.Diagram = new go.Diagram()\r\n  \r\n  public _selectedNode: go.Node | null = null;\r\n  public node_found: go.Node | null = null; \r\n\r\n  @Input()\r\n  public model: go.TreeModel = new go.TreeModel()\r\n\r\n  @Input()\r\n  get selectedNode() { return this._selectedNode; }\r\n  set selectedNode(node: go.Node | null) {\r\n    if (node != null) {\r\n      this._selectedNode = node;\r\n      console.log('Node clicked:')\r\n      console.log(this._selectedNode.data.title)\r\n\r\n      if (this.node_found != null) {\r\n        // set the previous selected node to false\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n        this.diagram.updateAllTargetBindings();\r\n      }\r\n      this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)\r\n      console.log('Looking for node')\r\n      if (this.node_found !== null) {\r\n        console.log('Node found:')\r\n        console.log(this.node_found.data)\r\n\r\n        const panToSelectedNode = (node_found: go.Node | null) => {\r\n          if (node_found !== null) {\r\n            var nodeBounds = node_found.actualBounds;\r\n            var viewportBounds = this.diagram.viewportBounds;\r\n\r\n            if (!viewportBounds.containsRect(nodeBounds)) {\r\n              var offsetY = (viewportBounds.height - nodeBounds.height) / 2;\r\n              var position = new go.Point(0, nodeBounds.y - offsetY);\r\n              this.diagram.position = position;\r\n              console.log('PANNED')\r\n            }\r\n          }\r\n        }\r\n\r\n        panToSelectedNode(this.node_found)\r\n\r\n        console.log(this.node_found.data.isSelected)\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', true)\r\n        console.log(this.node_found.data.isSelected)\r\n        this.diagram.updateAllTargetBindings();\r\n      } else {\r\n        // Node not found\r\n        console.log(\"Node not found\");\r\n      }\r\n\r\n    } else {\r\n      this._selectedNode = null;\r\n      if (this.node_found != null) {\r\n        // set the previous selected node to false\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n        this.diagram.updateAllTargetBindings();\r\n      }\r\n    }\r\n  }\r\n\r\n  @Output()\r\n  public nodeClicked = new EventEmitter()\r\n\r\n  constructor() {}\r\n\r\n  public ngOnInit() {\r\n    console.log(this.selectedNode)\r\n    console.log('ngOnInit')\r\n  }\r\n\r\n  public ngAfterViewInit() {\r\n\r\n      this.diagram = $(go.Diagram, \"app-node-directory\",\r\n      {\r\n        allowMove: false,\r\n        allowCopy: false,\r\n        allowDelete: false,\r\n        allowHorizontalScroll: true,\r\n        allowVerticalScroll: true,\r\n        contentAlignment: go.Spot.TopLeft,\r\n        padding: new go.Margin(100, 0),\r\n        layout:\r\n          $(go.TreeLayout,\r\n            {\r\n              alignment: go.TreeLayout.AlignmentStart,\r\n              angle: 0,\r\n              compaction: go.TreeLayout.CompactionNone,\r\n              layerSpacing: 16,\r\n              layerSpacingParentOverlap: 1,\r\n              nodeIndentPastParent: 1.0,\r\n              nodeSpacing: 0,\r\n              setsPortSpot: false,\r\n              setsChildPortSpot: false\r\n            })\r\n      });\r\n\r\n    // define the Node template\r\n    this.diagram.nodeTemplate =\r\n      $(go.Node, {\r\n        selectionAdorned: false,\r\n      },\r\n      $(\"TreeExpanderButton\",\r\n        { // customize the button's appearance\r\n          \"_treeExpandedFigure\": \"LineDown\",\r\n          \"_treeCollapsedFigure\": \"LineRight\",\r\n          \"ButtonBorder.fill\": \"whitesmoke\",\r\n          \"ButtonBorder.stroke\": null,\r\n          \"_buttonFillOver\": \"rgba(0,128,255,0.25)\",\r\n          \"_buttonStrokeOver\": null,\r\n        }),\r\n      $(go.Panel, \"Horizontal\",\r\n        { \r\n          position: new go.Point(18, 0),\r\n        },\r\n        $(go.Picture,\r\n          {\r\n            width: 18, height: 18,\r\n            margin: new go.Margin(0, 4, 0, 0),\r\n            imageStretch: go.GraphObject.Uniform\r\n          },\r\n          // bind the picture source on two properties of the Node\r\n          // to display open folder, closed folder, or document\r\n          new go.Binding(\"source\", \"isTreeExpanded\", imageConverter).ofObject(),\r\n          new go.Binding(\"source\", \"isTreeLeaf\", imageConverter).ofObject()),\r\n        $(go.TextBlock,\r\n          {},\r\n          new go.Binding(\"background\", \"\", function(data) {\r\n            return data.isSelected ? \"lightblue\" : null;\r\n          },\r\n        ),\r\n          new go.Binding(\"font\", \"\", function(data) {\r\n            return data.isSelected ? 'bold 9pt Verdana, sans-serif' : '9pt Verdana, sans-serif';\r\n          },\r\n        ),\r\n          new go.Binding(\"stroke\", \"\", function(data) {\r\n            return data.isSelected ? '#0960D4' : 'black';\r\n          },\r\n        ),\r\n          new go.Binding(\"text\", \"title\", s => \"\" + s))\r\n      ),  // end Horizontal Panel\r\n    );  // end Node\r\n\r\n  this.diagram.linkTemplate = $(go.Link)\r\n\r\n  this.diagram.model = this.model;\r\n\r\n  // when selection changes, emit event to update the selected node\r\n  this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\r\n    const node = this.diagram?.selection.first()\r\n    console.log(this.model.toJson())\r\n    this.nodeClicked.emit(node)\r\n  })\r\n\r\n  // Add buttons to control \"Collapse All\" and \"Expand All\" functionality\r\n  const expandAllButton = document.getElementById(\"expandAllButton\");\r\n  if (expandAllButton) {\r\n    expandAllButton.addEventListener(\"click\", () => this.expandAll());\r\n  }\r\n\r\n  const collapseAllButton = document.getElementById(\"collapseAllButton\");\r\n  if (collapseAllButton) {\r\n    collapseAllButton.addEventListener(\"click\", () => this.collapseAll());\r\n  }\r\n\r\n  // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use\r\n  function imageConverter(prop: any, picture: any) {\r\n    var node = picture.part;\r\n    if (node.isTreeLeaf) {\r\n      return \"https://www.iconpacks.net/icons/1/free-document-icon-901-thumb.png\";\r\n    } else {\r\n      if (node.isTreeExpanded) {\r\n        return \"https://www.clipartmax.com/png/middle/129-1292051_lower-nursery-open-folder-icon-png.png\";\r\n      } else {\r\n        return \"https://img.icons8.com/color/512/folder-invoices--v1.png\";\r\n      }\r\n    }\r\n  }\r\n  window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);\r\n  }\r\n\r\n  // Function to expand all tree nodes\r\n  public expandAll() {\r\n    this.diagram.startTransaction(\"expandAll\");\r\n    this.diagram.nodes.each((node) => {\r\n      if (!node.isTreeLeaf && !node.isTreeExpanded) {\r\n        node.isTreeExpanded = true;\r\n      }\r\n    });\r\n    this.diagram.commitTransaction(\"expandAll\");\r\n  }\r\n\r\n  // Function to collapse all tree nodes\r\n  public collapseAll() {\r\n    this.diagram.startTransaction(\"collapseAll\");\r\n    this.diagram.nodes.each((node) => {\r\n      if (!node.isTreeLeaf && node.isTreeExpanded) {\r\n        node.isTreeExpanded = false;\r\n      }\r\n    });\r\n    this.diagram.commitTransaction(\"collapseAll\");\r\n  }\r\n\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "#app-node-directory\n    position: absolute\n    top: 0\n    bottom: 0\n    left: 0\n    right: 0\n    width: 25%\n    height: 100%\n    background: #ffffff",
+                    "data": "#app-node-directory\r\n    margin-left: 0\r\n    margin-right: auto\r\n    margin-top: 0\r\n    width: 20vw\r\n    height: 97vh\r\n    border: 1px solid black\r\n\r\n#expandAllButton\r\n    background-color: #ADD8E6\r\n    color: black\r\n    font-family: Verdana\r\n    border: 3px solid #1E90FF\r\n    cursor: pointer\r\n    &:hover\r\n        background-color: #94BFCD\r\n\r\n#collapseAllButton\r\n    background-color: #ADD8E6\r\n    color: black\r\n    font-family: Verdana\r\n    border: 3px solid #1E90FF\r\n    cursor: pointer\r\n    &:hover\r\n        background-color: #94BFCD",
                     "styleUrl": "./node-directory.component.sass"
                 }
             ],
@@ -313,16 +815,55 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 18
+                "line": 76
             },
             "implements": [
-                "OnInit"
+                "OnInit",
+                "AfterViewInit"
             ],
-            "templateData": "<div id=\"app-node-directory\"></div>"
+            "accessors": {
+                "selectedNode": {
+                    "name": "selectedNode",
+                    "setSignature": {
+                        "name": "selectedNode",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "node",
+                                "type": "go.Node | null",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 23,
+                        "jsdoctags": [
+                            {
+                                "name": "node",
+                                "type": "go.Node | null",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "selectedNode",
+                        "type": "",
+                        "returnType": "",
+                        "line": 22
+                    }
+                }
+            },
+            "templateData": "<div id=\"app-node-directory\"></div>\r\n<button id=\"expandAllButton\">Expand All</button>\r\n<button id=\"collapseAllButton\">Collapse All</button>\r\n"
         },
         {
             "name": "OrgChartComponent",
-            "id": "component-OrgChartComponent-f1f609fb38129d0170e0cc80cfb9eeb2acf1678ecf9d2ba028e4c50d7b29dc8c9ed7f4f00e927328a902a9537988114a2a3e894c7c031fcedd5c2be9b133db93",
+            "id": "component-OrgChartComponent-b685addd795980e58199cf20ba10d3a3f5fd91a855a844b3e7e5044bbfb60e59728d6563a02f6851895de45805affcefab67a7d05925569d2d5530644e3e6741",
             "file": "src/app/components/org-chart/org-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -344,8 +885,16 @@
                     "defaultValue": "new go.TreeModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
+                    "line": 21,
                     "type": "go.TreeModel",
+                    "decorators": []
+                },
+                {
+                    "name": "selectedNode",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "any",
                     "decorators": []
                 }
             ],
@@ -355,22 +904,35 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 79,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
                 {
-                    "name": "diagram",
+                    "name": "_selectedNode",
                     "defaultValue": "null",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.Diagram | null",
+                    "type": "go.Node | null",
                     "optional": false,
                     "description": "",
-                    "line": 18,
+                    "line": 17,
                     "modifierKind": [
-                        121
+                        123
+                    ]
+                },
+                {
+                    "name": "diagram",
+                    "defaultValue": "new go.Diagram()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Diagram",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        123
                     ]
                 },
                 {
@@ -381,9 +943,9 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 21,
+                    "line": 15,
                     "modifierKind": [
-                        121
+                        123
                     ]
                 },
                 {
@@ -394,9 +956,22 @@
                     "type": "go.Overview | null",
                     "optional": false,
                     "description": "",
-                    "line": 19,
+                    "line": 13,
                     "modifierKind": [
-                        121
+                        123
+                    ]
+                },
+                {
+                    "name": "node_found",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.Node | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        123
                     ]
                 },
                 {
@@ -407,9 +982,9 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 20,
+                    "line": 14,
                     "modifierKind": [
-                        121
+                        123
                     ]
                 },
                 {
@@ -420,7 +995,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 81,
                     "modifierKind": [
                         123
                     ]
@@ -428,12 +1003,25 @@
             ],
             "methodsClass": [
                 {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 90,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 23,
+                    "line": 85,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -448,31 +1036,77 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\nimport * as go from \"gojs\"\n\nconst $ = go.GraphObject.make\n\n@Component({\n    selector: \"app-org-chart\",\n    templateUrl: \"./org-chart.component.html\",\n    styleUrls: [\"./org-chart.component.sass\"],\n})\nexport class OrgChartComponent implements OnInit {\n    @Input() public model: go.TreeModel = new go.TreeModel()\n\n    @Output() public nodeClicked = new EventEmitter()\n\n    public showMap = true\n\n    private diagram: go.Diagram | null = null\n    private minimap: go.Overview | null = null\n    private nodeSize = new go.Size(256, 128)\n    private font = \"sans-serif\"\n\n    public ngOnInit() {\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\n            allowCopy: false,\n            allowDelete: false,\n            layout: $(go.TreeLayout, {\n                treeStyle: go.TreeLayout.StyleLastParents,\n                arrangement: go.TreeLayout.ArrangementHorizontal,\n                // properties for most of the tree:\n                angle: 90,\n                layerSpacing: 35,\n                // properties for the leaf parents:\n                alternateAngle: 90,\n                alternateLayerSpacing: 35,\n                alternateAlignment: go.TreeLayout.AlignmentBus,\n                alternateNodeSpacing: 20,\n            }),\n            \"undoManager.isEnabled\": true,\n        })\n\n        this.diagram.nodeTemplate = $(\n            go.Node,\n            \"Auto\",\n            {\n                desiredSize: this.nodeSize,\n                isShadowed: true,\n                shadowOffset: new go.Point(2, 2),\n                shadowColor: \"#DDD\",\n                shadowBlur: 6,\n                mouseDragEnter: (e, node, prev) => {\n                    const shape: go.Shape = (node as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape.stroke = \"dodgerblue\"\n                    shape.strokeWidth = 3\n\n                    const shape2: go.Shape = (prev as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape2.stroke = \"green\"\n                    shape2.strokeWidth = 3\n                },\n                mouseDragLeave: (e, node, next) => {\n                    const shape: go.Shape = (node as go.Part).findObject(\n                        \"SHAPE\"\n                    ) as go.Shape\n                    shape.stroke = \"dodgerblue\"\n                    shape.strokeWidth = 0\n                },\n                mouseDrop: (e, node) => {\n                    const diagram = node.diagram\n                    const selnode = diagram?.selection.first() as go.Node // assume just one Node in selection\n                    // find any existing link into the selected node\n                    const link = selnode.findTreeParentLink()\n                    if (link !== null) {\n                        // reconnect any existing link\n                        link.fromNode = node as go.Node\n                    } else {\n                        // else create a new link\n                        diagram?.toolManager.linkingTool.insertLink(\n                            node as go.Node,\n                            (node as go.Node).port,\n                            selnode,\n                            selnode.port\n                        )\n                    }\n                },\n            },\n            $(go.Shape, \"Rectangle\", { name: \"SHAPE\", fill: \"white\", strokeWidth: 0 }),\n            $(\n                go.Panel,\n                \"Table\",\n                {\n                    alignment: go.Spot.TopLeft,\n                    margin: 16,\n                    defaultAlignment: go.Spot.Left,\n                },\n                $(go.RowColumnDefinition, {\n                    column: 0,\n                    width: this.nodeSize.width - 50,\n                }),\n                $(\n                    go.TextBlock,\n                    {\n                        row: 0,\n                        column: 0,\n                        font: \"bold 12pt \" + this.font,\n                        overflow: go.TextBlock.OverflowEllipsis,\n                    },\n                    new go.Binding(\"text\", \"title\")\n                ),\n                $(\n                    go.Shape, // chip\n                    \"RoundedRectangle\",\n                    {\n                        row: 1,\n                        column: 0,\n                        width: 70,\n                        height: 18,\n                        parameter1: 100,\n                        strokeWidth: 0,\n                    },\n                    new go.Binding(\"fill\", \"qualifier\", (qualifier) => {\n                        if (qualifier === \"SHALL\") {\n                            return \"#06c769\" // green\n                        } else if (qualifier === \"SHOULD\") {\n                            return \"#2196f3\" // blue\n                        } else {\n                            return \"#cccccc\" // default grey\n                        }\n                    })\n                ),\n                $(\n                    go.TextBlock,\n                    {\n                        row: 1,\n                        column: 0,\n                        font: \"10pt \" + this.font,\n                        stroke: \"white\",\n                        margin: 6,\n                    },\n                    new go.Binding(\"text\", \"qualifier\")\n                ),\n                $(\n                    go.TextBlock,\n                    {\n                        row: 2,\n                        column: 0,\n                        font: \"10pt \" + this.font,\n                        stretch: go.GraphObject.Fill,\n                        maxLines: 3,\n                        overflow: go.TextBlock.OverflowEllipsis,\n                    },\n                    new go.Binding(\"text\", \"description\")\n                )\n            )\n        )\n\n        this.diagram.linkTemplate = $(\n            go.Link, // the whole link panel\n            go.Link.Orthogonal,\n            $(go.Shape) // the link shape, default black stroke\n        )\n\n        this.minimap = $(go.Overview, \"app-minimap\", { observed: this.diagram })\n\n        this.diagram.model = this.model\n\n        // when selection changes, emit event to update the selected node\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\n            const node = this.diagram?.selection.first()\n            console.log(this.model.toJson())\n            this.nodeClicked.emit(node)\n        })\n    }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\n\r\nconst $ = go.GraphObject.make\r\n\r\n@Component({\r\n    selector: \"app-org-chart\",\r\n    templateUrl: \"./org-chart.component.html\",\r\n    styleUrls: [\"./org-chart.component.sass\"],\r\n})\r\nexport class OrgChartComponent implements OnInit {\r\n    public diagram: go.Diagram = new go.Diagram()\r\n    public minimap: go.Overview | null = null\r\n    public nodeSize = new go.Size(256, 128)\r\n    public font = \"sans-serif\"\r\n\r\n    public _selectedNode: go.Node | null = null;\r\n    public node_found: go.Node | null = null;\r\n\r\n    @Input() \r\n    public model: go.TreeModel = new go.TreeModel()\r\n\r\n    @Input()\r\n    get selectedNode() { return this._selectedNode; }\r\n    set selectedNode(node: go.Node | null) {\r\n        if (node != null) {\r\n        this._selectedNode = node;\r\n        console.log('Node clicked:')\r\n        console.log(this._selectedNode.data)\r\n\r\n        if (this.node_found != null) {\r\n            // set the previous selected node to false\r\n            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n            this.diagram.updateAllTargetBindings();\r\n        }\r\n        this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)\r\n        console.log('Looking for node')\r\n        if (this.node_found !== null) {\r\n            console.log('Node found:')\r\n            console.log(this.node_found.data)\r\n\r\n            const panToSelectedNode = (node_found: go.Node | null) => {\r\n                if (node_found !== null) {\r\n                  var nodeBounds = node_found.actualBounds;\r\n                  var viewportBounds = this.diagram.viewportBounds;\r\n\r\n                  if (!viewportBounds.containsRect(nodeBounds)) {\r\n                  var offsetX = (viewportBounds.width - nodeBounds.width) / 2;\r\n                  var offsetY = (viewportBounds.height - nodeBounds.height) / 2;\r\n                  var position = new go.Point(nodeBounds.x - offsetX, nodeBounds.y - offsetY);\r\n                  this.diagram.position = position;\r\n                  console.log('PANNED')\r\n                }\r\n                }\r\n              }\r\n      \r\n            panToSelectedNode(this.node_found)\r\n\r\n            console.log(this.node_found.data.isSelected)\r\n            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', 'true')\r\n            console.log(this.node_found.data.isSelected)\r\n            this.diagram.updateAllTargetBindings();\r\n        } else {\r\n            // Node not found\r\n            console.log(\"Node not found\");\r\n        }\r\n\r\n        } else {\r\n        this._selectedNode = null;\r\n        if (this.node_found != null) {\r\n            // set the previous selected node to false\r\n            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n            this.diagram.updateAllTargetBindings();\r\n        }\r\n        }\r\n    }\r\n\r\n    @Output() \r\n    public nodeClicked = new EventEmitter()\r\n\r\n    public showMap = true\r\n\r\n    constructor() {}\r\n\r\n    public ngOnInit() {\r\n        console.log(this.selectedNode)\r\n        console.log('ngOnInig')\r\n    }\r\n\r\n    public ngAfterViewInit() {\r\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\r\n            allowCopy: false,\r\n            allowDelete: false,\r\n            padding: new go.Margin(100, 0),\r\n            layout: $(go.TreeLayout, {\r\n                treeStyle: go.TreeLayout.StyleLastParents,\r\n                arrangement: go.TreeLayout.ArrangementHorizontal,\r\n                // properties for most of the tree:\r\n                angle: 90,\r\n                layerSpacing: 35,\r\n                // properties for the leaf parents:\r\n                alternateAngle: 90,\r\n                alternateLayerSpacing: 35,\r\n                alternateAlignment: go.TreeLayout.AlignmentBus,\r\n                alternateNodeSpacing: 20,\r\n            }),\r\n            \"undoManager.isEnabled\": true,\r\n        })\r\n\r\n        this.diagram.nodeTemplate = $(\r\n            go.Node,\r\n            \"Auto\",\r\n            {\r\n                selectionAdorned: false,\r\n                desiredSize: this.nodeSize,\r\n                isShadowed: true,\r\n                shadowOffset: new go.Point(2, 2),\r\n                shadowColor: \"#DDD\",\r\n                shadowBlur: 6,\r\n                mouseDragEnter: (e, node, prev) => {\r\n                    const shape: go.Shape = (node as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape.stroke = \"dodgerblue\"\r\n                    shape.strokeWidth = 3\r\n\r\n                    const shape2: go.Shape = (prev as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape2.stroke = \"green\"\r\n                    shape2.strokeWidth = 3\r\n                },\r\n                mouseDragLeave: (e, node, next) => {\r\n                    const shape: go.Shape = (node as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape.stroke = \"dodgerblue\"\r\n                    shape.strokeWidth = 0\r\n                },\r\n                mouseDrop: (e, node) => {\r\n                    const diagram = node.diagram\r\n                    const selnode = diagram?.selection.first() as go.Node // assume just one Node in selection\r\n                    // find any existing link into the selected node\r\n                    const link = selnode.findTreeParentLink()\r\n                    if (link !== null) {\r\n                        // reconnect any existing link\r\n                        link.fromNode = node as go.Node\r\n                    } else {\r\n                        // else create a new link\r\n                        diagram?.toolManager.linkingTool.insertLink(\r\n                            node as go.Node,\r\n                            (node as go.Node).port,\r\n                            selnode,\r\n                            selnode.port\r\n                        )\r\n                    }\r\n                },\r\n            },\r\n            $(go.Shape,\r\n                \"Rectangle\",\r\n                {\r\n                  name: \"SHAPE\",\r\n                  strokeWidth: 2,\r\n                },\r\n                new go.Binding(\"fill\", \"\", function(data) {\r\n                  return data.isSelected ? \"lightblue\" : \"white\";\r\n                }),\r\n                new go.Binding(\"stroke\", \"\", function(data) {\r\n                    return data.isSelected ? \"dodgerblue\" : null;\r\n                  })\r\n              ),\r\n              $(\r\n                go.Panel,\r\n                \"Table\",\r\n                {\r\n                    alignment: go.Spot.TopLeft,\r\n                    margin: 16,\r\n                    defaultAlignment: go.Spot.Left,\r\n                },\r\n                $(go.RowColumnDefinition, {\r\n                    column: 0,\r\n                    width: this.nodeSize.width - 50,\r\n                }),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 0,\r\n                        column: 0,\r\n                        font: \"bold 11pt \" + this.font,\r\n                        overflow: go.TextBlock.OverflowEllipsis,\r\n                        wrap: go.TextBlock.WrapDesiredSize, // Wrap the text to multiple lines if necessary\r\n                        maxSize: new go.Size(this.nodeSize.width - 50, NaN), // Limit the maximum width of the text block\r\n                        maxLines: 2,\r\n                    },\r\n                    new go.Binding(\"text\", \"title\")\r\n                ),\r\n                $(\r\n                    go.Shape, // chip\r\n                    \"RoundedRectangle\",\r\n                    {\r\n                        row: 1,\r\n                        column: 0,\r\n                        width: 70,\r\n                        height: 18,\r\n                        parameter1: 100,\r\n                        strokeWidth: 0,\r\n                    },\r\n                    new go.Binding(\"fill\", \"qualifier\", (qualifier) => {\r\n                        if (qualifier === \"SHALL\") {\r\n                            return \"#06c769\"; // green\r\n                        } else if (qualifier === \"SHOULD\") {\r\n                            return \"#2196f3\"; // blue\r\n                        } else {\r\n                            return \"#cccccc\"; // default grey\r\n                        }\r\n                    })\r\n                ),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 1,\r\n                        column: 0,\r\n                        font: \"10pt \" + this.font,\r\n                        stroke: \"white\",\r\n                        margin: 6,\r\n                    },\r\n                    new go.Binding(\"text\", \"qualifier\")\r\n                ),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 2,\r\n                        column: 0,\r\n                        font: \"9pt \" + this.font,\r\n                        stretch: go.GraphObject.Fill,\r\n                        maxLines: 3,\r\n                        overflow: go.TextBlock.OverflowEllipsis,\r\n                    },\r\n                    new go.Binding(\"text\", \"description\")\r\n                )\r\n            )            \r\n        )\r\n\r\n        this.diagram.linkTemplate = $(\r\n            go.Link, // the whole link panel\r\n            go.Link.Orthogonal,\r\n            $(go.Shape) // the link shape, default black stroke\r\n        )\r\n\r\n        this.minimap = $(go.Overview, \"app-minimap\", { observed: this.diagram })\r\n\r\n        this.diagram.model = this.model\r\n\r\n        // when selection changes, emit event to update the selected node\r\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\r\n            const node = this.diagram?.selection.first()\r\n            console.log(this.model.toJson())\r\n            this.nodeClicked.emit(node)\r\n        })\r\n    }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "#app-org-chart\n    position: absolute\n    top: 0\n    right: 0\n    bottom: 0\n    left: 0\n    width: 100%\n    height: 100%\n    background-color: #F8F8F8\n\n#app-minimap\n    position: absolute\n    margin: 32px\n    top: 0\n    right: 0\n    width: 16%\n    height: 16%\n    border: 1px solid black\n",
+                    "data": "#app-org-chart\r\n    background: whitesmoke\r\n    width: 60vw\r\n    height: 99.5vh\r\n    border: 1px solid black\r\n    margin-right: 0\r\n    margin-left: auto\r\n    margin-top: 0\r\n\r\n#app-minimap\r\n    position: absolute\r\n    margin: 15px\r\n    top: 0vw\r\n    right: 20vw\r\n    width: 10%\r\n    height: 10%\r\n    border: 1px solid black\r\n",
                     "styleUrl": "./org-chart.component.sass"
                 }
             ],
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 81
+            },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div>\n    <div id=\"app-org-chart\"></div>\n    <div id=\"app-minimap\"></div>\n</div>\n\n\n"
+            "accessors": {
+                "selectedNode": {
+                    "name": "selectedNode",
+                    "setSignature": {
+                        "name": "selectedNode",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "node",
+                                "type": "go.Node | null",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 25,
+                        "jsdoctags": [
+                            {
+                                "name": "node",
+                                "type": "go.Node | null",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "selectedNode",
+                        "type": "",
+                        "returnType": "",
+                        "line": 24
+                    }
+                }
+            },
+            "templateData": "<div>\r\n<div id=\"app-org-chart\"></div>\r\n<div id=\"app-minimap\"></div>\r\n</div>"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-032a8ac7cd41f4b9116678d3ad9caece1638fffd8de7b90df7bbae102e9afac4e4510b9024d391fc43a511e2b5d9411246d353ee5d314ac220f54ab1d96126eb",
+            "id": "module-AppModule-5f93730d8ee18b3d0c78e73b076adb77cc913716409ccadec6523d76f878c72f16ae204adabb105905b294c5af7adc1b43d009f0b478e3e2bb30451cc8459c51",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { BrowserModule } from \"@angular/platform-browser\"\nimport { HttpClientModule } from \"@angular/common/http\"\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\nimport { NodeDirectoryComponent } from './components/node-directory/node-directory.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    OrgChartComponent,\n    NodeDirectoryComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    BrowserAnimationsModule,\n    HttpClientModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule {}\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\"\r\nimport { BrowserModule } from \"@angular/platform-browser\"\r\nimport { HttpClientModule } from \"@angular/common/http\"\r\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { MatFormFieldModule } from '@angular/material/form-field';\r\nimport { MatInputModule } from '@angular/material/input';\r\nimport { MatSelectModule } from '@angular/material/select';\r\n\r\nimport { AppRoutingModule } from './app-routing.module';\r\nimport { AppComponent } from './app.component';\r\nimport { OrgChartComponent } from \"./components/org-chart/org-chart.component\";\r\nimport { NodeDirectoryComponent } from './components/node-directory/node-directory.component';\r\nimport { InspectorComponent } from './components/inspector/inspector.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    OrgChartComponent,\r\n    NodeDirectoryComponent,\r\n    InspectorComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    AppRoutingModule,\r\n    BrowserAnimationsModule,\r\n    HttpClientModule,\r\n    MatFormFieldModule,\r\n    MatInputModule,\r\n    MatSelectModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -483,6 +1117,9 @@
                     "elements": [
                         {
                             "name": "AppComponent"
+                        },
+                        {
+                            "name": "InspectorComponent"
                         },
                         {
                             "name": "NodeDirectoryComponent"
@@ -520,13 +1157,13 @@
         },
         {
             "name": "AppRoutingModule",
-            "id": "module-AppRoutingModule-300d8db993c2e4f6937a80d5621f170604c487e0b8cc75c75c0bfb3a5795d4adbad63ad38ab98380f2f6bed4d335641a600295f5592ff6447d6dcb768aa5bfaf",
+            "id": "module-AppRoutingModule-c68d9ea55ca484d5f473c0f9826d34b60878e736b364d02a1e184dcec84ed779f543f469f63802f271fe901994f668ce4d38df11293b9386a49a5e0336dfda1a",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app-routing.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from \"@angular/core\"\nimport { RouterModule, Routes } from \"@angular/router\"\n\nconst routes: Routes = []\n\n@NgModule({\n    imports: [RouterModule.forRoot(routes)],\n    exports: [RouterModule],\n})\nexport class AppRoutingModule {}\n",
+            "sourceCode": "import { NgModule } from \"@angular/core\"\r\nimport { RouterModule, Routes } from \"@angular/router\"\r\n\r\nconst routes: Routes = []\r\n\r\n@NgModule({\r\n    imports: [RouterModule.forRoot(routes)],\r\n    exports: [RouterModule],\r\n})\r\nexport class AppRoutingModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -591,6 +1228,16 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/node-directory/node-directory.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -608,6 +1255,26 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Editable",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/inspector/inspector.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "model",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "go.TreeModel",
+                "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n  })"
+            },
+            {
                 "name": "model",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -615,7 +1282,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "go.TreeModel",
-                "defaultValue": "new go.TreeModel({\n  nodeKeyProperty: \"id\",\n  nodeDataArray: [\n      {\n          id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          parent: \"\",\n          title: \"UTAT-Team-A\",\n          qualifier: \"SHALL\",\n          type: \"Performance\",\n          description: \"A description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n      },\n      {\n          id: \"123456789\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-B\",\n          qualifier: \"SHOULD\",\n          type: \"Constraint\",\n          description: \"Another description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-1-123456789\",\n      },\n      {\n          id: \"abcdefghi\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-C\",\n          qualifier: \"SHALL\",\n          type: \"Component Selection\",\n          description:\n              \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-2-abcdefghi\",\n      },\n      {\n          id: \"qwertyuiop\",\n          parent: \"123456789\",\n          title: \"UTAT-Team-D\",\n          qualifier: \"SHOULD\",\n          type: \"A type\",\n          description: \"Yet another description that is just a little bit longer\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n      },\n  ],\n})"
+                "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n})"
+            },
+            {
+                "name": "Readonly",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/inspector/inspector.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/inspector/inspector.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<InspectorComponent>",
+                "defaultValue": "(args: InspectorComponent) => ({\r\n    props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -625,7 +1322,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "(args) => ({\n    props: args,\n})"
+                "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -635,7 +1332,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "(args) => ({\n    props: args,\n})"
+                "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
             }
         ],
         "functions": [],
@@ -695,7 +1392,39 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "(args) => ({\n    props: args,\n})"
+                    "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
+                }
+            ],
+            "src/app/app.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "model",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "go.TreeModel",
+                    "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n  })"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
                 }
             ],
             "src/app/components/node-directory/node-directory.component.stories.ts": [
@@ -717,7 +1446,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "go.TreeModel",
-                    "defaultValue": "new go.TreeModel({\n  nodeKeyProperty: \"id\",\n  nodeDataArray: [\n      {\n          id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          parent: \"\",\n          title: \"UTAT-Team-A\",\n          qualifier: \"SHALL\",\n          type: \"Performance\",\n          description: \"A description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\n      },\n      {\n          id: \"123456789\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-B\",\n          qualifier: \"SHOULD\",\n          type: \"Constraint\",\n          description: \"Another description\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-1-123456789\",\n      },\n      {\n          id: \"abcdefghi\",\n          parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\n          title: \"UTAT-Team-C\",\n          qualifier: \"SHALL\",\n          type: \"Component Selection\",\n          description:\n              \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Child-2-abcdefghi\",\n      },\n      {\n          id: \"qwertyuiop\",\n          parent: \"123456789\",\n          title: \"UTAT-Team-D\",\n          qualifier: \"SHOULD\",\n          type: \"A type\",\n          description: \"Yet another description that is just a little bit longer\",\n          rationale: \"A rationale\",\n          url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\n      },\n  ],\n})"
+                    "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n})"
                 },
                 {
                     "name": "Template",
@@ -727,7 +1456,39 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "(args) => ({\n    props: args,\n})"
+                    "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
+                }
+            ],
+            "src/app/components/inspector/inspector.stories.ts": [
+                {
+                    "name": "Editable",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/inspector/inspector.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Readonly",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/inspector/inspector.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/inspector/inspector.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<InspectorComponent>",
+                    "defaultValue": "(args: InspectorComponent) => ({\r\n    props: args,\r\n})"
                 }
             ]
         },
@@ -754,12 +1515,81 @@
         "status": "low",
         "files": [
             {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "model",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/app.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InspectorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/20",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Editable",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Readonly",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/inspector/inspector.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -798,7 +1628,7 @@
                 "linktype": "component",
                 "name": "NodeDirectoryComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -847,7 +1677,7 @@
                 "linktype": "component",
                 "name": "OrgChartComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
@@ -861,19 +1691,28 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/services/backend.service.ts",
-                "type": "injectable",
-                "linktype": "injectable",
-                "name": "BackendService",
+                "filePath": "src/app/interfaces/requirement.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Requirement",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/17",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/interfaces/requirements.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Requirements",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
                 "filePath": "src/app/services/backend.service.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "Requirements",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "BackendService",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
