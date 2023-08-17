@@ -258,4 +258,31 @@ export class OrgChartComponent implements OnInit {
             this.nodeClicked.emit(node)
         })
     }
+
+    // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
+    public searchDiagram() {  // called by button
+        var input = document.getElementById("mySearch");
+        if (!input) return;
+        this.diagram.focus();
+
+        this.diagram.startTransaction("highlight search");
+
+        if (input.title) {
+        // search four different data properties for the string, any of which may match for success
+        // create a case insensitive RegExp from what the user typed
+        var safe = input.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var regex = new RegExp(safe, "i");
+        var results = this.diagram.findNodesByExample({ name: regex },
+            { nation: regex },
+            { title: regex },
+            { headOf: regex });
+        this.diagram.highlightCollection(results);
+        // try to center the diagram at the first node that was found
+        if (results.count > 0) this.diagram.centerRect(results.first()!.actualBounds);
+        } else {  // empty string only clears highlighteds collection
+        this.diagram.clearHighlighteds();
+        }
+
+        this.diagram.commitTransaction("highlight search");
+    }
 }
