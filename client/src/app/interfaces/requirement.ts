@@ -1,10 +1,10 @@
 export interface Requirement {
     id: string;
     'created-by': string;
-    'parent': string;
+    parent: Array<string>;
     'last-edited': Date;
     qualifier: string;
-    collection: Array<string>;
+    collection: string;
     'test-plans': Array<string>;
     system: string;
     rationale: string;
