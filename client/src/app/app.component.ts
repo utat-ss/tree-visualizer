@@ -25,7 +25,7 @@ export class AppComponent {
     };
 
     initModel(r: Requirements) {
-        this.model.commit(m => m.mergeNodeDataArray(r))
+        this.model.commit(m => m.mergeNodeDataArray(r))   // ! currently broken due to multiple parents, fix when moved to non-TreeModel!
     }
 
   public setSelectedNode(node: go.Node) {

@@ -14,7 +14,7 @@ export class InspectorComponent implements OnChanges {
 
     requirement: string = 'FINCH-TreeVisualizer-Placeholder';
     created_by: string = 'John Doe';
-    parent: string = 'FINCH-Team-Placeholder';
+    parent: string[] = ['FINCH-Team-Placeholder1', 'FINCH-Team-Placeholder2'];
     last_edited: Date | null = new Date();
     qualifier: string = 'SHALL';
     collection: string = 'Tree visualizer';
@@ -34,7 +34,7 @@ export class InspectorComponent implements OnChanges {
         if (val === null) {
             this.requirement = '-';
             this.created_by = '-';
-            this.parent = '-';
+            this.parent = ['-'];
             this.last_edited = null;
             this.qualifier = '-';
             this.collection = '-';
@@ -50,14 +50,14 @@ export class InspectorComponent implements OnChanges {
         }
         else {
             const data: Requirement = val.data;
-            const parent: go.Node | null = val.findTreeParentNode();
+            const parent: go.Node | null = val.findTreeParentNode();    // ! needs to be fixed after migration to non-TreeModel to support multiple parents
 
             this.requirement = data.title;
             this.created_by = data['created-by'];
             this.parent = parent ? parent.data.title : '';
             this.last_edited = new Date(data['last-edited']);
             this.qualifier = data.qualifier;
-            this.collection = data.collection.join(', ');
+            this.collection = data.collection;
             this.test_plans = data['test-plans'].length > 0 ? data['test-plans'] : [''];
             this.system = data.system;
             this.rationale = data.rationale;

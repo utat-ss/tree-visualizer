@@ -81,17 +81,17 @@ const _parseRequirementsForAPI = async function(raw_data) {
     data.push({
       'id': elem.id,
       'created-by': props['Created by'].created_by.name,
-      'parent': props.Parent.relation?.[0]?.id ?? '',                     // Notion enforced limit 1
+      'parent': props.Parent.relation.map(r => r.id),                           // * list
       'last-edited': props['Last Edited'].last_edited_time,
       'qualifier': qualifiers[props['🛑 Qualifier'].relation?.[0]?.id] ?? '',   // Notion enforced limit 1
-      'collection': props.Collection.multi_select.map(c => c.name),       // * list
-      'test-plans': props['🏁 Test Plans'].relation.map(r => test_plans[r.id]),  // * list
-      'system': systems[props['🏗️ System'].relation?.[0]?.id] ?? '',                  // Notion enforced limit 1
+      'collection': props.Collection.select?.name ?? '',
+      'test-plans': props['🏁 Test Plans'].relation.map(r => test_plans[r.id]), // * list
+      'system': systems[props['🏗️ System'].relation?.[0]?.id] ?? '',            // Notion enforced limit 1
       'rationale': props.Rationale.rich_text?.[0]?.plain_text ?? '',
-      'trades': props['🃏 Trades'].relation.map(r => trades[r.id]),      // * list
+      'trades': props['🃏 Trades'].relation.map(r => trades[r.id]),              // * list
       'last-edited-by': props['Last Edited By'].last_edited_by.name,
-      'stakeholder': props['⚽ Stakeholder'].relation.map(r => teams[r.id]),          // * list
-      'mission': missions[props['🏆 Mission'.relation?.[0]?.id]] ?? '',  // Notion enforced limit 1
+      'stakeholder': props['⚽ Stakeholder'].relation.map(r => teams[r.id]),    // * list
+      'mission': missions[props['🏆 Mission'.relation?.[0]?.id]] ?? '',         // Notion enforced limit 1
       'description': props.Description.rich_text?.[0]?.plain_text ?? '',
       'title': props.ID.title?.[0]?.plain_text ?? '',
       'url': elem.url
@@ -107,8 +107,8 @@ const _parseRequirementsForVis = async function(raw_data) {
   for (let elem of raw_data) {
     all_obj[elem.id] = {
       title: elem.properties['ID'].title[0]?.plain_text,
-      parent: elem.properties.Parent.relation[0]?.id,
-      children: elem.properties.Child.relation?.map(r => r.id)
+      parent: elem.properties.Parent.relation.map(r => r.id),
+      children: elem.properties.Child.relation.map(r => r.id)
     }
   }
 
