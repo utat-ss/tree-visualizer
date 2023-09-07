@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
 import * as go from "gojs"
-import { bufferToggle } from "rxjs";
 
 const $ = go.GraphObject.make
 
@@ -16,7 +15,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   public node_found: go.Node | null = null; 
 
   @Input()
-  public model: go.TreeModel = new go.TreeModel()
+  public model: go.GraphLinksModel = new go.GraphLinksModel()
 
   @Input()
   get selectedNode() { return this._selectedNode; }
@@ -94,17 +93,10 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         contentAlignment: go.Spot.TopLeft,
         padding: new go.Margin(100, 0),
         layout:
-          $(go.TreeLayout,
+          $(go.GridLayout,
             {
-              alignment: go.TreeLayout.AlignmentStart,
-              angle: 0,
-              compaction: go.TreeLayout.CompactionNone,
-              layerSpacing: 16,
-              layerSpacingParentOverlap: 1,
-              nodeIndentPastParent: 1.0,
-              nodeSpacing: 0,
-              setsPortSpot: false,
-              setsChildPortSpot: false
+              wrappingColumn: 1,
+              spacing: new go.Size(0, 5)
             })
       });
 
@@ -113,29 +105,19 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
       $(go.Node, {
         selectionAdorned: false,
       },
-      $("TreeExpanderButton",
-        { // customize the button's appearance
-          "_treeExpandedFigure": "LineDown",
-          "_treeCollapsedFigure": "LineRight",
-          "ButtonBorder.fill": "whitesmoke",
-          "ButtonBorder.stroke": null,
-          "_buttonFillOver": "rgba(0,128,255,0.25)",
-          "_buttonStrokeOver": null,
-        }),
       $(go.Panel, "Horizontal",
         { 
           position: new go.Point(18, 0),
         },
         $(go.Picture,
           {
-            width: 18, height: 18,
-            margin: new go.Margin(0, 4, 0, 0),
+            width: 15, height: 15,
+            margin: new go.Margin(0, 0, 0, 0),
             imageStretch: go.GraphObject.Uniform
           },
           // bind the picture source on two properties of the Node
           // to display open folder, closed folder, or document
-          new go.Binding("source", "isTreeExpanded", imageConverter).ofObject(),
-          new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
+          new go.Binding("source", "", imageConverter).ofObject(),),
         $(go.TextBlock,
           {},
           new go.Binding("background", "", function(data) {
@@ -165,53 +147,39 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
     this.nodeClicked.emit(node)
   })
 
-  // Add buttons to control "Collapse All" and "Expand All" functionality
-  const expandAllButton = document.getElementById("expandAllButton");
-  if (expandAllButton) {
-    expandAllButton.addEventListener("click", () => this.expandAll());
-  }
-
-  const collapseAllButton = document.getElementById("collapseAllButton");
-  if (collapseAllButton) {
-    collapseAllButton.addEventListener("click", () => this.collapseAll());
-  }
-
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use
-  function imageConverter(prop: any, picture: any) {
-    var node = picture.part;
-    if (node.isTreeLeaf) {
-      return "https://www.iconpacks.net/icons/1/free-document-icon-901-thumb.png";
-    } else {
-      if (node.isTreeExpanded) {
-        return "https://www.clipartmax.com/png/middle/129-1292051_lower-nursery-open-folder-icon-png.png";
-      } else {
-        return "https://img.icons8.com/color/512/folder-invoices--v1.png";
-      }
+  function imageConverter() {
+    return "https://cdn-icons-png.flaticon.com/512/1635/1635634.png";
+  }
+
+  // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
+  const searchDiagram = () => {  // called by button
+    var input = document.getElementById("mySearch");
+    if (!input) return;
+    this.diagram.focus();
+
+    this.diagram.startTransaction("highlight search");
+
+    if (input.title) {
+      // search four different data properties for the string, any of which may match for success
+      // create a case insensitive RegExp from what the user typed
+      var safe = input.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var regex = new RegExp(safe, "i");
+      var results = this.diagram.findNodesByExample({ name: regex },
+        { nation: regex },
+        { title: regex },
+        { headOf: regex });
+      this.diagram.highlightCollection(results);
+      // try to center the diagram at the first node that was found
+      // if (results.count > 0) this.diagram.centerRect(results.first().actualBounds);
+    } else {  // empty string only clears highlighteds collection
+      this.diagram.clearHighlighteds();
     }
+
+    this.diagram.commitTransaction("highlight search");
   }
+
   window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);
-  }
-
-  // Function to expand all tree nodes
-  public expandAll() {
-    this.diagram.startTransaction("expandAll");
-    this.diagram.nodes.each((node) => {
-      if (!node.isTreeLeaf && !node.isTreeExpanded) {
-        node.isTreeExpanded = true;
-      }
-    });
-    this.diagram.commitTransaction("expandAll");
-  }
-
-  // Function to collapse all tree nodes
-  public collapseAll() {
-    this.diagram.startTransaction("collapseAll");
-    this.diagram.nodes.each((node) => {
-      if (!node.isTreeLeaf && node.isTreeExpanded) {
-        node.isTreeExpanded = false;
-      }
-    });
-    this.diagram.commitTransaction("collapseAll");
   }
 
 }
