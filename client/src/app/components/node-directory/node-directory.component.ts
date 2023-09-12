@@ -138,6 +138,11 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
 
   this.diagram.linkTemplate = $(go.Link)
 
+  // sort array in alphabetical order
+  this.model.nodeDataArray.sort(function(a, b) {
+    return a["title"].localeCompare(b["title"]);
+  });
+
   this.diagram.model = this.model;
 
   // when selection changes, emit event to update the selected node
@@ -150,33 +155,6 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use
   function imageConverter() {
     return "https://cdn-icons-png.flaticon.com/512/1635/1635634.png";
-  }
-
-  // the Search functionality highlights all of the nodes that have at least one data property match a RegExp
-  const searchDiagram = () => {  // called by button
-    var input = document.getElementById("mySearch");
-    if (!input) return;
-    this.diagram.focus();
-
-    this.diagram.startTransaction("highlight search");
-
-    if (input.title) {
-      // search four different data properties for the string, any of which may match for success
-      // create a case insensitive RegExp from what the user typed
-      var safe = input.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      var regex = new RegExp(safe, "i");
-      var results = this.diagram.findNodesByExample({ name: regex },
-        { nation: regex },
-        { title: regex },
-        { headOf: regex });
-      this.diagram.highlightCollection(results);
-      // try to center the diagram at the first node that was found
-      // if (results.count > 0) this.diagram.centerRect(results.first().actualBounds);
-    } else {  // empty string only clears highlighteds collection
-      this.diagram.clearHighlighteds();
-    }
-
-    this.diagram.commitTransaction("highlight search");
   }
 
   window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);
