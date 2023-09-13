@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core"
 import * as go from "gojs"
-import { Requirements } from "./interfaces/requirements"
+import { RequirementsGraph } from "./interfaces/requirements-graph"
 import { BackendService } from "./services/backend.service"
 
 @Component({
@@ -16,16 +16,19 @@ export class AppComponent {
 
     @Input()
     model = new go.GraphLinksModel({
+        nodeKeyProperty: "id",
+        linkKeyProperty: "id",
         nodeDataArray: [],
         linkDataArray: [],
     })
 
     constructor(private backend: BackendService) {
-        backend.getRequirements().subscribe((r) => this.initModel(r))
+        backend.getRequirementsGraph().subscribe((graph) => this.initModel(graph))
     }
 
-    initModel(r: Requirements) {
-        this.model.commit(m => m.mergeNodeDataArray(r))   // ! currently broken due to multiple parents, fix when moved to non-TreeModel!
+    initModel(graph: RequirementsGraph) {
+        this.model.commit(m => m.mergeNodeDataArray(graph.nodes));
+        this.model.commit(m => (m as go.GraphLinksModel).mergeLinkDataArray(graph.links))
     }
 
     public setSelectedNode(node: go.Node) {
