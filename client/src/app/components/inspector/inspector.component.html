@@ -9,8 +9,8 @@
     </div>
 
     <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Parent</mat-label>
-        <input matInput [readonly]="read_only" [value]="parent">
+        <mat-label>Parents</mat-label>
+        <textarea matInput [readonly]="read_only" [rows]="parents.length" [value]="parents.join('\n')"></textarea>
     </mat-form-field>
 
     <div class="readonly-property">
