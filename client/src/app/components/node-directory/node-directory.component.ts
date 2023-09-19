@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+import { FormsModule } from '@angular/forms';
 import * as go from "gojs"
 
 const $ = go.GraphObject.make
@@ -9,10 +10,14 @@ const $ = go.GraphObject.make
   styleUrls: ['./node-directory.component.sass']
 })
 export class NodeDirectoryComponent implements OnInit, AfterViewInit {
+
   public diagram: go.Diagram = new go.Diagram()
   
   public _selectedNode: go.Node | null = null;
   public node_found: go.Node | null = null; 
+  public searchText: string = '';
+  public currentSearchIndex: number | null = null;
+  public hasMatchingNodes: boolean = true; // Initialize as true
 
   @Input()
   public model: go.GraphLinksModel = new go.GraphLinksModel()
@@ -155,4 +160,68 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
   window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);
   }
 
-}
+  // Function to handle the search operation
+  searchNodes() {
+    const searchText = this.searchText.toLowerCase(); // Convert the search text to lowercase for case-insensitive search
+    this.diagram.startTransaction("search"); // Start a transaction for making changes
+
+    const matchingNodes: go.Node[] = []; // To store matching nodes
+    let selectedNode: go.Node | null = null; // To store the selected node
+
+    this.diagram.nodes.each((node) => {
+      const nodeData = node.data;
+      const title = nodeData.title.toLowerCase(); // Convert node title to lowercase
+
+      if (title.includes(searchText)) {
+        matchingNodes.push(node);
+
+        // If the node matches the search text and no node is currently selected, select it
+        if (!selectedNode) {
+          selectedNode = node;
+        }
+      }
+    });
+
+    this.diagram.commitTransaction("search"); // Commit the transaction to apply changes
+
+    // If a node matching the search text was found, select it
+    if (selectedNode) {
+      this.selectedNode = selectedNode; // Assign the selected node
+    }
+
+    // Update the currentSearchIndex based on the matching nodes
+    if (matchingNodes.length > 0) {
+      if (this.currentSearchIndex === null || this.currentSearchIndex >= matchingNodes.length - 1) {
+        this.currentSearchIndex = 0; // Start from the first matching node
+      } else {
+        this.currentSearchIndex++; // Move to the next matching node
+      }
+      this.selectedNode = matchingNodes[this.currentSearchIndex];
+    }
+
+    this.hasMatchingNodes = matchingNodes.length > 0;
+  }
+
+  // Function to clear the search
+  clearSearch() {
+    this.searchText = ''; // Clear the search text
+    this.diagram.startTransaction("clearSearch");
+
+    if (this.selectedNode) {
+      this.selectedNode = null;
+    }
+
+    this.diagram.commitTransaction("clearSearch");
+
+    this.currentSearchIndex = null;
+  }
+
+  // Function to handle keydown events on the input field
+  onKeyDown(event: KeyboardEvent) {
+    // Check if the Backspace key was pressed (keyCode 8)
+    if (event.keyCode === 8) {
+      this.currentSearchIndex = null; // Reset the search index
+      this.hasMatchingNodes = true;
+    }
+  }
+  }
