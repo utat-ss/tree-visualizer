@@ -111,7 +111,7 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         },
         $(go.Picture,
           {
-            width: 15, height: 15,
+            width: 10, height: 10,
             margin: new go.Margin(0, 0, 0, 0),
             imageStretch: go.GraphObject.Uniform
           },
@@ -137,11 +137,6 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
     );  // end Node
 
   this.diagram.linkTemplate = $(go.Link)
-
-  // sort array in alphabetical order
-  this.model.nodeDataArray.sort(function(a, b) {
-    return a["title"].localeCompare(b["title"]);
-  });
 
   this.diagram.model = this.model;
 

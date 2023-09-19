@@ -27,7 +27,10 @@ export class AppComponent {
     }
 
     initModel(graph: RequirementsGraph) {
-        this.model.commit(m => m.mergeNodeDataArray(graph.nodes));
+        const sortedNodes = graph.nodes.slice().sort((a, b) => {
+            return a.title.localeCompare(b.title);
+        });
+        this.model.commit(m => m.mergeNodeDataArray(sortedNodes));
         this.model.commit(m => (m as go.GraphLinksModel).mergeLinkDataArray(graph.links))
     }
 
