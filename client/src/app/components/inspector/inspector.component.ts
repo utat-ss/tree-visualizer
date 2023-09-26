@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Link } from 'gojs';
 import { Requirement } from 'src/app/interfaces/requirement';
 
 @Component({
@@ -14,7 +15,7 @@ export class InspectorComponent implements OnChanges {
 
     requirement: string = 'FINCH-TreeVisualizer-Placeholder';
     created_by: string = 'John Doe';
-    parent: string[] = ['FINCH-Team-Placeholder1', 'FINCH-Team-Placeholder2'];
+    parents: string[] = ['FINCH-Team-Placeholder1', 'FINCH-Team-Placeholder2'];
     last_edited: Date | null = new Date();
     qualifier: string = 'SHALL';
     collection: string = 'Tree visualizer';
@@ -34,7 +35,7 @@ export class InspectorComponent implements OnChanges {
         if (val === null) {
             this.requirement = '-';
             this.created_by = '-';
-            this.parent = ['-'];
+            this.parents = ['-'];
             this.last_edited = null;
             this.qualifier = '-';
             this.collection = '-';
@@ -50,11 +51,16 @@ export class InspectorComponent implements OnChanges {
         }
         else {
             const data: Requirement = val.data;
-            const parent: go.Node | null = val.findTreeParentNode();    // ! needs to be fixed after migration to non-TreeModel to support multiple parents
+            const parents: Array<go.Node> = [];
+
+            let linksIterator = val.findLinksInto()
+            while (linksIterator.next()) {
+                parents.push((linksIterator.value as Link).fromNode!);
+            }
 
             this.requirement = data.title;
             this.created_by = data['created-by'];
-            this.parent = parent ? parent.data.title : '';
+            this.parents = parents.map(node => node.data.title);
             this.last_edited = new Date(data['last-edited']);
             this.qualifier = data.qualifier;
             this.collection = data.collection;

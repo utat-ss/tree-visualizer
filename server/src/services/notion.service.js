@@ -1,4 +1,5 @@
 const notion = require('@notionhq/client');
+const crypto = require('crypto')
 const { getEnv } = require('../utils/env.util')
 
 const newNotionClient = function(auth_token = undefined) {
@@ -75,13 +76,19 @@ const _parseRequirementsForAPI = async function(raw_data) {
   const teams = await getTeams();
   const missions = await getMissions();
 
-  let data = [];
+  let data = {
+    nodes: [],
+    links: []
+  }
+
   for (let elem of raw_data) {
     let props = elem.properties;
-    data.push({
+    let parent_ids = props.Parent.relation.map(r => r.id);
+
+    data.nodes.push({
       'id': elem.id,
       'created-by': props['Created by'].created_by.name,
-      'parent': props.Parent.relation.map(r => r.id),                           // * list
+      'parent': parent_ids,   // * list
       'last-edited': props['Last Edited'].last_edited_time,
       'qualifier': qualifiers[props['🛑 Qualifier'].relation?.[0]?.id] ?? '',   // Notion enforced limit 1
       'collection': props.Collection.select?.name ?? '',
@@ -96,6 +103,14 @@ const _parseRequirementsForAPI = async function(raw_data) {
       'title': props.ID.title?.[0]?.plain_text ?? '',
       'url': elem.url
     });
+
+    for (const parent_id of parent_ids) {
+      data.links.push({
+        id: crypto.randomUUID(),
+        from: parent_id,
+        to: elem.id
+      });
+    }
   }
 
   return data;

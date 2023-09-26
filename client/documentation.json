@@ -3,18 +3,18 @@
     "interfaces": [
         {
             "name": "Requirement",
-            "id": "interface-Requirement-6bca4c64c0842c889b9d63b07a1469c5d7925cbb85067f5e53a8a5913f8a6954adf4ffcbf9505fc7ae80a9dafd6e96e9c3e912b610632f6b771ab266d7e6f112",
+            "id": "interface-Requirement-773cc0ac854f77b019380831caf5eefd6f4b162b92c677baff3a594f49ec09bdb309baedf10d7db9db691fd2002863a0d46a17c3f5873fc2aa23590bcb3acea3",
             "file": "src/app/interfaces/requirement.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "export interface Requirement {\r\n    id: string;\r\n    'created-by': string;\r\n    'parent': string;\r\n    'last-edited': Date;\r\n    qualifier: string;\r\n    collection: Array<string>;\r\n    'test-plans': Array<string>;\r\n    system: string;\r\n    rationale: string;\r\n    trades: Array<string>;\r\n    'last-edited-by': string;\r\n    stakeholder: Array<string>;\r\n    mission: string;\r\n    description: string;\r\n    title: string;\r\n    url: URL;\r\n}\r\n",
+            "sourceCode": "export interface Requirement {\r\n    id: string;\r\n    'created-by': string;\r\n    parent: Array<string>;\r\n    'last-edited': Date;\r\n    qualifier: string;\r\n    collection: string;\r\n    'test-plans': Array<string>;\r\n    system: string;\r\n    rationale: string;\r\n    trades: Array<string>;\r\n    'last-edited-by': string;\r\n    stakeholder: Array<string>;\r\n    mission: string;\r\n    description: string;\r\n    title: string;\r\n    url: URL;\r\n}\r\n",
             "properties": [
                 {
                     "name": "collection",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Array<string>",
+                    "type": "string",
                     "optional": false,
                     "description": "",
                     "line": 7
@@ -77,7 +77,7 @@
                     "name": "parent",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
+                    "type": "Array<string>",
                     "optional": false,
                     "description": "",
                     "line": 4
@@ -244,7 +244,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-3a9c7a2b0c4f373f0b875538e1abad6d382cb6bfb611041f4d6320ef4786cc799293720aceb287bc5d7b12dd9595c8e74f492ca1b86c79cd1fb6ec32b5d97197",
+            "id": "component-AppComponent-e08960368bbd161816b8984100a1772dbc465c48d1ecbc1fc0b9cb7ef94efacd46812a446715059fc98c414bc9411d525ee878f304d5c70fc2c22263451b1dfe",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -263,7 +263,7 @@
             "inputsClass": [
                 {
                     "name": "model",
-                    "defaultValue": "new go.TreeModel({\r\n        nodeKeyProperty: \"id\",\r\n        nodeDataArray: [],\r\n    })",
+                    "defaultValue": "new go.GraphLinksModel({\r\n        nodeDataArray: [],\r\n        linkDataArray: [],\r\n    })",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 18,
@@ -361,7 +361,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\nimport { Requirements } from \"./interfaces/requirements\"\r\nimport { BackendService } from \"./services/backend.service\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n  styleUrls: ['./app.component.sass']\r\n})\r\nexport class AppComponent {\r\n    title = \"tree-visualizer\";\r\n\r\n    @Input()\r\n    public selectedNode: go.Node | null = null;\r\n\r\n    @Input()\r\n    model = new go.TreeModel({\r\n        nodeKeyProperty: \"id\",\r\n        nodeDataArray: [],\r\n    });\r\n\r\n    constructor(private backend: BackendService) {\r\n        backend.getRequirements().subscribe(r => this.initModel(r))\r\n    };\r\n\r\n    initModel(r: Requirements) {\r\n        this.model.commit(m => m.mergeNodeDataArray(r))\r\n    }\r\n\r\n  public setSelectedNode(node: go.Node) {\r\n    this.selectedNode = node;\r\n    console.log(this.selectedNode)\r\n  }\r\n\r\n}",
+            "sourceCode": "import { Component, Input } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\nimport { Requirements } from \"./interfaces/requirements\"\r\nimport { BackendService } from \"./services/backend.service\"\r\n\r\n@Component({\r\n    selector: \"app-root\",\r\n    templateUrl: \"./app.component.html\",\r\n    styleUrls: [\"./app.component.sass\"],\r\n})\r\nexport class AppComponent {\r\n    title = \"tree-visualizer\"\r\n\r\n    @Input()\r\n    public selectedNode: go.Node | null = null\r\n\r\n    @Input()\r\n    model = new go.GraphLinksModel({\r\n        nodeDataArray: [],\r\n        linkDataArray: [],\r\n    })\r\n\r\n    constructor(private backend: BackendService) {\r\n        backend.getRequirements().subscribe((r) => this.initModel(r))\r\n    }\r\n\r\n    initModel(r: Requirements) {\r\n        this.model.commit(m => m.mergeNodeDataArray(r))   // ! currently broken due to multiple parents, fix when moved to non-TreeModel!\r\n    }\r\n\r\n    public setSelectedNode(node: go.Node) {\r\n        this.selectedNode = node\r\n        console.log(this.selectedNode)\r\n    }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -400,7 +400,7 @@
         },
         {
             "name": "InspectorComponent",
-            "id": "component-InspectorComponent-3a9a9e1ef890cabda33cf35ac39b75c1be39cd8f1b53ae5e05e68514287d7fa382e5b66f7ffc74e1555508e31f813177cdbd5837fd1f798d39f6a50b74f54268",
+            "id": "component-InspectorComponent-2d37890473a20bbce4e8dc3361bab4512a34cb3c18d8bbc9841b45f11f9075a165c9407c5dbbe00cbe660d02e836ce3cf120cb84333317d6d63882378715ae2c",
             "file": "src/app/components/inspector/inspector.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -491,10 +491,10 @@
                 },
                 {
                     "name": "parent",
-                    "defaultValue": "'FINCH-Team-Placeholder'",
+                    "defaultValue": "['FINCH-Team-Placeholder1', 'FINCH-Team-Placeholder2']",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
+                    "type": "string[]",
                     "optional": false,
                     "description": "",
                     "line": 17
@@ -637,7 +637,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\r\nimport { Requirement } from 'src/app/interfaces/requirement';\r\n\r\n@Component({\r\n    selector: 'app-inspector',\r\n    templateUrl: './inspector.component.html',\r\n    styleUrls: ['./inspector.component.sass']\r\n})\r\nexport class InspectorComponent implements OnChanges {\r\n    @Input() public selectedNode: go.Part | null = null;\r\n\r\n    read_only = true;\r\n    qualifiers = ['SHALL', 'SHOULD', 'WILL'];\r\n\r\n    requirement: string = 'FINCH-TreeVisualizer-Placeholder';\r\n    created_by: string = 'John Doe';\r\n    parent: string = 'FINCH-Team-Placeholder';\r\n    last_edited: Date | null = new Date();\r\n    qualifier: string = 'SHALL';\r\n    collection: string = 'Tree visualizer';\r\n    test_plans: string[] = ['Test plan 1 (placeholder link)'];\r\n    system: string = 'Tree Visualizer';\r\n    rationale: string = 'To do stuff';\r\n    trades: string[] = ['Trade 1 (placeholder link)'];\r\n    last_edited_by: string = 'Jane Doe';\r\n    stakeholders: string[] = ['Systems'];\r\n    mission: string = 'FINCH';\r\n    description: string = 'The tree visualizer shall do things'\r\n    url: URL | null = new URL('https://www.notion.so/FINCH-Power-Batteries-74331bc1129c417c850a0a5ca0deb759')\r\n\r\n    ngOnChanges(changes: SimpleChanges) {\r\n        const val = changes['selectedNode'].currentValue;\r\n\r\n        if (val === null) {\r\n            this.requirement = '-';\r\n            this.created_by = '-';\r\n            this.parent = '-';\r\n            this.last_edited = null;\r\n            this.qualifier = '-';\r\n            this.collection = '-';\r\n            this.test_plans = ['-'];\r\n            this.system = '-';\r\n            this.rationale = '-';\r\n            this.trades = ['-'];\r\n            this.last_edited_by = '-';\r\n            this.stakeholders = ['-'];\r\n            this.mission = '-';\r\n            this.description = '-';\r\n            this.url = null;\r\n        }\r\n        else {\r\n            const data: Requirement = val.data;\r\n            const parent: go.Node | null = val.findTreeParentNode();\r\n\r\n            this.requirement = data.title;\r\n            this.created_by = data['created-by'];\r\n            this.parent = parent ? parent.data.title : '';\r\n            this.last_edited = new Date(data['last-edited']);\r\n            this.qualifier = data.qualifier;\r\n            this.collection = data.collection.join(', ');\r\n            this.test_plans = data['test-plans'].length > 0 ? data['test-plans'] : [''];\r\n            this.system = data.system;\r\n            this.rationale = data.rationale;\r\n            this.trades = data.trades.length > 0 ? data.trades : [''];\r\n            this.last_edited_by = data['last-edited-by'];\r\n            this.stakeholders = data.stakeholder.length > 0 ? data.stakeholder : [''];\r\n            this.mission = data.mission;\r\n            this.description = data.description;\r\n            this.url = data.url ? new URL(data.url) : null;\r\n        }\r\n    }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';\r\nimport { Requirement } from 'src/app/interfaces/requirement';\r\n\r\n@Component({\r\n    selector: 'app-inspector',\r\n    templateUrl: './inspector.component.html',\r\n    styleUrls: ['./inspector.component.sass']\r\n})\r\nexport class InspectorComponent implements OnChanges {\r\n    @Input() public selectedNode: go.Part | null = null;\r\n\r\n    read_only = true;\r\n    qualifiers = ['SHALL', 'SHOULD', 'WILL'];\r\n\r\n    requirement: string = 'FINCH-TreeVisualizer-Placeholder';\r\n    created_by: string = 'John Doe';\r\n    parent: string[] = ['FINCH-Team-Placeholder1', 'FINCH-Team-Placeholder2'];\r\n    last_edited: Date | null = new Date();\r\n    qualifier: string = 'SHALL';\r\n    collection: string = 'Tree visualizer';\r\n    test_plans: string[] = ['Test plan 1 (placeholder link)'];\r\n    system: string = 'Tree Visualizer';\r\n    rationale: string = 'To do stuff';\r\n    trades: string[] = ['Trade 1 (placeholder link)'];\r\n    last_edited_by: string = 'Jane Doe';\r\n    stakeholders: string[] = ['Systems'];\r\n    mission: string = 'FINCH';\r\n    description: string = 'The tree visualizer shall do things'\r\n    url: URL | null = new URL('https://www.notion.so/FINCH-Power-Batteries-74331bc1129c417c850a0a5ca0deb759')\r\n\r\n    ngOnChanges(changes: SimpleChanges) {\r\n        const val = changes['selectedNode'].currentValue;\r\n\r\n        if (val === null) {\r\n            this.requirement = '-';\r\n            this.created_by = '-';\r\n            this.parent = ['-'];\r\n            this.last_edited = null;\r\n            this.qualifier = '-';\r\n            this.collection = '-';\r\n            this.test_plans = ['-'];\r\n            this.system = '-';\r\n            this.rationale = '-';\r\n            this.trades = ['-'];\r\n            this.last_edited_by = '-';\r\n            this.stakeholders = ['-'];\r\n            this.mission = '-';\r\n            this.description = '-';\r\n            this.url = null;\r\n        }\r\n        else {\r\n            const data: Requirement = val.data;\r\n            const parent: go.Node | null = val.findTreeParentNode();    // ! needs to be fixed after migration to non-TreeModel to support multiple parents\r\n\r\n            this.requirement = data.title;\r\n            this.created_by = data['created-by'];\r\n            this.parent = parent ? parent.data.title : '';\r\n            this.last_edited = new Date(data['last-edited']);\r\n            this.qualifier = data.qualifier;\r\n            this.collection = data.collection;\r\n            this.test_plans = data['test-plans'].length > 0 ? data['test-plans'] : [''];\r\n            this.system = data.system;\r\n            this.rationale = data.rationale;\r\n            this.trades = data.trades.length > 0 ? data.trades : [''];\r\n            this.last_edited_by = data['last-edited-by'];\r\n            this.stakeholders = data.stakeholder.length > 0 ? data.stakeholder : [''];\r\n            this.mission = data.mission;\r\n            this.description = data.description;\r\n            this.url = data.url ? new URL(data.url) : null;\r\n        }\r\n    }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -653,7 +653,7 @@
         },
         {
             "name": "NodeDirectoryComponent",
-            "id": "component-NodeDirectoryComponent-c52e881f2b823230c01db1edb1ac8015c3fbd5d20e1d006179e9869e98aa1ef092f1d346d11195951147d1c686da7dff67648a4083ede62ccb0517c27cfcea59",
+            "id": "component-NodeDirectoryComponent-507e61383df80b76979396bab0f2fd0e74dc47c6096d686b9da258a6cbc9f4ee07394432fdb54eaa4db2289683b451c8296a7115842f11d0f5bddb4fbe467b69",
             "file": "src/app/components/node-directory/node-directory.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -672,18 +672,18 @@
             "inputsClass": [
                 {
                     "name": "model",
-                    "defaultValue": "new go.TreeModel()",
+                    "defaultValue": "new go.GraphLinksModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
-                    "type": "go.TreeModel",
+                    "line": 18,
+                    "type": "go.GraphLinksModel",
                     "decorators": []
                 },
                 {
                     "name": "selectedNode",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 21,
                     "type": "any",
                     "decorators": []
                 }
@@ -694,7 +694,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 76,
+                    "line": 75,
                     "type": "EventEmitter"
                 }
             ],
@@ -707,7 +707,7 @@
                     "type": "go.Node | null",
                     "optional": false,
                     "description": "",
-                    "line": 15,
+                    "line": 14,
                     "modifierKind": [
                         123
                     ]
@@ -720,7 +720,7 @@
                     "type": "go.Diagram",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 12,
                     "modifierKind": [
                         123
                     ]
@@ -733,7 +733,7 @@
                     "type": "go.Node | null",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 15,
                     "modifierKind": [
                         123
                     ]
@@ -741,38 +741,12 @@
             ],
             "methodsClass": [
                 {
-                    "name": "collapseAll",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 207,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        123
-                    ]
-                },
-                {
-                    "name": "expandAll",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 196,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        123
-                    ]
-                },
-                {
                     "name": "ngAfterViewInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 85,
+                    "line": 84,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -785,7 +759,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 80,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -800,7 +774,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\nimport { bufferToggle } from \"rxjs\";\r\n\r\nconst $ = go.GraphObject.make\r\n\r\n@Component({\r\n  selector: 'app-node-directory',\r\n  templateUrl: './node-directory.component.html',\r\n  styleUrls: ['./node-directory.component.sass']\r\n})\r\nexport class NodeDirectoryComponent implements OnInit, AfterViewInit {\r\n  public diagram: go.Diagram = new go.Diagram()\r\n  \r\n  public _selectedNode: go.Node | null = null;\r\n  public node_found: go.Node | null = null; \r\n\r\n  @Input()\r\n  public model: go.TreeModel = new go.TreeModel()\r\n\r\n  @Input()\r\n  get selectedNode() { return this._selectedNode; }\r\n  set selectedNode(node: go.Node | null) {\r\n    if (node != null) {\r\n      this._selectedNode = node;\r\n      console.log('Node clicked:')\r\n      console.log(this._selectedNode.data.title)\r\n\r\n      if (this.node_found != null) {\r\n        // set the previous selected node to false\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n        this.diagram.updateAllTargetBindings();\r\n      }\r\n      this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)\r\n      console.log('Looking for node')\r\n      if (this.node_found !== null) {\r\n        console.log('Node found:')\r\n        console.log(this.node_found.data)\r\n\r\n        const panToSelectedNode = (node_found: go.Node | null) => {\r\n          if (node_found !== null) {\r\n            var nodeBounds = node_found.actualBounds;\r\n            var viewportBounds = this.diagram.viewportBounds;\r\n\r\n            if (!viewportBounds.containsRect(nodeBounds)) {\r\n              var offsetY = (viewportBounds.height - nodeBounds.height) / 2;\r\n              var position = new go.Point(0, nodeBounds.y - offsetY);\r\n              this.diagram.position = position;\r\n              console.log('PANNED')\r\n            }\r\n          }\r\n        }\r\n\r\n        panToSelectedNode(this.node_found)\r\n\r\n        console.log(this.node_found.data.isSelected)\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', true)\r\n        console.log(this.node_found.data.isSelected)\r\n        this.diagram.updateAllTargetBindings();\r\n      } else {\r\n        // Node not found\r\n        console.log(\"Node not found\");\r\n      }\r\n\r\n    } else {\r\n      this._selectedNode = null;\r\n      if (this.node_found != null) {\r\n        // set the previous selected node to false\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n        this.diagram.updateAllTargetBindings();\r\n      }\r\n    }\r\n  }\r\n\r\n  @Output()\r\n  public nodeClicked = new EventEmitter()\r\n\r\n  constructor() {}\r\n\r\n  public ngOnInit() {\r\n    console.log(this.selectedNode)\r\n    console.log('ngOnInit')\r\n  }\r\n\r\n  public ngAfterViewInit() {\r\n\r\n      this.diagram = $(go.Diagram, \"app-node-directory\",\r\n      {\r\n        allowMove: false,\r\n        allowCopy: false,\r\n        allowDelete: false,\r\n        allowHorizontalScroll: true,\r\n        allowVerticalScroll: true,\r\n        contentAlignment: go.Spot.TopLeft,\r\n        padding: new go.Margin(100, 0),\r\n        layout:\r\n          $(go.TreeLayout,\r\n            {\r\n              alignment: go.TreeLayout.AlignmentStart,\r\n              angle: 0,\r\n              compaction: go.TreeLayout.CompactionNone,\r\n              layerSpacing: 16,\r\n              layerSpacingParentOverlap: 1,\r\n              nodeIndentPastParent: 1.0,\r\n              nodeSpacing: 0,\r\n              setsPortSpot: false,\r\n              setsChildPortSpot: false\r\n            })\r\n      });\r\n\r\n    // define the Node template\r\n    this.diagram.nodeTemplate =\r\n      $(go.Node, {\r\n        selectionAdorned: false,\r\n      },\r\n      $(\"TreeExpanderButton\",\r\n        { // customize the button's appearance\r\n          \"_treeExpandedFigure\": \"LineDown\",\r\n          \"_treeCollapsedFigure\": \"LineRight\",\r\n          \"ButtonBorder.fill\": \"whitesmoke\",\r\n          \"ButtonBorder.stroke\": null,\r\n          \"_buttonFillOver\": \"rgba(0,128,255,0.25)\",\r\n          \"_buttonStrokeOver\": null,\r\n        }),\r\n      $(go.Panel, \"Horizontal\",\r\n        { \r\n          position: new go.Point(18, 0),\r\n        },\r\n        $(go.Picture,\r\n          {\r\n            width: 18, height: 18,\r\n            margin: new go.Margin(0, 4, 0, 0),\r\n            imageStretch: go.GraphObject.Uniform\r\n          },\r\n          // bind the picture source on two properties of the Node\r\n          // to display open folder, closed folder, or document\r\n          new go.Binding(\"source\", \"isTreeExpanded\", imageConverter).ofObject(),\r\n          new go.Binding(\"source\", \"isTreeLeaf\", imageConverter).ofObject()),\r\n        $(go.TextBlock,\r\n          {},\r\n          new go.Binding(\"background\", \"\", function(data) {\r\n            return data.isSelected ? \"lightblue\" : null;\r\n          },\r\n        ),\r\n          new go.Binding(\"font\", \"\", function(data) {\r\n            return data.isSelected ? 'bold 9pt Verdana, sans-serif' : '9pt Verdana, sans-serif';\r\n          },\r\n        ),\r\n          new go.Binding(\"stroke\", \"\", function(data) {\r\n            return data.isSelected ? '#0960D4' : 'black';\r\n          },\r\n        ),\r\n          new go.Binding(\"text\", \"title\", s => \"\" + s))\r\n      ),  // end Horizontal Panel\r\n    );  // end Node\r\n\r\n  this.diagram.linkTemplate = $(go.Link)\r\n\r\n  this.diagram.model = this.model;\r\n\r\n  // when selection changes, emit event to update the selected node\r\n  this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\r\n    const node = this.diagram?.selection.first()\r\n    console.log(this.model.toJson())\r\n    this.nodeClicked.emit(node)\r\n  })\r\n\r\n  // Add buttons to control \"Collapse All\" and \"Expand All\" functionality\r\n  const expandAllButton = document.getElementById(\"expandAllButton\");\r\n  if (expandAllButton) {\r\n    expandAllButton.addEventListener(\"click\", () => this.expandAll());\r\n  }\r\n\r\n  const collapseAllButton = document.getElementById(\"collapseAllButton\");\r\n  if (collapseAllButton) {\r\n    collapseAllButton.addEventListener(\"click\", () => this.collapseAll());\r\n  }\r\n\r\n  // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use\r\n  function imageConverter(prop: any, picture: any) {\r\n    var node = picture.part;\r\n    if (node.isTreeLeaf) {\r\n      return \"https://www.iconpacks.net/icons/1/free-document-icon-901-thumb.png\";\r\n    } else {\r\n      if (node.isTreeExpanded) {\r\n        return \"https://www.clipartmax.com/png/middle/129-1292051_lower-nursery-open-folder-icon-png.png\";\r\n      } else {\r\n        return \"https://img.icons8.com/color/512/folder-invoices--v1.png\";\r\n      }\r\n    }\r\n  }\r\n  window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);\r\n  }\r\n\r\n  // Function to expand all tree nodes\r\n  public expandAll() {\r\n    this.diagram.startTransaction(\"expandAll\");\r\n    this.diagram.nodes.each((node) => {\r\n      if (!node.isTreeLeaf && !node.isTreeExpanded) {\r\n        node.isTreeExpanded = true;\r\n      }\r\n    });\r\n    this.diagram.commitTransaction(\"expandAll\");\r\n  }\r\n\r\n  // Function to collapse all tree nodes\r\n  public collapseAll() {\r\n    this.diagram.startTransaction(\"collapseAll\");\r\n    this.diagram.nodes.each((node) => {\r\n      if (!node.isTreeLeaf && node.isTreeExpanded) {\r\n        node.isTreeExpanded = false;\r\n      }\r\n    });\r\n    this.diagram.commitTransaction(\"collapseAll\");\r\n  }\r\n\r\n}",
+            "sourceCode": "import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\n\r\nconst $ = go.GraphObject.make\r\n\r\n@Component({\r\n  selector: 'app-node-directory',\r\n  templateUrl: './node-directory.component.html',\r\n  styleUrls: ['./node-directory.component.sass']\r\n})\r\nexport class NodeDirectoryComponent implements OnInit, AfterViewInit {\r\n  public diagram: go.Diagram = new go.Diagram()\r\n  \r\n  public _selectedNode: go.Node | null = null;\r\n  public node_found: go.Node | null = null; \r\n\r\n  @Input()\r\n  public model: go.GraphLinksModel = new go.GraphLinksModel()\r\n\r\n  @Input()\r\n  get selectedNode() { return this._selectedNode; }\r\n  set selectedNode(node: go.Node | null) {\r\n    if (node != null) {\r\n      this._selectedNode = node;\r\n      console.log('Node clicked:')\r\n      console.log(this._selectedNode.data.title)\r\n\r\n      if (this.node_found != null) {\r\n        // set the previous selected node to false\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n        this.diagram.updateAllTargetBindings();\r\n      }\r\n      this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)\r\n      console.log('Looking for node')\r\n      if (this.node_found !== null) {\r\n        console.log('Node found:')\r\n        console.log(this.node_found.data)\r\n\r\n        const panToSelectedNode = (node_found: go.Node | null) => {\r\n          if (node_found !== null) {\r\n            var nodeBounds = node_found.actualBounds;\r\n            var viewportBounds = this.diagram.viewportBounds;\r\n\r\n            if (!viewportBounds.containsRect(nodeBounds)) {\r\n              var offsetY = (viewportBounds.height - nodeBounds.height) / 2;\r\n              var position = new go.Point(0, nodeBounds.y - offsetY);\r\n              this.diagram.position = position;\r\n              console.log('PANNED')\r\n            }\r\n          }\r\n        }\r\n\r\n        panToSelectedNode(this.node_found)\r\n\r\n        console.log(this.node_found.data.isSelected)\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', true)\r\n        console.log(this.node_found.data.isSelected)\r\n        this.diagram.updateAllTargetBindings();\r\n      } else {\r\n        // Node not found\r\n        console.log(\"Node not found\");\r\n      }\r\n\r\n    } else {\r\n      this._selectedNode = null;\r\n      if (this.node_found != null) {\r\n        // set the previous selected node to false\r\n        this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n        this.diagram.updateAllTargetBindings();\r\n      }\r\n    }\r\n  }\r\n\r\n  @Output()\r\n  public nodeClicked = new EventEmitter()\r\n\r\n  constructor() {}\r\n\r\n  public ngOnInit() {\r\n    console.log(this.selectedNode)\r\n    console.log('ngOnInit')\r\n  }\r\n\r\n  public ngAfterViewInit() {\r\n\r\n      this.diagram = $(go.Diagram, \"app-node-directory\",\r\n      {\r\n        allowMove: false,\r\n        allowCopy: false,\r\n        allowDelete: false,\r\n        allowHorizontalScroll: true,\r\n        allowVerticalScroll: true,\r\n        contentAlignment: go.Spot.TopLeft,\r\n        padding: new go.Margin(100, 0),\r\n        layout:\r\n          $(go.GridLayout,\r\n            {\r\n              wrappingColumn: 1,\r\n              spacing: new go.Size(0, 5)\r\n            })\r\n      });\r\n\r\n    // define the Node template\r\n    this.diagram.nodeTemplate =\r\n      $(go.Node, {\r\n        selectionAdorned: false,\r\n      },\r\n      $(go.Panel, \"Horizontal\",\r\n        { \r\n          position: new go.Point(18, 0),\r\n        },\r\n        $(go.Picture,\r\n          {\r\n            width: 15, height: 15,\r\n            margin: new go.Margin(0, 0, 0, 0),\r\n            imageStretch: go.GraphObject.Uniform\r\n          },\r\n          // bind the picture source on two properties of the Node\r\n          // to display open folder, closed folder, or document\r\n          new go.Binding(\"source\", \"\", imageConverter).ofObject(),),\r\n        $(go.TextBlock,\r\n          {},\r\n          new go.Binding(\"background\", \"\", function(data) {\r\n            return data.isSelected ? \"lightblue\" : null;\r\n          },\r\n        ),\r\n          new go.Binding(\"font\", \"\", function(data) {\r\n            return data.isSelected ? 'bold 9pt Verdana, sans-serif' : '9pt Verdana, sans-serif';\r\n          },\r\n        ),\r\n          new go.Binding(\"stroke\", \"\", function(data) {\r\n            return data.isSelected ? '#0960D4' : 'black';\r\n          },\r\n        ),\r\n          new go.Binding(\"text\", \"title\", s => \"\" + s))\r\n      ),  // end Horizontal Panel\r\n    );  // end Node\r\n\r\n  this.diagram.linkTemplate = $(go.Link)\r\n\r\n  this.diagram.model = this.model;\r\n\r\n  // when selection changes, emit event to update the selected node\r\n  this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\r\n    const node = this.diagram?.selection.first()\r\n    console.log(this.model.toJson())\r\n    this.nodeClicked.emit(node)\r\n  })\r\n\r\n  // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use\r\n  function imageConverter() {\r\n    return \"https://cdn-icons-png.flaticon.com/512/1635/1635634.png\";\r\n  }\r\n\r\n  // the Search functionality highlights all of the nodes that have at least one data property match a RegExp\r\n  const searchDiagram = () => {  // called by button\r\n    var input = document.getElementById(\"mySearch\");\r\n    if (!input) return;\r\n    this.diagram.focus();\r\n\r\n    this.diagram.startTransaction(\"highlight search\");\r\n\r\n    if (input.title) {\r\n      // search four different data properties for the string, any of which may match for success\r\n      // create a case insensitive RegExp from what the user typed\r\n      var safe = input.title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\r\n      var regex = new RegExp(safe, \"i\");\r\n      var results = this.diagram.findNodesByExample({ name: regex },\r\n        { nation: regex },\r\n        { title: regex },\r\n        { headOf: regex });\r\n      this.diagram.highlightCollection(results);\r\n      // try to center the diagram at the first node that was found\r\n      // if (results.count > 0) this.diagram.centerRect(results.first().actualBounds);\r\n    } else {  // empty string only clears highlighteds collection\r\n      this.diagram.clearHighlighteds();\r\n    }\r\n\r\n    this.diagram.commitTransaction(\"highlight search\");\r\n  }\r\n\r\n  window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);\r\n  }\r\n\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -815,7 +789,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 76
+                "line": 75
             },
             "implements": [
                 "OnInit",
@@ -838,7 +812,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 23,
+                        "line": 22,
                         "jsdoctags": [
                             {
                                 "name": "node",
@@ -855,15 +829,15 @@
                         "name": "selectedNode",
                         "type": "",
                         "returnType": "",
-                        "line": 22
+                        "line": 21
                     }
                 }
             },
-            "templateData": "<div id=\"app-node-directory\"></div>\r\n<button id=\"expandAllButton\">Expand All</button>\r\n<button id=\"collapseAllButton\">Collapse All</button>\r\n"
+            "templateData": "<div id=\"app-node-directory\"></div>\r\n\r\n"
         },
         {
             "name": "OrgChartComponent",
-            "id": "component-OrgChartComponent-b685addd795980e58199cf20ba10d3a3f5fd91a855a844b3e7e5044bbfb60e59728d6563a02f6851895de45805affcefab67a7d05925569d2d5530644e3e6741",
+            "id": "component-OrgChartComponent-60ed237a307e7e4070885a7db971a1f6df6e499dd1ea23c22ac4da142d34b6214e969ab575eb3017b9253be7fa7fa864449ee8343307b53a56a36d2c13e0b463",
             "file": "src/app/components/org-chart/org-chart.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -882,11 +856,11 @@
             "inputsClass": [
                 {
                     "name": "model",
-                    "defaultValue": "new go.TreeModel()",
+                    "defaultValue": "new go.GraphLinksModel()",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 21,
-                    "type": "go.TreeModel",
+                    "type": "go.GraphLinksModel",
                     "decorators": []
                 },
                 {
@@ -904,7 +878,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 79,
+                    "line": 96,
                     "type": "EventEmitter"
                 }
             ],
@@ -995,7 +969,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 81,
+                    "line": 98,
                     "modifierKind": [
                         123
                     ]
@@ -1008,7 +982,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 90,
+                    "line": 107,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1021,7 +995,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 85,
+                    "line": 102,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1036,7 +1010,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\n\r\nconst $ = go.GraphObject.make\r\n\r\n@Component({\r\n    selector: \"app-org-chart\",\r\n    templateUrl: \"./org-chart.component.html\",\r\n    styleUrls: [\"./org-chart.component.sass\"],\r\n})\r\nexport class OrgChartComponent implements OnInit {\r\n    public diagram: go.Diagram = new go.Diagram()\r\n    public minimap: go.Overview | null = null\r\n    public nodeSize = new go.Size(256, 128)\r\n    public font = \"sans-serif\"\r\n\r\n    public _selectedNode: go.Node | null = null;\r\n    public node_found: go.Node | null = null;\r\n\r\n    @Input() \r\n    public model: go.TreeModel = new go.TreeModel()\r\n\r\n    @Input()\r\n    get selectedNode() { return this._selectedNode; }\r\n    set selectedNode(node: go.Node | null) {\r\n        if (node != null) {\r\n        this._selectedNode = node;\r\n        console.log('Node clicked:')\r\n        console.log(this._selectedNode.data)\r\n\r\n        if (this.node_found != null) {\r\n            // set the previous selected node to false\r\n            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n            this.diagram.updateAllTargetBindings();\r\n        }\r\n        this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)\r\n        console.log('Looking for node')\r\n        if (this.node_found !== null) {\r\n            console.log('Node found:')\r\n            console.log(this.node_found.data)\r\n\r\n            const panToSelectedNode = (node_found: go.Node | null) => {\r\n                if (node_found !== null) {\r\n                  var nodeBounds = node_found.actualBounds;\r\n                  var viewportBounds = this.diagram.viewportBounds;\r\n\r\n                  if (!viewportBounds.containsRect(nodeBounds)) {\r\n                  var offsetX = (viewportBounds.width - nodeBounds.width) / 2;\r\n                  var offsetY = (viewportBounds.height - nodeBounds.height) / 2;\r\n                  var position = new go.Point(nodeBounds.x - offsetX, nodeBounds.y - offsetY);\r\n                  this.diagram.position = position;\r\n                  console.log('PANNED')\r\n                }\r\n                }\r\n              }\r\n      \r\n            panToSelectedNode(this.node_found)\r\n\r\n            console.log(this.node_found.data.isSelected)\r\n            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', 'true')\r\n            console.log(this.node_found.data.isSelected)\r\n            this.diagram.updateAllTargetBindings();\r\n        } else {\r\n            // Node not found\r\n            console.log(\"Node not found\");\r\n        }\r\n\r\n        } else {\r\n        this._selectedNode = null;\r\n        if (this.node_found != null) {\r\n            // set the previous selected node to false\r\n            this.diagram.model.setDataProperty(this.node_found.data, 'isSelected', false)\r\n            this.diagram.updateAllTargetBindings();\r\n        }\r\n        }\r\n    }\r\n\r\n    @Output() \r\n    public nodeClicked = new EventEmitter()\r\n\r\n    public showMap = true\r\n\r\n    constructor() {}\r\n\r\n    public ngOnInit() {\r\n        console.log(this.selectedNode)\r\n        console.log('ngOnInig')\r\n    }\r\n\r\n    public ngAfterViewInit() {\r\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\r\n            allowCopy: false,\r\n            allowDelete: false,\r\n            padding: new go.Margin(100, 0),\r\n            layout: $(go.TreeLayout, {\r\n                treeStyle: go.TreeLayout.StyleLastParents,\r\n                arrangement: go.TreeLayout.ArrangementHorizontal,\r\n                // properties for most of the tree:\r\n                angle: 90,\r\n                layerSpacing: 35,\r\n                // properties for the leaf parents:\r\n                alternateAngle: 90,\r\n                alternateLayerSpacing: 35,\r\n                alternateAlignment: go.TreeLayout.AlignmentBus,\r\n                alternateNodeSpacing: 20,\r\n            }),\r\n            \"undoManager.isEnabled\": true,\r\n        })\r\n\r\n        this.diagram.nodeTemplate = $(\r\n            go.Node,\r\n            \"Auto\",\r\n            {\r\n                selectionAdorned: false,\r\n                desiredSize: this.nodeSize,\r\n                isShadowed: true,\r\n                shadowOffset: new go.Point(2, 2),\r\n                shadowColor: \"#DDD\",\r\n                shadowBlur: 6,\r\n                mouseDragEnter: (e, node, prev) => {\r\n                    const shape: go.Shape = (node as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape.stroke = \"dodgerblue\"\r\n                    shape.strokeWidth = 3\r\n\r\n                    const shape2: go.Shape = (prev as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape2.stroke = \"green\"\r\n                    shape2.strokeWidth = 3\r\n                },\r\n                mouseDragLeave: (e, node, next) => {\r\n                    const shape: go.Shape = (node as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape.stroke = \"dodgerblue\"\r\n                    shape.strokeWidth = 0\r\n                },\r\n                mouseDrop: (e, node) => {\r\n                    const diagram = node.diagram\r\n                    const selnode = diagram?.selection.first() as go.Node // assume just one Node in selection\r\n                    // find any existing link into the selected node\r\n                    const link = selnode.findTreeParentLink()\r\n                    if (link !== null) {\r\n                        // reconnect any existing link\r\n                        link.fromNode = node as go.Node\r\n                    } else {\r\n                        // else create a new link\r\n                        diagram?.toolManager.linkingTool.insertLink(\r\n                            node as go.Node,\r\n                            (node as go.Node).port,\r\n                            selnode,\r\n                            selnode.port\r\n                        )\r\n                    }\r\n                },\r\n            },\r\n            $(go.Shape,\r\n                \"Rectangle\",\r\n                {\r\n                  name: \"SHAPE\",\r\n                  strokeWidth: 2,\r\n                },\r\n                new go.Binding(\"fill\", \"\", function(data) {\r\n                  return data.isSelected ? \"lightblue\" : \"white\";\r\n                }),\r\n                new go.Binding(\"stroke\", \"\", function(data) {\r\n                    return data.isSelected ? \"dodgerblue\" : null;\r\n                  })\r\n              ),\r\n              $(\r\n                go.Panel,\r\n                \"Table\",\r\n                {\r\n                    alignment: go.Spot.TopLeft,\r\n                    margin: 16,\r\n                    defaultAlignment: go.Spot.Left,\r\n                },\r\n                $(go.RowColumnDefinition, {\r\n                    column: 0,\r\n                    width: this.nodeSize.width - 50,\r\n                }),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 0,\r\n                        column: 0,\r\n                        font: \"bold 11pt \" + this.font,\r\n                        overflow: go.TextBlock.OverflowEllipsis,\r\n                        wrap: go.TextBlock.WrapDesiredSize, // Wrap the text to multiple lines if necessary\r\n                        maxSize: new go.Size(this.nodeSize.width - 50, NaN), // Limit the maximum width of the text block\r\n                        maxLines: 2,\r\n                    },\r\n                    new go.Binding(\"text\", \"title\")\r\n                ),\r\n                $(\r\n                    go.Shape, // chip\r\n                    \"RoundedRectangle\",\r\n                    {\r\n                        row: 1,\r\n                        column: 0,\r\n                        width: 70,\r\n                        height: 18,\r\n                        parameter1: 100,\r\n                        strokeWidth: 0,\r\n                    },\r\n                    new go.Binding(\"fill\", \"qualifier\", (qualifier) => {\r\n                        if (qualifier === \"SHALL\") {\r\n                            return \"#06c769\"; // green\r\n                        } else if (qualifier === \"SHOULD\") {\r\n                            return \"#2196f3\"; // blue\r\n                        } else {\r\n                            return \"#cccccc\"; // default grey\r\n                        }\r\n                    })\r\n                ),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 1,\r\n                        column: 0,\r\n                        font: \"10pt \" + this.font,\r\n                        stroke: \"white\",\r\n                        margin: 6,\r\n                    },\r\n                    new go.Binding(\"text\", \"qualifier\")\r\n                ),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 2,\r\n                        column: 0,\r\n                        font: \"9pt \" + this.font,\r\n                        stretch: go.GraphObject.Fill,\r\n                        maxLines: 3,\r\n                        overflow: go.TextBlock.OverflowEllipsis,\r\n                    },\r\n                    new go.Binding(\"text\", \"description\")\r\n                )\r\n            )            \r\n        )\r\n\r\n        this.diagram.linkTemplate = $(\r\n            go.Link, // the whole link panel\r\n            go.Link.Orthogonal,\r\n            $(go.Shape) // the link shape, default black stroke\r\n        )\r\n\r\n        this.minimap = $(go.Overview, \"app-minimap\", { observed: this.diagram })\r\n\r\n        this.diagram.model = this.model\r\n\r\n        // when selection changes, emit event to update the selected node\r\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\r\n            const node = this.diagram?.selection.first()\r\n            console.log(this.model.toJson())\r\n            this.nodeClicked.emit(node)\r\n        })\r\n    }\r\n}\r\n",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from \"@angular/core\"\r\nimport * as go from \"gojs\"\r\n\r\nconst $ = go.GraphObject.make\r\n\r\n@Component({\r\n    selector: \"app-org-chart\",\r\n    templateUrl: \"./org-chart.component.html\",\r\n    styleUrls: [\"./org-chart.component.sass\"],\r\n})\r\nexport class OrgChartComponent implements OnInit {\r\n    public diagram: go.Diagram = new go.Diagram()\r\n    public minimap: go.Overview | null = null\r\n    public nodeSize = new go.Size(256, 128)\r\n    public font = \"sans-serif\"\r\n\r\n    public _selectedNode: go.Node | null = null\r\n    public node_found: go.Node | null = null\r\n\r\n    @Input()\r\n    public model: go.GraphLinksModel = new go.GraphLinksModel()\r\n\r\n    @Input()\r\n    get selectedNode() {\r\n        return this._selectedNode\r\n    }\r\n    set selectedNode(node: go.Node | null) {\r\n        if (node != null) {\r\n            this._selectedNode = node\r\n            console.log(\"Node clicked:\")\r\n            console.log(this._selectedNode.data)\r\n\r\n            if (this.node_found != null) {\r\n                // set the previous selected node to false\r\n                this.diagram.model.setDataProperty(\r\n                    this.node_found.data,\r\n                    \"isSelected\",\r\n                    false\r\n                )\r\n                this.diagram.updateAllTargetBindings()\r\n            }\r\n            this.node_found = this.diagram.findNodeForKey(this._selectedNode.data.id)\r\n            console.log(\"Looking for node\")\r\n            if (this.node_found !== null) {\r\n                console.log(\"Node found:\")\r\n                console.log(this.node_found.data)\r\n\r\n                const panToSelectedNode = (node_found: go.Node | null) => {\r\n                    if (node_found !== null) {\r\n                        var nodeBounds = node_found.actualBounds\r\n                        var viewportBounds = this.diagram.viewportBounds\r\n\r\n                        if (!viewportBounds.containsRect(nodeBounds)) {\r\n                            var offsetX = (viewportBounds.width - nodeBounds.width) / 2\r\n                            var offsetY =\r\n                                (viewportBounds.height - nodeBounds.height) / 2\r\n                            var position = new go.Point(\r\n                                nodeBounds.x - offsetX,\r\n                                nodeBounds.y - offsetY\r\n                            )\r\n                            this.diagram.position = position\r\n                            console.log(\"PANNED\")\r\n                        }\r\n                    }\r\n                }\r\n\r\n                panToSelectedNode(this.node_found)\r\n\r\n                console.log(this.node_found.data.isSelected)\r\n                this.diagram.model.setDataProperty(\r\n                    this.node_found.data,\r\n                    \"isSelected\",\r\n                    \"true\"\r\n                )\r\n                console.log(this.node_found.data.isSelected)\r\n                this.diagram.updateAllTargetBindings()\r\n            } else {\r\n                // Node not found\r\n                console.log(\"Node not found\")\r\n            }\r\n        } else {\r\n            this._selectedNode = null\r\n            if (this.node_found != null) {\r\n                // set the previous selected node to false\r\n                this.diagram.model.setDataProperty(\r\n                    this.node_found.data,\r\n                    \"isSelected\",\r\n                    false\r\n                )\r\n                this.diagram.updateAllTargetBindings()\r\n            }\r\n        }\r\n    }\r\n\r\n    @Output()\r\n    public nodeClicked = new EventEmitter()\r\n\r\n    public showMap = true\r\n\r\n    constructor() {}\r\n\r\n    public ngOnInit() {\r\n        console.log(this.selectedNode)\r\n        console.log(\"ngOnInit\")\r\n    }\r\n\r\n    public ngAfterViewInit() {\r\n        console.log(\"ngAfterViewInit\")\r\n        this.diagram = $(go.Diagram, \"app-org-chart\", {\r\n            allowCopy: false,\r\n            allowDelete: false,\r\n            padding: new go.Margin(100, 0),\r\n            layout: $(go.TreeLayout, {\r\n                treeStyle: go.TreeLayout.StyleLastParents,\r\n                arrangement: go.TreeLayout.ArrangementHorizontal,\r\n                // properties for most of the tree:\r\n                angle: 90,\r\n                layerSpacing: 35,\r\n                // properties for the leaf parents:\r\n                alternateAngle: 90,\r\n                alternateLayerSpacing: 35,\r\n                alternateAlignment: go.TreeLayout.AlignmentBus,\r\n                alternateNodeSpacing: 20,\r\n            }),\r\n            \"undoManager.isEnabled\": true,\r\n        })\r\n\r\n        this.diagram.nodeTemplate = $(\r\n            go.Node,\r\n            \"Auto\",\r\n            {\r\n                selectionAdorned: false,\r\n                desiredSize: this.nodeSize,\r\n                isShadowed: true,\r\n                shadowOffset: new go.Point(2, 2),\r\n                shadowColor: \"#DDD\",\r\n                shadowBlur: 6,\r\n                mouseDragEnter: (e, node, prev) => {\r\n                    const shape: go.Shape = (node as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape.stroke = \"dodgerblue\"\r\n                    shape.strokeWidth = 3\r\n\r\n                    const shape2: go.Shape = (prev as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape2.stroke = \"green\"\r\n                    shape2.strokeWidth = 3\r\n                },\r\n                mouseDragLeave: (e, node, next) => {\r\n                    const shape: go.Shape = (node as go.Part).findObject(\r\n                        \"SHAPE\"\r\n                    ) as go.Shape\r\n                    shape.stroke = \"dodgerblue\"\r\n                    shape.strokeWidth = 0\r\n                },\r\n                mouseDrop: (e, node) => {\r\n                    const diagram = node.diagram\r\n                    const selnode = diagram?.selection.first() as go.Node // assume just one Node in selection\r\n                    // find any existing link into the selected node\r\n                    const link = selnode.findTreeParentLink()\r\n                    if (link !== null) {\r\n                        // reconnect any existing link\r\n                        link.fromNode = node as go.Node\r\n                    } else {\r\n                        // else create a new link\r\n                        diagram?.toolManager.linkingTool.insertLink(\r\n                            node as go.Node,\r\n                            (node as go.Node).port,\r\n                            selnode,\r\n                            selnode.port\r\n                        )\r\n                    }\r\n                },\r\n            },\r\n            $(\r\n                go.Shape,\r\n                \"Rectangle\",\r\n                {\r\n                    name: \"SHAPE\",\r\n                    strokeWidth: 2,\r\n                },\r\n                new go.Binding(\"fill\", \"\", function (data) {\r\n                    return data.isSelected ? \"lightblue\" : \"white\"\r\n                }),\r\n                new go.Binding(\"stroke\", \"\", function (data) {\r\n                    return data.isSelected ? \"dodgerblue\" : null\r\n                })\r\n            ),\r\n            $(\r\n                go.Panel,\r\n                \"Table\",\r\n                {\r\n                    alignment: go.Spot.TopLeft,\r\n                    margin: 16,\r\n                    defaultAlignment: go.Spot.Left,\r\n                },\r\n                $(go.RowColumnDefinition, {\r\n                    column: 0,\r\n                    width: this.nodeSize.width - 50,\r\n                }),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 0,\r\n                        column: 0,\r\n                        font: \"bold 11pt \" + this.font,\r\n                        overflow: go.TextBlock.OverflowEllipsis,\r\n                        wrap: go.TextBlock.WrapDesiredSize, // Wrap the text to multiple lines if necessary\r\n                        maxSize: new go.Size(this.nodeSize.width - 50, NaN), // Limit the maximum width of the text block\r\n                        maxLines: 2,\r\n                    },\r\n                    new go.Binding(\"text\", \"title\")\r\n                ),\r\n                $(\r\n                    go.Shape, // chip\r\n                    \"RoundedRectangle\",\r\n                    {\r\n                        row: 1,\r\n                        column: 0,\r\n                        width: 70,\r\n                        height: 18,\r\n                        parameter1: 100,\r\n                        strokeWidth: 0,\r\n                    },\r\n                    new go.Binding(\"fill\", \"qualifier\", (qualifier) => {\r\n                        if (qualifier === \"SHALL\") {\r\n                            return \"#06c769\" // green\r\n                        } else if (qualifier === \"SHOULD\") {\r\n                            return \"#2196f3\" // blue\r\n                        } else {\r\n                            return \"#cccccc\" // default grey\r\n                        }\r\n                    })\r\n                ),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 1,\r\n                        column: 0,\r\n                        font: \"10pt \" + this.font,\r\n                        stroke: \"white\",\r\n                        margin: 6,\r\n                    },\r\n                    new go.Binding(\"text\", \"qualifier\")\r\n                ),\r\n                $(\r\n                    go.TextBlock,\r\n                    {\r\n                        row: 2,\r\n                        column: 0,\r\n                        font: \"9pt \" + this.font,\r\n                        stretch: go.GraphObject.Fill,\r\n                        maxLines: 3,\r\n                        overflow: go.TextBlock.OverflowEllipsis,\r\n                    },\r\n                    new go.Binding(\"text\", \"description\")\r\n                )\r\n            )\r\n        )\r\n\r\n        this.diagram.linkTemplate = $(\r\n            go.Link, // the whole link panel\r\n            go.Link.Orthogonal,\r\n            $(go.Shape) // the link shape, default black stroke\r\n        )\r\n\r\n        this.minimap = $(go.Overview, \"app-minimap\", { observed: this.diagram })\r\n\r\n        this.diagram.model = this.model\r\n        console.log(this.diagram.model)\r\n\r\n        // when selection changes, emit event to update the selected node\r\n        this.diagram.addDiagramListener(\"ChangedSelection\", (e) => {\r\n            console.log(e)\r\n            const node = this.diagram?.selection.first()\r\n            console.log(this.model.toJson())\r\n            this.nodeClicked.emit(node)\r\n        })\r\n    }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1051,7 +1025,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 81
+                "line": 98
             },
             "implements": [
                 "OnInit"
@@ -1073,7 +1047,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 25,
+                        "line": 27,
                         "jsdoctags": [
                             {
                                 "name": "node",
@@ -1218,6 +1192,16 @@
                 "name": "Cycle",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Cycle",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/org-chart/org-chart.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1265,24 +1249,64 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "model",
+                "name": "linkDataArray",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/app.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "go.TreeModel",
-                "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n  })"
+                "type": "[]",
+                "defaultValue": "[\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"123456789\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"abcdefghi\",\r\n    },\r\n    {\r\n        from: \"123456789\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n]"
             },
             {
-                "name": "model",
+                "name": "linkDataArray",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/node-directory/node-directory.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "go.TreeModel",
-                "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n})"
+                "type": "[]",
+                "defaultValue": "[\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"123456789\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"abcdefghi\",\r\n    },\r\n    {\r\n        from: \"123456789\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n]"
+            },
+            {
+                "name": "linkDataArray",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/org-chart/org-chart.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"123456789\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"abcdefghi\",\r\n    },\r\n    {\r\n        from: \"123456789\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n]"
+            },
+            {
+                "name": "nodeDataArray",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/app.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n    {\r\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        title: \"UTAT-Team-A\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Performance\",\r\n        description: \"A description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n    },\r\n    {\r\n        key: \"123456789\",\r\n        title: \"UTAT-Team-B\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"Constraint\",\r\n        description: \"Another description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-1-123456789\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"abcdefghi\",\r\n        title: \"UTAT-Team-C\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Component Selection\",\r\n        description: \"A very long form description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"qwertyuiop\",\r\n        title: \"UTAT-Team-D\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"A type\",\r\n        description: \"Yet another description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        parent: \"123456789\",\r\n    },\r\n]"
+            },
+            {
+                "name": "nodeDataArray",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/node-directory/node-directory.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n    {\r\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        title: \"UTAT-Team-A\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Performance\",\r\n        description: \"A description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n    },\r\n    {\r\n        key: \"123456789\",\r\n        title: \"UTAT-Team-B\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"Constraint\",\r\n        description: \"Another description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-1-123456789\",\r\n    },\r\n    {\r\n        key: \"abcdefghi\",\r\n        title: \"UTAT-Team-C\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Component Selection\",\r\n        description: \"A very long form description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n    },\r\n    {\r\n        key: \"qwertyuiop\",\r\n        title: \"UTAT-Team-D\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"A type\",\r\n        description: \"Yet another description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n    },\r\n]"
+            },
+            {
+                "name": "nodeDataArray",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/org-chart/org-chart.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\r\n    {\r\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        title: \"UTAT-Team-A\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Performance\",\r\n        description: \"A description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n    },\r\n    {\r\n        key: \"123456789\",\r\n        title: \"UTAT-Team-B\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"Constraint\",\r\n        description: \"Another description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-1-123456789\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"abcdefghi\",\r\n        title: \"UTAT-Team-C\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Component Selection\",\r\n        description: \"A very long form description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"qwertyuiop\",\r\n        title: \"UTAT-Team-D\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"A type\",\r\n        description: \"Yet another description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        parent: \"123456789\",\r\n    },\r\n]"
             },
             {
                 "name": "Readonly",
@@ -1363,6 +1387,58 @@
                     "defaultValue": "go.GraphObject.make"
                 }
             ],
+            "src/app/app.component.stories.ts": [
+                {
+                    "name": "Cycle",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "linkDataArray",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"123456789\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"abcdefghi\",\r\n    },\r\n    {\r\n        from: \"123456789\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n]"
+                },
+                {
+                    "name": "nodeDataArray",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n    {\r\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        title: \"UTAT-Team-A\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Performance\",\r\n        description: \"A description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n    },\r\n    {\r\n        key: \"123456789\",\r\n        title: \"UTAT-Team-B\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"Constraint\",\r\n        description: \"Another description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-1-123456789\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"abcdefghi\",\r\n        title: \"UTAT-Team-C\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Component Selection\",\r\n        description: \"A very long form description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"qwertyuiop\",\r\n        title: \"UTAT-Team-D\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"A type\",\r\n        description: \"Yet another description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        parent: \"123456789\",\r\n    },\r\n]"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/app.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
+                }
+            ],
             "src/app/components/org-chart/org-chart.component.stories.ts": [
                 {
                     "name": "Cycle",
@@ -1385,42 +1461,30 @@
                     "defaultValue": "Template.bind({})"
                 },
                 {
-                    "name": "Template",
+                    "name": "linkDataArray",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/components/org-chart/org-chart.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "(args) => ({\r\n    props: args,\r\n})"
-                }
-            ],
-            "src/app/app.component.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/app.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
+                    "type": "[]",
+                    "defaultValue": "[\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"123456789\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"abcdefghi\",\r\n    },\r\n    {\r\n        from: \"123456789\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n]"
                 },
                 {
-                    "name": "model",
+                    "name": "nodeDataArray",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/app.component.stories.ts",
+                    "file": "src/app/components/org-chart/org-chart.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.TreeModel",
-                    "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n  })"
+                    "type": "[]",
+                    "defaultValue": "[\r\n    {\r\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        title: \"UTAT-Team-A\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Performance\",\r\n        description: \"A description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n    },\r\n    {\r\n        key: \"123456789\",\r\n        title: \"UTAT-Team-B\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"Constraint\",\r\n        description: \"Another description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-1-123456789\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"abcdefghi\",\r\n        title: \"UTAT-Team-C\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Component Selection\",\r\n        description: \"A very long form description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n    },\r\n    {\r\n        key: \"qwertyuiop\",\r\n        title: \"UTAT-Team-D\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"A type\",\r\n        description: \"Yet another description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        parent: \"123456789\",\r\n    },\r\n]"
                 },
                 {
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/app.component.stories.ts",
+                    "file": "src/app/components/org-chart/org-chart.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -1439,14 +1503,24 @@
                     "defaultValue": "Template.bind({})"
                 },
                 {
-                    "name": "model",
+                    "name": "linkDataArray",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/components/node-directory/node-directory.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "go.TreeModel",
-                    "defaultValue": "new go.TreeModel({\r\n    nodeKeyProperty: \"id\",\r\n    nodeDataArray: [\r\n        {\r\n            id: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            parent: \"\",\r\n            title: \"UTAT-Team-A\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Performance\",\r\n            description: \"A description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n        },\r\n        {\r\n            id: \"123456789\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-B\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"Constraint\",\r\n            description: \"Another description\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-1-123456789\",\r\n        },\r\n        {\r\n            id: \"abcdefghi\",\r\n            parent: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n            title: \"UTAT-Team-C\",\r\n            qualifier: \"SHALL\",\r\n            type: \"Component Selection\",\r\n            description:\r\n                \"A very long form description that may or may not exceed the width of the node. The quick brown fox jumps over the lazy dog. Octopuses have several tentacles. Icecream is cold. Did you know that lava is warm? Lava cake with an ice cream scoop on the side is delicious.\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n        },\r\n        {\r\n            id: \"qwertyuiop\",\r\n            parent: \"123456789\",\r\n            title: \"UTAT-Team-D\",\r\n            qualifier: \"SHOULD\",\r\n            type: \"A type\",\r\n            description: \"Yet another description that is just a little bit longer\",\r\n            rationale: \"A rationale\",\r\n            url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n        },\r\n    ],\r\n})"
+                    "type": "[]",
+                    "defaultValue": "[\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"123456789\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"abcdefghi\",\r\n    },\r\n    {\r\n        from: \"123456789\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n    {\r\n        from: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        to: \"qwertyuiop\",\r\n    },\r\n]"
+                },
+                {
+                    "name": "nodeDataArray",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/node-directory/node-directory.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\r\n    {\r\n        key: \"ff5892a7-b5c9-4a25-97bd-663b2cff5bd7\",\r\n        title: \"UTAT-Team-A\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Performance\",\r\n        description: \"A description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/UTAT-Team-A-74331bc1129c417c850a0a5ca0deb759\",\r\n    },\r\n    {\r\n        key: \"123456789\",\r\n        title: \"UTAT-Team-B\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"Constraint\",\r\n        description: \"Another description\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-1-123456789\",\r\n    },\r\n    {\r\n        key: \"abcdefghi\",\r\n        title: \"UTAT-Team-C\",\r\n        qualifier: \"SHALL\",\r\n        type: \"Component Selection\",\r\n        description: \"A very long form description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Child-2-abcdefghi\",\r\n    },\r\n    {\r\n        key: \"qwertyuiop\",\r\n        title: \"UTAT-Team-D\",\r\n        qualifier: \"SHOULD\",\r\n        type: \"A type\",\r\n        description: \"Yet another description...\",\r\n        rationale: \"A rationale\",\r\n        url: \"https://www.notion.so/Grandchild-1-qwertyuiop\",\r\n    },\r\n]"
                 },
                 {
                     "name": "Template",
@@ -1519,6 +1593,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Cycle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Default",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -1529,7 +1613,17 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "model",
+                "name": "linkDataArray",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "nodeDataArray",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1607,7 +1701,17 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "model",
+                "name": "linkDataArray",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/node-directory/node-directory.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "nodeDataArray",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1628,7 +1732,7 @@
                 "linktype": "component",
                 "name": "NodeDirectoryComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
@@ -1657,6 +1761,26 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/org-chart/org-chart.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "linkDataArray",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/org-chart/org-chart.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "nodeDataArray",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

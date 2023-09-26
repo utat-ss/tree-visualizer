@@ -36,7 +36,7 @@ describe('InspectorComponent', () => {
   // Runs these tests on each of the properties we need to display
   describe.each([
     ['Requirement', 'input'],
-    ['Parent', 'input'],
+    ['Parents', 'textarea'],
     ['Qualifier', 'mat-select'],
     ['Collection', 'input'],
     ['Verification Plans', 'input'],

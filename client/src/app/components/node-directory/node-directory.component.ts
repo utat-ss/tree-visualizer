@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+import { FormsModule } from '@angular/forms';
 import * as go from "gojs"
-import { bufferToggle } from "rxjs";
 
 const $ = go.GraphObject.make
 
@@ -10,13 +10,17 @@ const $ = go.GraphObject.make
   styleUrls: ['./node-directory.component.sass']
 })
 export class NodeDirectoryComponent implements OnInit, AfterViewInit {
+
   public diagram: go.Diagram = new go.Diagram()
   
   public _selectedNode: go.Node | null = null;
   public node_found: go.Node | null = null; 
+  public searchText: string = '';
+  public currentSearchIndex: number | null = null;
+  public hasMatchingNodes: boolean = true; // Initialize as true
 
   @Input()
-  public model: go.TreeModel = new go.TreeModel()
+  public model: go.GraphLinksModel = new go.GraphLinksModel()
 
   @Input()
   get selectedNode() { return this._selectedNode; }
@@ -94,17 +98,10 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
         contentAlignment: go.Spot.TopLeft,
         padding: new go.Margin(100, 0),
         layout:
-          $(go.TreeLayout,
+          $(go.GridLayout,
             {
-              alignment: go.TreeLayout.AlignmentStart,
-              angle: 0,
-              compaction: go.TreeLayout.CompactionNone,
-              layerSpacing: 16,
-              layerSpacingParentOverlap: 1,
-              nodeIndentPastParent: 1.0,
-              nodeSpacing: 0,
-              setsPortSpot: false,
-              setsChildPortSpot: false
+              wrappingColumn: 1,
+              spacing: new go.Size(0, 5)
             })
       });
 
@@ -113,29 +110,19 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
       $(go.Node, {
         selectionAdorned: false,
       },
-      $("TreeExpanderButton",
-        { // customize the button's appearance
-          "_treeExpandedFigure": "LineDown",
-          "_treeCollapsedFigure": "LineRight",
-          "ButtonBorder.fill": "whitesmoke",
-          "ButtonBorder.stroke": null,
-          "_buttonFillOver": "rgba(0,128,255,0.25)",
-          "_buttonStrokeOver": null,
-        }),
       $(go.Panel, "Horizontal",
         { 
           position: new go.Point(18, 0),
         },
         $(go.Picture,
           {
-            width: 18, height: 18,
-            margin: new go.Margin(0, 4, 0, 0),
+            width: 10, height: 10,
+            margin: new go.Margin(0, 0, 0, 0),
             imageStretch: go.GraphObject.Uniform
           },
           // bind the picture source on two properties of the Node
           // to display open folder, closed folder, or document
-          new go.Binding("source", "isTreeExpanded", imageConverter).ofObject(),
-          new go.Binding("source", "isTreeLeaf", imageConverter).ofObject()),
+          new go.Binding("source", "", imageConverter).ofObject(),),
         $(go.TextBlock,
           {},
           new go.Binding("background", "", function(data) {
@@ -165,53 +152,76 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
     this.nodeClicked.emit(node)
   })
 
-  // Add buttons to control "Collapse All" and "Expand All" functionality
-  const expandAllButton = document.getElementById("expandAllButton");
-  if (expandAllButton) {
-    expandAllButton.addEventListener("click", () => this.expandAll());
-  }
-
-  const collapseAllButton = document.getElementById("collapseAllButton");
-  if (collapseAllButton) {
-    collapseAllButton.addEventListener("click", () => this.collapseAll());
-  }
-
   // takes a property change on either isTreeLeaf or isTreeExpanded and selects the correct image to use
-  function imageConverter(prop: any, picture: any) {
-    var node = picture.part;
-    if (node.isTreeLeaf) {
-      return "https://www.iconpacks.net/icons/1/free-document-icon-901-thumb.png";
-    } else {
-      if (node.isTreeExpanded) {
-        return "https://www.clipartmax.com/png/middle/129-1292051_lower-nursery-open-folder-icon-png.png";
-      } else {
-        return "https://img.icons8.com/color/512/folder-invoices--v1.png";
-      }
-    }
+  function imageConverter() {
+    return "https://cdn-icons-png.flaticon.com/512/1635/1635634.png";
   }
+
   window.addEventListener('DOMContentLoaded', this.ngAfterViewInit);
   }
 
-  // Function to expand all tree nodes
-  public expandAll() {
-    this.diagram.startTransaction("expandAll");
+  // Function to handle the search operation
+  searchNodes() {
+    const searchText = this.searchText.toLowerCase(); // Convert the search text to lowercase for case-insensitive search
+    this.diagram.startTransaction("search"); // Start a transaction for making changes
+
+    const matchingNodes: go.Node[] = []; // To store matching nodes
+    let selectedNode: go.Node | null = null; // To store the selected node
+
     this.diagram.nodes.each((node) => {
-      if (!node.isTreeLeaf && !node.isTreeExpanded) {
-        node.isTreeExpanded = true;
+      const nodeData = node.data;
+      const title = nodeData.title.toLowerCase(); // Convert node title to lowercase
+
+      if (title.includes(searchText)) {
+        matchingNodes.push(node);
+
+        // If the node matches the search text and no node is currently selected, select it
+        if (!selectedNode) {
+          selectedNode = node;
+        }
       }
     });
-    this.diagram.commitTransaction("expandAll");
-  }
 
-  // Function to collapse all tree nodes
-  public collapseAll() {
-    this.diagram.startTransaction("collapseAll");
-    this.diagram.nodes.each((node) => {
-      if (!node.isTreeLeaf && node.isTreeExpanded) {
-        node.isTreeExpanded = false;
+    this.diagram.commitTransaction("search"); // Commit the transaction to apply changes
+
+    // If a node matching the search text was found, select it
+    if (selectedNode) {
+      this.selectedNode = selectedNode; // Assign the selected node
+    }
+
+    // Update the currentSearchIndex based on the matching nodes
+    if (matchingNodes.length > 0) {
+      if (this.currentSearchIndex === null || this.currentSearchIndex >= matchingNodes.length - 1) {
+        this.currentSearchIndex = 0; // Start from the first matching node
+      } else {
+        this.currentSearchIndex++; // Move to the next matching node
       }
-    });
-    this.diagram.commitTransaction("collapseAll");
+      this.selectedNode = matchingNodes[this.currentSearchIndex];
+    }
+
+    this.hasMatchingNodes = matchingNodes.length > 0;
   }
 
-}
+  // Function to clear the search
+  clearSearch() {
+    this.searchText = ''; // Clear the search text
+    this.diagram.startTransaction("clearSearch");
+
+    if (this.selectedNode) {
+      this.selectedNode = null;
+    }
+
+    this.diagram.commitTransaction("clearSearch");
+
+    this.currentSearchIndex = null;
+  }
+
+  // Function to handle keydown events on the input field
+  onKeyDown(event: KeyboardEvent) {
+    // Check if the Backspace key was pressed (keyCode 8)
+    if (event.keyCode === 8) {
+      this.currentSearchIndex = null; // Reset the search index
+      this.hasMatchingNodes = true;
+    }
+  }
+  }

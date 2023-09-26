@@ -1,36 +1,41 @@
 import { Component, Input } from "@angular/core"
 import * as go from "gojs"
-import { Requirements } from "./interfaces/requirements"
-import { BackendService } from "./services/backend.service";
+import { RequirementsGraph } from "./interfaces/requirements-graph"
+import { BackendService } from "./services/backend.service"
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.sass"],
 })
 export class AppComponent {
-    title = "tree-visualizer";
+    title = "tree-visualizer"
 
     @Input()
-    public selectedNode: go.Node | null = null;
+    public selectedNode: go.Node | null = null
 
     @Input()
-    model = new go.TreeModel({
+    model = new go.GraphLinksModel({
         nodeKeyProperty: "id",
+        linkKeyProperty: "id",
         nodeDataArray: [],
-    });
+        linkDataArray: [],
+    })
 
     constructor(private backend: BackendService) {
-        backend.getRequirements().subscribe(r => this.initModel(r))
-    };
-
-    initModel(r: Requirements) {
-        this.model.commit(m => m.mergeNodeDataArray(r))   // ! currently broken due to multiple parents, fix when moved to non-TreeModel!
+        backend.getRequirementsGraph().subscribe((graph) => this.initModel(graph))
     }
 
-  public setSelectedNode(node: go.Node) {
-    this.selectedNode = node;
-    console.log(this.selectedNode)
-  }
+    initModel(graph: RequirementsGraph) {
+        const sortedNodes = graph.nodes.slice().sort((a, b) => {
+            return a.title.localeCompare(b.title);
+        });
+        this.model.commit(m => m.mergeNodeDataArray(sortedNodes));
+        this.model.commit(m => (m as go.GraphLinksModel).mergeLinkDataArray(graph.links))
+    }
 
+    public setSelectedNode(node: go.Node) {
+        this.selectedNode = node
+        console.log(this.selectedNode)
+    }
 }
