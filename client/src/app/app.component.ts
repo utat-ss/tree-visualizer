@@ -12,6 +12,9 @@ export class AppComponent {
     title = "tree-visualizer"
 
     @Input()
+    public visibleList: Array<string> = []
+
+    @Input()
     public selectedNode: go.Node | null = null
 
     @Input()
@@ -20,7 +23,7 @@ export class AppComponent {
         linkKeyProperty: "id",
         nodeDataArray: [],
         linkDataArray: [],
-    })
+    });
 
     constructor(private backend: BackendService) {
         backend.getRequirementsGraph().subscribe((graph) => this.initModel(graph))
@@ -31,11 +34,16 @@ export class AppComponent {
             return a.title.localeCompare(b.title);
         });
         this.model.commit(m => m.mergeNodeDataArray(sortedNodes));
-        this.model.commit(m => (m as go.GraphLinksModel).mergeLinkDataArray(graph.links))
+        this.model.commit(m => (m as go.GraphLinksModel).mergeLinkDataArray(graph.links));
     }
 
     public setSelectedNode(node: go.Node) {
-        this.selectedNode = node
-        console.log(this.selectedNode)
+        this.selectedNode = node;
+        console.log(this.selectedNode);
+    }
+
+    public setVisibleList(visibleList: Array<string>) {
+        this.visibleList = visibleList;
+        console.log(visibleList)
     }
 }

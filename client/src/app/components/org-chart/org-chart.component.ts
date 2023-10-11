@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from "@angular/core"
 import * as go from "gojs"
 
 const $ = go.GraphObject.make
@@ -19,6 +19,9 @@ export class OrgChartComponent implements OnInit {
 
     @Input()
     public model: go.GraphLinksModel = new go.GraphLinksModel()
+
+    @Input()
+    public visibleList: Array<string> = []
 
     @Input()
     get selectedNode() {
@@ -278,5 +281,10 @@ export class OrgChartComponent implements OnInit {
             console.log(this.model.toJson())
             this.nodeClicked.emit(node)
         })
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        const visibleList = changes["visibleList"].currentValue;
+        this.diagram.nodes.each(node => node.visible = visibleList.includes(node.data.id))
     }
 }

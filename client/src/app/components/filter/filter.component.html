@@ -1,23 +1,41 @@
 <div id="container">
 
-    <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Filter for</mat-label>
-        <input matInput [(ngModel)]="selectedFilter" (input)="filterValidFilters()" (change)="setValidValues()" [matAutocomplete]="filterAutocomplete">
-        <mat-autocomplete #filterAutocomplete (optionSelected)="setValidValues()">
-            <mat-option *ngFor="let f of filteredValidFilters" [value]="f">
-                {{ f |titlecase }}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
+    <div id="form">
 
-    <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Matching</mat-label>
-        <input matInput [(ngModel)]="selectedValue" (input)="filterValidValues()" [matAutocomplete]="valueAutocomplete">
-        <mat-autocomplete #valueAutocomplete>
-            <mat-option *ngFor="let v of filteredValidValues" [value]="v">
-                {{ v }}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
+        <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Filter for</mat-label>
+            <input matInput [(ngModel)]="selectedFilter" (input)="filterValidFilters()" (change)="setValidValues()" [matAutocomplete]="filterAutocomplete">
+            <mat-autocomplete #filterAutocomplete (optionSelected)="setValidValues()">
+                <mat-option *ngFor="let f of filteredValidFilters" [value]="f">
+                    {{ f |titlecase }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always">
+            <mat-label>Matching</mat-label>
+            <input matInput [(ngModel)]="selectedValue" (input)="filterValidValues()" [matAutocomplete]="valueAutocomplete">
+            <mat-autocomplete #valueAutocomplete>
+                <mat-option *ngFor="let v of filteredValidValues" [value]="v">
+                    {{ v }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" color="primary" (click)="filterClicked()">Filter!</button>
+
+    </div>
+
+    <div id="active-filters">
+
+        <h2>Active filters (showing <span *ngIf="numResults >= 0 && numResults < model.nodeDataArray.length">{{ numResults }} /</span> {{ model.nodeDataArray.length }} requirements):</h2>
+        <ul>
+            <li *ngFor="let filter of activeFilters | keyvalue">
+                {{ filter.key }}:  {{ filter.value }}
+                <button mat-raised-button type="button" color="secondary" (click)="removeFilter(filter.key)">Remove</button>
+            </li>
+        </ul>
+
+    </div>
 
 </div>

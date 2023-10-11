@@ -1,7 +1,7 @@
 <div style="display: flex; flex-grow: grow">
-    <app-node-directory [model]="model" [selectedNode]="selectedNode" (nodeClicked)="setSelectedNode($event)"></app-node-directory>
-    <app-org-chart [model]="model" (nodeClicked)="setSelectedNode($event)" [selectedNode]="selectedNode"></app-org-chart>
+    <app-node-directory [model]="model" [selectedNode]="selectedNode" [visibleList]="visibleList" (nodeClicked)="setSelectedNode($event)"></app-node-directory>
+    <app-org-chart [model]="model" [selectedNode]="selectedNode" [visibleList]="visibleList" (nodeClicked)="setSelectedNode($event)"></app-org-chart>
     <app-inspector [selectedNode]="selectedNode"></app-inspector>
 </div>
 
-<app-filter [model]="model"></app-filter>
+<app-filter [model]="model" (filterUpdated)="setVisibleList($event)"></app-filter>
