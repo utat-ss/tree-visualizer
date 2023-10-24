@@ -20,11 +20,11 @@ export class FilterComponent {
         // 'last-edited',  // TODO: have a datepicker for this
         'qualifier',
         'collection',
-        'test-plans',
+        'verification-plans',
+        'verification-methods',
         'system',
         'stakeholder',
         'mission',
-        'collection'
     ];
 
     activeFilters: Map<string, string> = new Map();         // note: only allows for string values
