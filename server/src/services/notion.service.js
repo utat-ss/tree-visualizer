@@ -52,6 +52,10 @@ const getTestPlans = async function() {
   return await _getDBTitles(getEnv('NOTION_TEST_PLANS_DB_ID'));
 }
 
+const getVerificationMethods = async function() {
+  return await _getDBTitles(getEnv('NOTION_VERIFICATION_METHODS_DB_ID'));
+}
+
 const getSystems = async function() {
   return await _getDBTitles(getEnv('NOTION_SYSTEM_ARCHITECTURE_DB_ID'));
 }
@@ -75,6 +79,7 @@ const _parseRequirementsForAPI = async function(raw_data) {
   const trades = await getTrades();
   const teams = await getTeams();
   const missions = await getMissions();
+  const verification_methods = await getVerificationMethods();
 
   let data = {
     nodes: [],
@@ -92,7 +97,8 @@ const _parseRequirementsForAPI = async function(raw_data) {
       'last-edited': props['Last Edited'].last_edited_time,
       'qualifier': qualifiers[props['🛑 Qualifier'].relation?.[0]?.id] ?? '',   // Notion enforced limit 1
       'collection': props.Collection.select?.name ?? '',
-      'test-plans': props['🏁 Test Plans'].relation.map(r => test_plans[r.id]), // * list
+      'verification-plans': props['🏁 Verification Plan'].relation.map(r => test_plans[r.id]),             // * list
+      'verification-methods': props['Verification Method'].relation.map(r => verification_methods[r.id]),   // * list
       'system': systems[props['🏗️ System'].relation?.[0]?.id] ?? '',            // Notion enforced limit 1
       'rationale': props.Rationale.rich_text?.[0]?.plain_text ?? '',
       'trades': props['🃏 Trades'].relation.map(r => trades[r.id]),              // * list

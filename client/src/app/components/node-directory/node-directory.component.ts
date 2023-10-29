@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from "@angular/core"
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from "@angular/core"
 import { FormsModule } from '@angular/forms';
 import * as go from "gojs"
 
@@ -12,7 +12,7 @@ const $ = go.GraphObject.make
 export class NodeDirectoryComponent implements OnInit, AfterViewInit {
 
   public diagram: go.Diagram = new go.Diagram()
-  
+
   public _selectedNode: go.Node | null = null;
   public node_found: go.Node | null = null; 
   public searchText: string = '';
@@ -21,6 +21,9 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
 
   @Input()
   public model: go.GraphLinksModel = new go.GraphLinksModel()
+
+  @Input()
+  public visibleList: Array<string> = []
 
   @Input()
   get selectedNode() { return this._selectedNode; }
@@ -224,4 +227,9 @@ export class NodeDirectoryComponent implements OnInit, AfterViewInit {
       this.hasMatchingNodes = true;
     }
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const visibleList = changes["visibleList"].currentValue;
+    this.diagram.nodes.each(node => node.visible = visibleList.includes(node.data.id))
   }
+}

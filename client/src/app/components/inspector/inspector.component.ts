@@ -11,7 +11,7 @@ export class InspectorComponent implements OnChanges {
     @Input() public selectedNode: go.Part | null = null;
 
     read_only = true;
-    qualifiers = ['SHALL', 'SHOULD', 'WILL'];
+    qualifiers = ['SHALL', 'SHOULD', 'WILL', 'MAY'];
 
     requirement: string = 'FINCH-TreeVisualizer-Placeholder';
     created_by: string = 'John Doe';
@@ -19,7 +19,8 @@ export class InspectorComponent implements OnChanges {
     last_edited: Date | null = new Date();
     qualifier: string = 'SHALL';
     collection: string = 'Tree visualizer';
-    test_plans: string[] = ['Test plan 1 (placeholder link)'];
+    verification_plans: string[] = ['Test plan 1 (placeholder link)'];
+    verification_methods: string[] = ['Test'];
     system: string = 'Tree Visualizer';
     rationale: string = 'To do stuff';
     trades: string[] = ['Trade 1 (placeholder link)'];
@@ -39,7 +40,8 @@ export class InspectorComponent implements OnChanges {
             this.last_edited = null;
             this.qualifier = '-';
             this.collection = '-';
-            this.test_plans = ['-'];
+            this.verification_plans = ['-'];
+            this.verification_methods = ['-'];
             this.system = '-';
             this.rationale = '-';
             this.trades = ['-'];
@@ -64,7 +66,8 @@ export class InspectorComponent implements OnChanges {
             this.last_edited = new Date(data['last-edited']);
             this.qualifier = data.qualifier;
             this.collection = data.collection;
-            this.test_plans = data['test-plans'].length > 0 ? data['test-plans'] : [''];
+            this.verification_plans = data['verification-plans'].length > 0 ? data['verification-plans'] : [''];
+            this.verification_methods = data['verification-methods'].length > 0 ? data['verification-methods'] : [''];
             this.system = data.system;
             this.rationale = data.rationale;
             this.trades = data.trades.length > 0 ? data.trades : [''];

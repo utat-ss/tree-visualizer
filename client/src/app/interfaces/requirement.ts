@@ -5,7 +5,8 @@ export interface Requirement {
     'last-edited': Date;
     qualifier: string;
     collection: string;
-    'test-plans': Array<string>;
+    'verification-plans': Array<string>;
+    'verification-methods': Array<string>;
     system: string;
     rationale: string;
     trades: Array<string>;
