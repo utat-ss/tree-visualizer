@@ -9,8 +9,12 @@ Built by the the [University of Toronto Aerospace Team](https://www.utat.ca/spac
 
 <img src="img/utat-logo.png" height="64">
 
+# Usage
+1. Connect to the [UTAT VPN](https://www.notion.so/utat-ss/OpenVPN-db39f3bb05ab470688e540b9827473f7?pvs=4)
+1. Navigate to (TBD) in your browser
 
-# Setup
 
-## Local Development
+# Development
+
+## Setup
 1. Install [Node](https://nodejs.org/en)
