@@ -19,4 +19,4 @@ RUN npm ci --legacy-peer-deps
 COPY . .
 
 EXPOSE 4200
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "start:docker" ]
