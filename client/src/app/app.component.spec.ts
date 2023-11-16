@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { InspectorComponent } from './components/inspector/inspector.component';
 import { NodeDirectoryComponent } from './components/node-directory/node-directory.component';
 import { OrgChartComponent } from './components/org-chart/org-chart.component';
+import { FilterComponent } from './components/filter/filter.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -18,7 +19,8 @@ describe('AppComponent', () => {
         AppComponent,
         MockComponent(InspectorComponent),
         MockComponent(NodeDirectoryComponent),
-        MockComponent(OrgChartComponent)
+        MockComponent(OrgChartComponent),
+        MockComponent(FilterComponent),
       ],
     }).compileComponents();
   });

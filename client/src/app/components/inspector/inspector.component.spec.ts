@@ -39,7 +39,7 @@ describe('InspectorComponent', () => {
     ['Parents', 'textarea'],
     ['Qualifier', 'mat-select'],
     ['Collection', 'input'],
-    ['Verification Plans', 'input'],
+    ['Verification Plan', 'input'],
     ['System', 'input'],
     ['Rationale', 'input'],
     ['Trades', 'input'],
