@@ -1,3 +1,3 @@
 export const environment = {
-    apiBaseUrl: 'http://treeviz-server:3000/api'
+    apiBaseUrl: 'https://treeviz-server.in.utat.ca:3000/api'
 };
