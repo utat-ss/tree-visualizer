@@ -12,6 +12,7 @@ Built by the [University of Toronto Aerospace Team](https://www.utat.ca/space-sy
 # Usage
 1. Connect to the [UTAT VPN](https://www.notion.so/utat-ss/OpenVPN-db39f3bb05ab470688e540b9827473f7?pvs=4)
 1. Navigate to [https://treeviz.in.utat.ca/](https://treeviz.in.utat.ca/) in your browser
+
 See Notion [page](https://www.notion.so/utat-ss/TreeViz-78c65cf8e7af4b1ba30fc42d1922bc95?pvs=4)
 
 # Development
