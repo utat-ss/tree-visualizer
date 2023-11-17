@@ -1,0 +1,59 @@
+name: Pipeline
+on: [push, pull_request]
+jobs:
+  build-client:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npx ng build
+
+  test-client:
+    runs-on: ubuntu-latest
+    needs: build-client
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Install client dependencies
+        run: npm ci
+
+      - name: Test
+        run: npx ng test
+
+  test-server:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Install server dependencies
+        run: npm ci
+
+      - name: Test
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_REQUIREMENTS_DB_ID: "b9c7195bd9fa414a97ee704f503a0e9f"
+          NOTION_REQUIREMENT_QUALIFIERS_DB_ID: "73c9d422a5204bcc9245a752413353e8"
+          NOTION_REQUIREMENT_TYPES_DB_ID: "2cedac620d554fb0ad17abcb2388f842"
+          NOTION_TEST_PLANS_DB_ID: "9e32b247f1f24362b471481e475132dc"
+          NOTION_SYSTEM_ARCHITECTURE_DB_ID: "aa7abed08ca749f685d8266b6ede20ce"
+          NOTION_TRADES_DB_ID: "ab99520cf6c947b0a57dc9fe75bff34c"
+          NOTION_TEAMS_DB_ID: "2b64b90381df4cc2a25a8e7e32456d16"
+          NOTION_MISSIONS_DB_ID: "f449b66490e74911816ede6ac36b0867"
+        run: npm test

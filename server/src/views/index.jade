@@ -1,0 +1,64 @@
+// For demo
+
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  #graph
+
+  script(type='text/javascript').
+    // create an array with nodes
+    var nodes = new vis.DataSet(JSON.parse("#{nodes}".replaceAll("&quot;", "\"").replaceAll("&amp;", "&")));
+
+    // create an array with edges
+    var edges = new vis.DataSet(JSON.parse("#{edges}".replaceAll("&quot;", "\"")));
+
+    // create a network
+    var container = document.getElementById('graph');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {
+      edges: {
+        arrows: {
+          to: {
+            enabled: true
+          }
+        },
+        width: 3,
+        hoverWidth: 3,
+        selectionWidth: 6
+      },
+      nodes: {
+        shape: 'circle',
+        mass: 5,
+        widthConstraint: {
+          maximum: 180
+        },
+        font: {
+          size: 30
+        },
+        shadow: {
+          enabled: true
+        }
+      },
+      layout: {
+        hierarchical: {
+          enabled: false,
+          nodeSpacing: 500,
+          levelSeparation: 500,
+          sortMethod: 'directed'
+        }
+      },
+      interaction: {
+        hover: true
+      }
+    };
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
