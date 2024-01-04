@@ -92,7 +92,7 @@ const _parseRequirementsForAPI = async function(raw_data) {
 
     data.nodes.push({
       'id': elem.id,
-      'created-by': props['Created by'].created_by.name,
+      'created-by': props['Created By'].created_by.name,
       'parent': parent_ids,   // * list
       'last-edited': props['Last Edited'].last_edited_time,
       'qualifier': qualifiers[props['🛑 Qualifier'].relation?.[0]?.id] ?? '',   // Notion enforced limit 1
