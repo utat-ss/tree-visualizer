@@ -5,6 +5,10 @@
 # TreeViz
 An interactive requirements engineering tool. TreeViz makes working with requirement models more approachable by visualizing parent and child relationships as a graph. It connects to the team's [requirements database](https://www.notion.so/utat-ss/b9c7195bd9fa414a97ee704f503a0e9f?v=0f0b8595c5a943f5b01190c34206415b&pvs=4).
 
+
+
+<img src="client/src/assets/treeviz-view.png">
+
 Built by the [University of Toronto Aerospace Team](https://www.utat.ca/space-systems):milky_way:.
 
 <img src="client/src/assets/utat-logo.png" height="64">
