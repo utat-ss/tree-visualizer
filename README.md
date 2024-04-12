@@ -9,7 +9,7 @@ An interactive requirements engineering tool. TreeViz makes working with require
 
 <img src="client/src/assets/treeviz-view.png">
 
-Built by the [University of Toronto Aerospace Team](https://www.utat.ca/space-systems):milky_way:.
+Built by the [University of Toronto Aerospace Team](https://www.utat.ca/space-systems):milky_way:. Watch the V1.0 [development here](https://youtu.be/JJnwyHyZsfw).
 
 <img src="client/src/assets/utat-logo.png" height="64">
 
