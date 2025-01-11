@@ -101,9 +101,10 @@ const _parseRequirementsForAPI = async function(raw_data) {
       'verification-methods': props['Verification Method'].relation.map(r => verification_methods[r.id]),   // * list
       'system': systems[props['🏗️ System'].relation?.[0]?.id] ?? '',            // Notion enforced limit 1
       'rationale': props.Rationale.rich_text?.[0]?.plain_text ?? '',
-      'trades': props['🃏 Trades'].relation.map(r => trades[r.id]),              // * list
+      // 'trades': props['🃏 Trades'].relation.map(r => trades[r.id]),              // * list
+      'trades': ['- deprecated -'],
       'last-edited-by': props['Last Edited By'].last_edited_by.name,
-      'stakeholder': props['⚽ Stakeholder'].relation.map(r => teams[r.id]),    // * list
+      'stakeholder': props.Stakeholder.relation.map(r => teams[r.id]),           // * list
       'mission': missions[props['🏆 Mission'.relation?.[0]?.id]] ?? '',         // Notion enforced limit 1
       'description': props.Description.rich_text?.[0]?.plain_text ?? '',
       'title': props.ID.title?.[0]?.plain_text ?? '',
